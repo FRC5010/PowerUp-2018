@@ -8,6 +8,7 @@
 package org.usfirst.frc.team5010.robot;
 
 import org.usfirst.frc.team5010.robot.commands.SwitchDriveMode;
+import org.usfirst.frc.team5010.robot.commands.TurnToAngle;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -49,8 +50,10 @@ public class OI {
 	public Joystick joyDriver = new Joystick(0);
 	
 	private Button buttonY = new JoystickButton(joyDriver, 4);
+	private Button buttonBack = new JoystickButton(joyDriver,7);
 	
 	public OI () {
 		buttonY.whenPressed(new SwitchDriveMode());
+		buttonBack.whenReleased(new TurnToAngle(90));
 	}
 }

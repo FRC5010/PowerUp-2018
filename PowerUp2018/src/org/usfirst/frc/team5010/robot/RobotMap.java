@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -25,6 +26,12 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
  * floating around.
  */
 public class RobotMap {
+	public static void smartDashboard() {
+		SmartDashboard.putNumber("D", 0.04);
+		SmartDashboard.putNumber("I", 0.04);
+		SmartDashboard.putNumber("P", 0.06);
+		
+	}
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	public static SpeedController driveMotorLeft;
@@ -51,4 +58,6 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
+
+	
 }

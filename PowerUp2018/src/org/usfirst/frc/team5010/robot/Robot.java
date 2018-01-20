@@ -11,7 +11,7 @@ import org.usfirst.frc.team5010.robot.commands.ExampleAuto1;
 import org.usfirst.frc.team5010.robot.commands.ExampleAuto2;
 import org.usfirst.frc.team5010.robot.subsystems.ExampleSubsystem;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
@@ -41,8 +41,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		RobotMap.smartDashboard();
 		RobotMap.init();
 		oi = new OI();
+		
 		
 		positionChooser.addObject("Position1", new ExampleAuto1());
 		positionChooser.addObject("Position2", new ExampleAuto2());
