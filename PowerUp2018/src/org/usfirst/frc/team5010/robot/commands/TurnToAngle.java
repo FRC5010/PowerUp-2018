@@ -17,7 +17,7 @@ public class TurnToAngle extends PIDCommand {
 	public TurnToAngle(double setPoint) {
 		super("TurnToAngle", p, i, d);
 		setSetpoint(setPoint);
-		this.setPoint= setPoint;
+		this.setPoint = setPoint;
 		requires(RobotMap.drivetrain);
 		requires(RobotMap.direction);
 		getPIDController().setAbsoluteTolerance(tolerance);

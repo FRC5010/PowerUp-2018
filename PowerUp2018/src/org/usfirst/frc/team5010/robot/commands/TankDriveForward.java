@@ -34,7 +34,7 @@ public class TankDriveForward extends Command {
 			input = (input + deadZone) * 1/(1 - deadZone);	
 		}
 		
-		return input * 1;
+		return input;
 	}
 
     // Called just before this Command runs the first time
@@ -45,12 +45,6 @@ public class TankDriveForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	/*
-    	straightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
-    	turnValue = scaleInputs(-Robot.oi.joyDriver.getRawAxis(1));
-    	
-    	RobotMap.drivetrain.drive(straightValue + turnValue, straightValue - turnValue );
-    	*/
     	if (Robot.toa) {
     		//tank mode
     		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));

@@ -9,9 +9,12 @@ package org.usfirst.frc.team5010.robot;
 
 import org.usfirst.frc.team5010.robot.commands.ExampleAuto1;
 import org.usfirst.frc.team5010.robot.commands.ExampleAuto2;
+import org.usfirst.frc.team5010.robot.commands.Left;
 import org.usfirst.frc.team5010.robot.subsystems.ExampleSubsystem;
 
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -24,12 +27,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> positionChooser = new SendableChooser<>();
+	SendableChooser<Command> robotChooser = new SendableChooser<>();
 	
 	
 	//tank or arcade mode. tank is true, arcade is false
@@ -48,8 +52,10 @@ public class Robot extends TimedRobot {
 		
 		positionChooser.addObject("Position1", new ExampleAuto1());
 		positionChooser.addObject("Position2", new ExampleAuto2());
-		
+		positionChooser.addDefault("Default", new Left());
 		SmartDashboard.putData("Auton mode", positionChooser);
+		robotChooser.addObject("2017", new Spark(0));
+		robotChooser.addDefault("2018",new Victor(0));
 	}
 
 	/**
