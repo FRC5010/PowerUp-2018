@@ -14,6 +14,8 @@ import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
 
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -36,17 +38,27 @@ public class RobotMap {
 	// following variables to use with your drivetrain subsystem.
 	public static SpeedController driveMotorLeft;
 	public static SpeedController driveMotorRight;
+	public static SpeedController driveMotor2017Left;
+	public static SpeedController driveMotor2017Right;
+	public static SpeedController driveMotor2018Left;
+	public static SpeedController driveMotor2018Right;
 	public static Gyro gyro;
-	
+	public static  Encoder leftEncoder;
 	public static DirectionSensor direction;
 	public static DistanceSensor distance;
 	public static DriveTrainMain drivetrain;
 	
 	public static void init() {
 		//components
-		driveMotorLeft = new Victor(0);
-		driveMotorRight = new Victor(1);
+		
+		driveMotor2018Left = new Victor(0);
+		driveMotor2018Right = new Victor(1);
+		driveMotor2017Left = new Spark(8);
+		driveMotor2017Right = new Spark(9);
+		driveMotorLeft = driveMotor2018Left;
+		driveMotorRight = driveMotor2018Right;
 		gyro = new ADXRS450_Gyro();
+		leftEncoder = new Encoder(0, 1);
 		
 		//subsystems
 		direction = new DirectionSensor();

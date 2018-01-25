@@ -4,6 +4,7 @@ import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -18,6 +19,7 @@ public class TankDriveForward extends Command {
 	
 	public TankDriveForward() {
     	requires(RobotMap.drivetrain);
+    	requires(RobotMap.distance);
     	
 
         // Use requires() here to declare subsystem dependencies
@@ -56,6 +58,7 @@ public class TankDriveForward extends Command {
     		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
     		RobotMap.drivetrain.drive(leftValue - rightValue, leftValue + rightValue);
     	}
+    	SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
    
     }
 
