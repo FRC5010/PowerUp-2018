@@ -42,23 +42,30 @@ public class RobotMap {
 	public static SpeedController driveMotor2017Right;
 	public static SpeedController driveMotor2018Left;
 	public static SpeedController driveMotor2018Right;
+	public static SpeedController backriser;
+	public static SpeedController intakeMotorLeft;
+	public static SpeedController intakeMotorRight;
 	public static Gyro gyro;
-	public static  Encoder leftEncoder;
+	public static  Encoder encoder;
 	public static DirectionSensor direction;
 	public static DistanceSensor distance;
 	public static DriveTrainMain drivetrain;
+	public static SpeedController frontriser;
 	
 	public static void init() {
 		//components
 		
 		driveMotor2018Left = new Victor(0);
 		driveMotor2018Right = new Victor(1);
-		driveMotor2017Left = new Spark(8);
-		driveMotor2017Right = new Spark(9);
+		backriser = new Victor(9);
+		intakeMotorLeft = new Victor(7);
+		intakeMotorRight = new Victor(8);
+		frontriser = new Victor(6);
+		
 		driveMotorLeft = driveMotor2018Left;
 		driveMotorRight = driveMotor2018Right;
 		gyro = new ADXRS450_Gyro();
-		leftEncoder = new Encoder(0, 1);
+		encoder = new Encoder(0, 1);
 		
 		//subsystems
 		direction = new DirectionSensor();

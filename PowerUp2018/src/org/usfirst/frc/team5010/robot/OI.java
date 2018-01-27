@@ -54,6 +54,6 @@ public class OI {
 	
 	public OI () {
 		buttonY.whenPressed(new SwitchDriveMode());
-		buttonBack.whenReleased(new TurnToAngle(60));
+		buttonBack.whenReleased(new TurnToAngle(45));
 	}
 }

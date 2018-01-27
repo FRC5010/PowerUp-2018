@@ -16,7 +16,7 @@ public class Left extends CommandGroup {
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
+        //      addSequential(new Cow ommand2());
         // Command1 and Command2 will run in parallel.
 
         // A command group will require all of the subsystems that each member
@@ -25,7 +25,7 @@ public class Left extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	DriveForDistance driveForward = new DriveForDistance();
-    	driveForward.setPoint(260);
+    	driveForward.setPoint(102);
     	
     	addSequential(driveForward);
     }

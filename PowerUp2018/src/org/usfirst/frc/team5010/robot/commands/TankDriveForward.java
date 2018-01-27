@@ -56,7 +56,7 @@ public class TankDriveForward extends Command {
     		//arcade mode
     		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
     		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
-    		RobotMap.drivetrain.drive(leftValue - rightValue, leftValue + rightValue);
+    		RobotMap.drivetrain.drive(leftValue + rightValue, leftValue - rightValue);
     	}
     	SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
    

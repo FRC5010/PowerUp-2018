@@ -13,10 +13,11 @@ public class DriveForDistance extends PIDCommand {
 	private double currentAngle = 0;
 	private double startAngle = 0;
 	private static double p = 0.12;
-	private static double i = 0.04;
-	private static double d = 0.04;
+	private static double i = 0.1;
+	private static double d = 0.5;
 	private static double tolerance = 2;
 	private static int toleranceBuffer = 10;
+	private int stopCount = 0;
 	
 
     public DriveForDistance() {
@@ -28,7 +29,7 @@ public class DriveForDistance extends PIDCommand {
         requires(RobotMap.drivetrain);
         requires(RobotMap.direction);
         //requires(RobotMap.distanceSensor);
-        getPIDController().setInputRange(0, 500);
+        getPIDController().setInputRange(0, 5000);
         getPIDController().setOutputRange(-0.4, 0.4);
     }
     public void setPoint(double setPoint) {
@@ -37,7 +38,7 @@ public class DriveForDistance extends PIDCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//getPIDController().setPID(SmartDashboard.getNumber("P", 0.12), SmartDashboard.getNumber("I", 0.04), SmartDashboard.getNumber("D", 0.04));
+    	getPIDController().setPID(SmartDashboard.getNumber("P", 0.12), SmartDashboard.getNumber("I", 0.04), SmartDashboard.getNumber("D", 0.04));
     	getPIDController().setAbsoluteTolerance(tolerance);
     	RobotMap.direction.reset();
         startAngle = RobotMap.direction.angle();
@@ -55,14 +56,20 @@ public class DriveForDistance extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return getPIDController().onTarget();
+        if(getPIDController().onTarget()) {
+        	stopCount++;
+        }
+        if(stopCount == 30) {
+        	return true;
+        }else {
+        	return false;
+        }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	getPIDController().reset();
     	RobotMap.drivetrain.stop();
-    
+    	getPIDController().reset();
     }
 
     // Called when another command which requires one or more of the same
@@ -73,9 +80,9 @@ public class DriveForDistance extends PIDCommand {
 
 	@Override
 	protected double returnPIDInput() {
-		//double distance = RobotMap.distanceSensor.getDistance();
-    	SmartDashboard.putNumber("distance", 0);
-		return 1;
+		double distance = RobotMap.distance.getDistance();
+    	SmartDashboard.putNumber("distance", distance);
+		return distance;
 		
 	}
 
