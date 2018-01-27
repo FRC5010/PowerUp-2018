@@ -1,5 +1,5 @@
 package org.usfirst.frc.team5010.robot.subsystems;
-
+import org.usfirst.frc.team5010.robot.RobotMap;
 import org.usfirst.frc.team5010.robot.Robot;
 
 import edu.wpi.first.wpilibj.SpeedController;
@@ -8,12 +8,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BackRiser extends Subsystem {
 
-	public static SpeedController backriser;
 	public BackRiser() {
-		// TODO Auto-generated constructor stub
-		backriser = new Victor(9);
 	}
-
+	
 	public BackRiser(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
@@ -25,17 +22,15 @@ public class BackRiser extends Subsystem {
 
 	}
 
-	public void lower() {
-		if(Robot.oi.joyDriver.getRawAxis(2)>0) {
-			backriser.set(-scaleInputs(Robot.oi.joyDriver.getRawAxis(2)));
+	public void move() {
+		//Handles raising and lowering
+		//Reason: Raising and lowering will never be done at the same time
+		if(Math.abs(Robot.oi.joyCODriver.getRawAxis(1))>0.0) {
+			//Raise and lower should be on the same axis, because they shouldn't be triggered at the same time.
+			RobotMap.backriser.set(scaleInputs(Robot.oi.joyCODriver.getRawAxis(1)));
 		}
 	}
-	
-	public void raise() {
-		if(Robot.oi.joyDriver.getRawAxis(3)>0) {
-			backriser.set(scaleInputs(Robot.oi.joyDriver.getRawAxis(3)));
-		}
-	}
+
 	public double scaleInputs(double input){
 	    if(Math.abs(input) < deadZone){
 	    	input = 0;
