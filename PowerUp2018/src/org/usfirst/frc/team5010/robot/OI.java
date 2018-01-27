@@ -48,6 +48,7 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	public Joystick joyDriver = new Joystick(0);
+	public Joystick joyCODriver = new Joystick(1);
 	
 	private Button buttonY = new JoystickButton(joyDriver, 4);
 	private Button buttonBack = new JoystickButton(joyDriver,7);
