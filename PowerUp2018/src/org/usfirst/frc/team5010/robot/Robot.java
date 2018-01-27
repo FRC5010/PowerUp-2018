@@ -9,7 +9,7 @@ package org.usfirst.frc.team5010.robot;
 
 import org.usfirst.frc.team5010.robot.commands.ExampleAuto1;
 import org.usfirst.frc.team5010.robot.commands.ExampleAuto2;
-import org.usfirst.frc.team5010.robot.commands.Left;
+import org.usfirst.frc.team5010.robot.commands.AutoCenter;
 import org.usfirst.frc.team5010.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 		
 		positionChooser.addObject("Position1", new ExampleAuto1());
 		positionChooser.addObject("Position2", new ExampleAuto2());
-		positionChooser.addDefault("Default", new Left());
+		positionChooser.addDefault("Default", new AutoCenter());
 		SmartDashboard.putData("Auton mode", positionChooser);
 	}
 

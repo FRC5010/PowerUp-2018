@@ -28,7 +28,7 @@ public class DriveForDistance extends PIDCommand {
 
         requires(RobotMap.drivetrain);
         requires(RobotMap.direction);
-        //requires(RobotMap.distanceSensor);
+        requires(RobotMap.distance);
         getPIDController().setInputRange(0, 5000);
         getPIDController().setOutputRange(-0.4, 0.4);
     }
@@ -40,10 +40,10 @@ public class DriveForDistance extends PIDCommand {
     protected void initialize() {
     	getPIDController().setPID(SmartDashboard.getNumber("P", 0.12), SmartDashboard.getNumber("I", 0.04), SmartDashboard.getNumber("D", 0.04));
     	getPIDController().setAbsoluteTolerance(tolerance);
-    	RobotMap.direction.reset();
+    	//RobotMap.direction.reset();
         startAngle = RobotMap.direction.angle();
     	SmartDashboard.putNumber("startAngle", startAngle);
-    	//RobotMap.distanceSensor.reset();
+    	RobotMap.distance.reset();
     	
     }
 
@@ -59,7 +59,7 @@ public class DriveForDistance extends PIDCommand {
         if(getPIDController().onTarget()) {
         	stopCount++;
         }
-        if(stopCount == 30) {
+        if(stopCount == 10) {
         	return true;
         }else {
         	return false;

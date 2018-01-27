@@ -11,11 +11,12 @@ package org.usfirst.frc.team5010.robot;
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
+import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
 
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -42,6 +43,7 @@ public class RobotMap {
 	public static SpeedController driveMotor2017Right;
 	public static SpeedController driveMotor2018Left;
 	public static SpeedController driveMotor2018Right;
+	public static  AnalogInput ultrasound;
 	public static SpeedController backriser;
 	public static SpeedController intakeMotorLeft;
 	public static SpeedController intakeMotorRight;
@@ -51,7 +53,7 @@ public class RobotMap {
 	public static DistanceSensor distance;
 	public static DriveTrainMain drivetrain;
 	public static SpeedController frontriser;
-	
+	public static UltrasonicSensor range;
 	public static void init() {
 		//components
 		
@@ -66,8 +68,10 @@ public class RobotMap {
 		driveMotorRight = driveMotor2018Right;
 		gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
+		ultrasound = new AnalogInput(0);	
 		
 		//subsystems
+		range = new UltrasonicSensor();
 		direction = new DirectionSensor();
 		distance = new DistanceSensor();
 		drivetrain = new DriveTrainMain();

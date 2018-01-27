@@ -38,7 +38,7 @@ public class TurnToAngle extends PIDCommand {
 
 	protected void initialize() {
 		setSetpoint(setPoint);
-		RobotMap.direction.reset();
+		//RobotMap.direction.reset();
 		getPIDController().setPID(SmartDashboard.getNumber("P", 0.01), SmartDashboard.getNumber("I", 0),
 				SmartDashboard.getNumber("D", 0));
 	}
