@@ -11,11 +11,13 @@ package org.usfirst.frc.team5010.robot;
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
+import org.usfirst.frc.team5010.robot.subsystems.Shift;
 import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
 
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -54,6 +56,8 @@ public class RobotMap {
 	public static DriveTrainMain drivetrain;
 	public static SpeedController frontriser;
 	public static UltrasonicSensor range;
+	public static Shift shift;
+	public static DoubleSolenoid intake;
 	public static void init() {
 		//components
 		
@@ -68,7 +72,9 @@ public class RobotMap {
 		driveMotorRight = driveMotor2018Right;
 		gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
-		ultrasound = new AnalogInput(0);	
+		ultrasound = new AnalogInput(0);
+		shift = new DoubleSolenoid(0, 1);
+		intake = new DoubleSolenoid(2,3);		
 		
 		//subsystems
 		range = new UltrasonicSensor();
