@@ -25,9 +25,9 @@ public class BackRiser extends Subsystem {
 	public void move() {
 		//Handles raising and lowering
 		//Reason: Raising and lowering will never be done at the same time
-		if(Math.abs(Robot.oi.joyCODriver.getRawAxis(1))>0.0) {
+		if(Math.abs(Robot.oi.joyCoDriver.getRawAxis(1))>0.0) {
 			//Raise and lower should be on the same axis, because they shouldn't be triggered at the same time.
-			RobotMap.backriser.set(scaleInputs(Robot.oi.joyCODriver.getRawAxis(1)));
+			RobotMap.backriser.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(1)));
 		}
 	}
 

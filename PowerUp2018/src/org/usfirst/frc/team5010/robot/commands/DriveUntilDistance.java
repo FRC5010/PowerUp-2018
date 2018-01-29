@@ -47,6 +47,10 @@ public class DriveUntilDistance extends PIDCommand {
     public void setPoint(double setPoint) {
     	setSetpoint(setPoint);
     }
+    
+    public void setAngle(double setAngle) {
+    	startAngle = setAngle;
+    }
 
 	// Called just before this Command runs the first time
     protected void initialize() {
@@ -54,7 +58,6 @@ public class DriveUntilDistance extends PIDCommand {
     	//setPoint(SmartDashboard.getNumber("Setpoint", 20));
 //        SmartDashboard.putNumber("Setpoint", getSetpoint());   
         getPIDController().setAbsoluteTolerance(tolerance);
-    	startAngle = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -67,9 +70,6 @@ public class DriveUntilDistance extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {    
     	if(getPIDController().onTarget()) {
-        	stopCount++;
-        }
-        if(stopCount == 10) {
         	return true;
         }else {
         	return false;
@@ -80,7 +80,6 @@ public class DriveUntilDistance extends PIDCommand {
     protected void end() {
     	getPIDController().reset();
     	RobotMap.drivetrain.stop();
-    
     }
 
     // Called when another command which requires one or more of the same

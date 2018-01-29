@@ -1,16 +1,14 @@
 package org.usfirst.frc.team5010.robot.subsystems;
 
 import org.usfirst.frc.team5010.robot.Robot;
+import org.usfirst.frc.team5010.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team5010.robot.RobotMap
 public class FrontRiser extends Subsystem {
 
 	public FrontRiser() {
 		// TODO Auto-generated constructor stub
-		frontriser = new Victor(9);
+		//frontriser = new Victor(9);
 	}
 
 	public FrontRiser(String name) {
@@ -27,8 +25,8 @@ public class FrontRiser extends Subsystem {
 	public void move() {
 		//Handles raising and lowering
 		//Reason: Raising and lowering will never be done at the same time
-		if(Math.abs(Robot.oi.joyCODriver.getRawAxis(4))>0.0) {
-			RobotMap.frontriser.set(scaleInputs(Robot.oi.joyCODriver.getRawAxis(4)));
+		if(Math.abs(Robot.oi.joyCoDriver.getRawAxis(4))>0.0) {
+			RobotMap.frontriser.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(4)));
 		}
 	}
 	

@@ -58,7 +58,7 @@ public class TankDriveForward extends Command {
     	} else if (!Robot.toa) {
     		//tank mode
     		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-    		rightValue = -scaleInputs(Robot.oi.joyDriver2.getRawAxis(1));
+    		rightValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
     		RobotMap.drivetrain.drive(leftValue, rightValue);
     	}
     	SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());

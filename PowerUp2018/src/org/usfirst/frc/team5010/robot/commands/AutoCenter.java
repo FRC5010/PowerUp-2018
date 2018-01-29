@@ -29,15 +29,7 @@ public class AutoCenter extends CommandGroup {
 		TurnToAngle turn;
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if (gameData.charAt(0) == 'L') {
-			turn = new TurnToAngle(-45);
-			turn2 = new TurnToAngle(0);
-			// Put left auto code here
-		} else {
-			// Put right auto code here
-			turn = new TurnToAngle(45);
-			turn2 = new TurnToAngle(0);
-		}
+		
 		DriveForDistance driveForward = new DriveForDistance();
 		driveForward.setPoint(30);
 
@@ -46,11 +38,22 @@ public class AutoCenter extends CommandGroup {
 
 		DriveUntilDistance driveForward3 = new DriveUntilDistance();
 		driveForward3.setPoint(7);
+		
+		Stop stop1 = new Stop();
 
+		if (gameData.charAt(0) == 'L') {
+			driveForward2.setAngle(-45);
+			driveForward3.setAngle(0);
+			// Put left auto code here
+		} else {
+			// Put right auto code here
+			driveForward2.setAngle(45);
+			driveForward3.setAngle(0);
+		}
+		
 		addSequential(driveForward);
-		addSequential(turn);
 		addSequential(driveForward2);
-		addSequential(turn2);
-		addSequential(driveForward3);
+		//addSequential(driveForward3);
+		addSequential(stop1);
 	}
 }

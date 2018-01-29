@@ -73,7 +73,6 @@ public class RobotMap {
 		gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
 		ultrasound = new AnalogInput(0);
-		shift = new DoubleSolenoid(0, 1);
 		intake = new DoubleSolenoid(2,3);		
 		
 		//subsystems

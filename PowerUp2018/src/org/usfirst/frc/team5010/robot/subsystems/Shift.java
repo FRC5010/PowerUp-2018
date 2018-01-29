@@ -13,7 +13,7 @@ public class Shift extends Subsystem {
 	 DoubleSolenoid EvoShift = null;
 	
 	public Shift () {
-		EvoShift = RobotMap.shift;
+		//EvoShift = RobotMap.shift;
 	}
 
     // Put methods for controlling this subsystem
