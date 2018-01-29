@@ -17,7 +17,7 @@ import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -57,7 +57,7 @@ public class RobotMap {
 	public static SpeedController frontriser;
 	public static UltrasonicSensor range;
 	public static Shift shift;
-	public static DoubleSolenoid intake;
+	public static Solenoid intake;
 	public static void init() {
 		//components
 		
@@ -73,7 +73,7 @@ public class RobotMap {
 		gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
 		ultrasound = new AnalogInput(0);
-		intake = new DoubleSolenoid(2,3);		
+		intake = new Solenoid(2);		
 		
 		//subsystems
 		range = new UltrasonicSensor();

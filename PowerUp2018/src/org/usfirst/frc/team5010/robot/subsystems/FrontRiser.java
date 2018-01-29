@@ -5,15 +5,12 @@ import org.usfirst.frc.team5010.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 public class FrontRiser extends Subsystem {
+	private double deadZone = .15;
 
+	/**
+	 * Default constructor.
+	 */
 	public FrontRiser() {
-		// TODO Auto-generated constructor stub
-		//frontriser = new Victor(9);
-	}
-
-	public FrontRiser(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -25,13 +22,13 @@ public class FrontRiser extends Subsystem {
 	public void move() {
 		//Handles raising and lowering
 		//Reason: Raising and lowering will never be done at the same time
-		if(Math.abs(Robot.oi.joyCoDriver.getRawAxis(4))>0.0) {
-			RobotMap.frontriser.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(4)));
+		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(1)) > 0.0) {
+			RobotMap.frontriser.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(1)));
 		}
 	}
 	
 	public double scaleInputs(double input){
-	    if(Math.abs(input) < deadZone){
+	    if (Math.abs(input) < deadZone){
 	    	input = 0;
 	    }
 	    else if (input > 0){
@@ -42,7 +39,5 @@ public class FrontRiser extends Subsystem {
 		
 		return input;
 	}
-	private double deadZone = .15;
-
 
 }

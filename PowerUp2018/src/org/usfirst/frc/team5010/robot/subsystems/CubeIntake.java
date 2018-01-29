@@ -3,19 +3,19 @@ package org.usfirst.frc.team5010.robot.subsystems;
 import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
 
 
 public class CubeIntake extends Subsystem {
-	private Solenoid IntakePiston = null;
 	private double deadZone = .15;
+	
+	/** 
+	 * Default constructor.
+	 */
 	public CubeIntake() {
-		// TODO Auto-generated constructor stub
-		IntakePiston = new Solenoid(0);
 	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
@@ -23,14 +23,14 @@ public class CubeIntake extends Subsystem {
 	}
 
 	public void devourCube() {
-		if(Robot.oi.joyCoDriver.getRawAxis(2)>0) {
+		if (Robot.oi.joyCoDriver.getRawAxis(2) > 0) {
 			RobotMap.intakeMotorLeft.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)));
 			RobotMap.intakeMotorRight.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)));
 		}
 	}
 	
 	public void spitCube() {
-		if(Robot.oi.joyCoDriver.getRawAxis(3)>0) {
+		if (Robot.oi.joyCoDriver.getRawAxis(3) > 0) {
 			RobotMap.intakeMotorLeft.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)));
 			RobotMap.intakeMotorRight.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)));
 		}		
@@ -49,21 +49,22 @@ public class CubeIntake extends Subsystem {
 		return input;
 	}
 	
+	// TODO uncomment GearHolderPiston code when Pneumatic Control available.
+
+	public void closeIntake() {
 		// TODO uncomment GearHolderPiston code when Pneumatic Control available.
-
-		public void closeIntake() {
-			// TODO uncomment GearHolderPiston code when Pneumatic Control available.
-			IntakePiston.set(false);
-			System.out.println("Intake is closing");
-		}
-
-		public void openIntake() {
-			// TODO uncomment GearHolderPiston code when Pneumatic Control available.
-			IntakePiston.set(true);
-			System.out.println("Intake is opening");
-		}
-
-		public void stop() {
-			IntakePiston.set(false);
-		}
+		RobotMap.intake.set(false);
+		System.out.println("Intake is closing");
 	}
+
+	public void openIntake() {
+		// TODO uncomment GearHolderPiston code when Pneumatic Control available.
+		RobotMap.intake.set(true);
+		System.out.println("Intake is opening");
+	}
+
+	public void stop() {
+		RobotMap.intake.set(false);
+	}
+
+}
