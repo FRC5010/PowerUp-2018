@@ -51,14 +51,16 @@ public class TankDriveForward extends Command {
     		//arcade mode
     		
     		//leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-    		//rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(0));
+    		//rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(2));
     		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
     		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
     		RobotMap.drivetrain.drive(leftValue + rightValue, leftValue - rightValue);
     	} else if (!Robot.toa) {
     		//tank mode
     		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-    		rightValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
+    		rightValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(5));
+    		//leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
+    		//rightValue = -scaleInputs(Robot.oi.joyDriver2.getRawAxis(1));
     		RobotMap.drivetrain.drive(leftValue, rightValue);
     	}
     	SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
