@@ -1,19 +1,13 @@
 package org.usfirst.frc.team5010.robot.subsystems;
-import org.usfirst.frc.team5010.robot.RobotMap;
 import org.usfirst.frc.team5010.robot.Robot;
+import org.usfirst.frc.team5010.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
-public class BackRiser extends Subsystem {
-
-	public BackRiser() {
-	}
+public class BackRiser extends PIDSubsystem {
 	
 	public BackRiser(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+		super(name, 0.1, 0.0, 0.2);
 	}
 
 	@Override
@@ -44,4 +38,17 @@ public class BackRiser extends Subsystem {
 		return input;
 	}
 	private double deadZone = .15;
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		double potValue = RobotMap.backRiserPot.get();
+		double height = Math.sin(potValue)*RobotMap.armLength;
+		return height;
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// TODO Auto-generated method stub
+		RobotMap.backriser.set(output);
+	}
 }

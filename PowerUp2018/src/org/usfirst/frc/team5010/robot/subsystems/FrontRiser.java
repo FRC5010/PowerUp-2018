@@ -1,21 +1,13 @@
 package org.usfirst.frc.team5010.robot.subsystems;
-
 import org.usfirst.frc.team5010.robot.Robot;
+import org.usfirst.frc.team5010.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team5010.robot.RobotMap
-public class FrontRiser extends Subsystem {
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
-	public FrontRiser() {
-		// TODO Auto-generated constructor stub
-		frontriser = new Victor(9);
-	}
+public class FrontRiser extends PIDSubsystem {
 
 	public FrontRiser(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+		super(name, 0.1, 0.0, 0.2);
 	}
 
 	@Override
@@ -46,5 +38,17 @@ public class FrontRiser extends Subsystem {
 	}
 	private double deadZone = .15;
 
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		double potValue = RobotMap.frontRiserPot.get();
+		double height = Math.sin(potValue)*RobotMap.armLength;
+		return height;
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// TODO Auto-generated method stub
+		RobotMap.frontriser.set(output);
+	}
 
 }

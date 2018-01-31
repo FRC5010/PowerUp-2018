@@ -14,6 +14,7 @@ import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
 
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -51,6 +52,10 @@ public class RobotMap {
 	public static DistanceSensor distance;
 	public static DriveTrainMain drivetrain;
 	public static SpeedController frontriser;
+	public static AnalogPotentiometer backRiserPot;
+	public static AnalogPotentiometer frontRiserPot;
+	public static double armLength = 35;
+	//Make sure front and back arms are same length, or change above code
 	
 	public static void init() {
 		//components
@@ -61,6 +66,9 @@ public class RobotMap {
 		intakeMotorLeft = new Victor(7);
 		intakeMotorRight = new Victor(8);
 		frontriser = new Victor(6);
+		
+		frontRiserPot = new AnalogPotentiometer(0);
+		backRiserPot = new AnalogPotentiometer(1);
 		
 		driveMotorLeft = driveMotor2018Left;
 		driveMotorRight = driveMotor2018Right;
