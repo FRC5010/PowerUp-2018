@@ -7,12 +7,15 @@
 
 package org.usfirst.frc.team5010.robot;
 
+import org.usfirst.frc.team5010.robot.commands.ShiftDown;
+import org.usfirst.frc.team5010.robot.commands.ShiftUp;
 import org.usfirst.frc.team5010.robot.commands.SwitchDriveMode;
 import org.usfirst.frc.team5010.robot.commands.TurnToAngle;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -48,13 +51,20 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	public Joystick joyDriver = new Joystick(0);
-	public Joystick joyCODriver = new Joystick(1);
+	public Joystick joyCoDriver = new Joystick(1);
+	
 	
 	private Button buttonY = new JoystickButton(joyDriver, 4);
 	private Button buttonBack = new JoystickButton(joyDriver,7);
+	private Button buttonRB = new JoystickButton(joyDriver, 6);
+	private Button buttonLB = new JoystickButton(joyDriver, 5);
 	
 	public OI () {
 		buttonY.whenPressed(new SwitchDriveMode());
 		buttonBack.whenReleased(new TurnToAngle(45));
+		buttonRB.whenPressed(new ShiftUp());
+		buttonLB.whenPressed(new ShiftDown());
+		joyDriver.getName();
+		SmartDashboard.putString("joystick Name", joyDriver.getName());
 	}
 }

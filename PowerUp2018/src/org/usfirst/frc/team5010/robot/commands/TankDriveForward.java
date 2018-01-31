@@ -20,7 +20,7 @@ public class TankDriveForward extends Command {
 	public TankDriveForward() {
     	requires(RobotMap.drivetrain);
     	requires(RobotMap.distance);
-    	
+    	requires(RobotMap.range);
 
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -41,24 +41,28 @@ public class TankDriveForward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.toa) {
-    		//tank mode
-    		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-    		rightValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(5));
-    		RobotMap.drivetrain.drive(leftValue, rightValue);
-    	} else if (!Robot.toa) {
+    		
     		//arcade mode
+    		
+    		//leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
+    		//rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(0));
     		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
     		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
     		RobotMap.drivetrain.drive(leftValue + rightValue, leftValue - rightValue);
+    	} else if (!Robot.toa) {
+    		//tank mode
+    		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
+    		rightValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
+    		RobotMap.drivetrain.drive(leftValue, rightValue);
     	}
     	SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
+    	SmartDashboard.putNumber("range", RobotMap.range.getDistance());
    
     }
 

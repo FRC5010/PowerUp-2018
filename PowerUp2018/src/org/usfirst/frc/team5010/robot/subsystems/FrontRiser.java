@@ -3,8 +3,11 @@ import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+	private double deadZone = .15;
 
 public class FrontRiser extends PIDSubsystem {
+	 * Default constructor.
+	 */
 
 	public FrontRiser(String name) {
 		super(name, 0.1, 0.0, 0.2);
@@ -19,13 +22,13 @@ public class FrontRiser extends PIDSubsystem {
 	public void move() {
 		//Handles raising and lowering
 		//Reason: Raising and lowering will never be done at the same time
-		if(Math.abs(Robot.oi.joyCODriver.getRawAxis(4))>0.0) {
-			RobotMap.frontriser.set(scaleInputs(Robot.oi.joyCODriver.getRawAxis(4)));
+		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(1)) > 0.0) {
+			RobotMap.frontriser.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(1)));
 		}
 	}
 	
 	public double scaleInputs(double input){
-	    if(Math.abs(input) < deadZone){
+	    if (Math.abs(input) < deadZone){
 	    	input = 0;
 	    }
 	    else if (input > 0){
@@ -36,7 +39,6 @@ public class FrontRiser extends PIDSubsystem {
 		
 		return input;
 	}
-	private double deadZone = .15;
 	public void setHeight(double height) {
 		setSetpoint(height);
 	}
@@ -46,7 +48,6 @@ public class FrontRiser extends PIDSubsystem {
 		double height = Math.sin(potValue)*RobotMap.armLength;
 		return height;
 	}
-
 	@Override
 	protected void usePIDOutput(double output) {
 		// TODO Auto-generated method stub

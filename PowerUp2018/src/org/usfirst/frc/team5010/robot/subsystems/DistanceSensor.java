@@ -21,6 +21,9 @@ public class DistanceSensor extends Subsystem {
 	public double getDistance() {
 		return -RobotMap.encoder.getDistance();
 	}
+	public void reset() {
+		RobotMap.encoder.reset();
+	}
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub

@@ -10,6 +10,7 @@ public class DirectionSensor extends Subsystem {
 	private Gyro gyro;
 	
 	public DirectionSensor() {
+		RobotMap.gyro.reset();
 		this.gyro = RobotMap.gyro;
 	}
 	

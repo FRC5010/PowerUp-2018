@@ -11,12 +11,15 @@ package org.usfirst.frc.team5010.robot;
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
+import org.usfirst.frc.team5010.robot.subsystems.Shift;
+import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
 
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -43,6 +46,7 @@ public class RobotMap {
 	public static SpeedController driveMotor2017Right;
 	public static SpeedController driveMotor2018Left;
 	public static SpeedController driveMotor2018Right;
+	public static  AnalogInput ultrasound;
 	public static SpeedController backriser;
 	public static SpeedController intakeMotorLeft;
 	public static SpeedController intakeMotorRight;
@@ -55,8 +59,10 @@ public class RobotMap {
 	public static AnalogPotentiometer backRiserPot;
 	public static AnalogPotentiometer frontRiserPot;
 	public static double armLength = 35;
+	public static UltrasonicSensor range;
+	public static Shift shift;
+	public static Solenoid intake;
 	//Make sure front and back arms are same length, or change above code
-	
 	public static void init() {
 		//components
 		
@@ -74,8 +80,11 @@ public class RobotMap {
 		driveMotorRight = driveMotor2018Right;
 		gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
+		ultrasound = new AnalogInput(0);
+		intake = new Solenoid(2);		
 		
 		//subsystems
+		range = new UltrasonicSensor();
 		direction = new DirectionSensor();
 		distance = new DistanceSensor();
 		drivetrain = new DriveTrainMain();
