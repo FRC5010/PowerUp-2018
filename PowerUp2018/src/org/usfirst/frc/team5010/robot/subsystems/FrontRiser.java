@@ -37,7 +37,9 @@ public class FrontRiser extends PIDSubsystem {
 		return input;
 	}
 	private double deadZone = .15;
-
+	public void setHeight(double height) {
+		setSetpoint(height);
+	}
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
 		double potValue = RobotMap.frontRiserPot.get();

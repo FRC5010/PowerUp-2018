@@ -38,6 +38,9 @@ public class BackRiser extends PIDSubsystem {
 		return input;
 	}
 	private double deadZone = .15;
+	public void setHeight(double height) {
+		setSetpoint(height);
+	}
 	@Override
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
