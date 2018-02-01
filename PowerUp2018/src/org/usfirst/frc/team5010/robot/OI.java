@@ -51,7 +51,8 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	public Joystick joyDriver = new Joystick(0);
-	public Joystick joyCoDriver = new Joystick(1);
+	//public Joystick joyDriver2 = new Joystick(1);
+	public Joystick joyCoDriver = new Joystick(2);
 	
 	
 	private Button buttonY = new JoystickButton(joyDriver, 4);
@@ -62,8 +63,8 @@ public class OI {
 	public OI () {
 		buttonY.whenPressed(new SwitchDriveMode());
 		buttonBack.whenReleased(new TurnToAngle(45));
-		buttonRB.whenPressed(new ShiftUp());
-		buttonLB.whenPressed(new ShiftDown());
+		//buttonRB.whenPressed(new ShiftUp());
+		//buttonLB.whenPressed(new ShiftDown());
 		joyDriver.getName();
 		SmartDashboard.putString("joystick Name", joyDriver.getName());
 	}
