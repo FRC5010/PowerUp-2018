@@ -3,11 +3,11 @@ import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-	private double deadZone = .15;
 
 public class FrontRiser extends PIDSubsystem {
-	 * Default constructor.
+	 /* Default constructor.
 	 */
+	private double deadZone = .15;
 
 	public FrontRiser(String name) {
 		super(name, 0.1, 0.0, 0.2);
