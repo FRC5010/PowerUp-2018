@@ -3,25 +3,38 @@ import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FrontRiser extends PIDSubsystem {
 	private double deadZone = .15;
 
 	public FrontRiser(String name) {
 		super(name, 0.1, 0.0, 0.2);
+		disable();
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+	}
 
+	/**
+	 * Function determines whether joystick controller is being pressed or not.
+	 * @return boolean
+	 */
+	public boolean isAxisPressed() {
+		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(1)) > 0.0) {
+			return true;
+		}
+		return false;
 	}
 
 	public void move() {
 		//Handles raising and lowering
 		//Reason: Raising and lowering will never be done at the same time
 		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(1)) > 0.0) {
-			RobotMap.frontriser.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(1)));
+			double output = scaleInputs(Robot.oi.joyCoDriver.getRawAxis(1));
+			RobotMap.frontriser.set(-output);
+			SmartDashboard.putNumber("FrontRiser", output);
 		}
 	}
 	
@@ -48,7 +61,6 @@ public class FrontRiser extends PIDSubsystem {
 	}
 	@Override
 	protected void usePIDOutput(double output) {
-		// TODO Auto-generated method stub
 		RobotMap.frontriser.set(output);
 	}
 

@@ -7,10 +7,9 @@
 
 package org.usfirst.frc.team5010.robot;
 
+import org.usfirst.frc.team5010.robot.commands.AutoCenter;
 import org.usfirst.frc.team5010.robot.commands.ExampleAuto1;
 import org.usfirst.frc.team5010.robot.commands.ExampleAuto2;
-import org.usfirst.frc.team5010.robot.commands.AutoCenter;
-import org.usfirst.frc.team5010.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;

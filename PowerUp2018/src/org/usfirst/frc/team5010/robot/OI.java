@@ -55,16 +55,16 @@ public class OI {
 	public Joystick joyCoDriver = new Joystick(2);
 	
 	
-	private Button buttonY = new JoystickButton(joyDriver, 4);
-	private Button buttonBack = new JoystickButton(joyDriver,7);
-	private Button buttonRB = new JoystickButton(joyDriver, 6);
-	private Button buttonLB = new JoystickButton(joyDriver, 5);
+	private Button driverButtonY = new JoystickButton(joyDriver, 4);
+	private Button driverButtonBack = new JoystickButton(joyDriver,7);
+	private Button driverButtonRB = new JoystickButton(joyDriver, 6);
+	private Button driverButtonLB = new JoystickButton(joyDriver, 5);
 	
 	public OI () {
-		buttonY.whenPressed(new SwitchDriveMode());
-		buttonBack.whenReleased(new TurnToAngle(45));
-		//buttonRB.whenPressed(new ShiftUp());
-		//buttonLB.whenPressed(new ShiftDown());
+		driverButtonY.whenPressed(new SwitchDriveMode());
+		//driverButtonBack.whenReleased(new TurnToAngle(45));
+		//driverButtonRB.whenPressed(new ShiftUp());
+		//driverButtonLB.whenPressed(new ShiftDown());
 		joyDriver.getName();
 		SmartDashboard.putString("joystick Name", joyDriver.getName());
 	}

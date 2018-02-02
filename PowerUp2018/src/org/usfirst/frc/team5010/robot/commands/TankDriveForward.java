@@ -65,7 +65,8 @@ public class TankDriveForward extends Command {
     	}
     	SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
     	SmartDashboard.putNumber("range", RobotMap.range.getDistance());
-   
+    	RobotMap.frontLifter.move();
+    	RobotMap.backLifter.move();
     }
 
     // Make this return true when this Command no longer needs to run execute()
