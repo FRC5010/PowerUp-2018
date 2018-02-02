@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FrontRiser extends PIDSubsystem {
+	 /* Default constructor.
+	 */
 	private double deadZone = .15;
 
 	public FrontRiser(String name) {
