@@ -7,12 +7,18 @@
 
 package org.usfirst.frc.team5010.robot;
 
+import org.usfirst.frc.team5010.robot.subsystems.BackRiser;
+import org.usfirst.frc.team5010.robot.subsystems.CubeIntake;
 //subsystems
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
+import org.usfirst.frc.team5010.robot.subsystems.FourBarLifter;
+import org.usfirst.frc.team5010.robot.subsystems.FrontRiser;
 import org.usfirst.frc.team5010.robot.subsystems.Shift;
 import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -38,9 +44,18 @@ public class RobotMap {
 		SmartDashboard.putNumber("I", 0.04);
 		SmartDashboard.putNumber("P", 0.06);
 		
+		
 	}
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
+	
+	public static TalonSRX rightMotor1;
+	public static TalonSRX rightMotor2;
+	public static TalonSRX rightMotor3;
+	public static TalonSRX leftMotor1; 
+	public static TalonSRX leftMotor2;
+	public static TalonSRX leftMotor3;
+	
 	public static SpeedController driveMotorLeft;
 	public static SpeedController driveMotorRight;
 	public static SpeedController driveMotor2017Left;
@@ -64,26 +79,52 @@ public class RobotMap {
 	public static Shift shift;
 	public static Solenoid intake;
 	public static CameraServer camera;
+	public static Solenoid shiftSolenoid;
+	public static FrontRiser frontLifter;
+	public static BackRiser backLifter;
+	public static FourBarLifter fourbar;
+	public static CubeIntake cubeIntake;
+	
 	//Make sure front and back arms are same length, or change above code
 	public static void init() {
-		//components
+		// Drive Train components
+		rightMotor1 = new TalonSRX(4);
+		rightMotor2 = new TalonSRX(5);
+		rightMotor3 = new TalonSRX(6);
+		leftMotor1 = new TalonSRX(1);
+		leftMotor2 = new TalonSRX(2);
+		leftMotor3 = new TalonSRX(3);
 		
-		driveMotor2018Left = new Victor(0);
-		driveMotor2018Right = new Victor(1);
-		backriser = new Victor(9);
-		intakeMotorLeft = new Victor(7);
-		intakeMotorRight = new Victor(8);
-		frontriser = new Victor(6);
+		rightMotor2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
+		rightMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
 		
-		frontRiserPot = new AnalogPotentiometer(0);
-		backRiserPot = new AnalogPotentiometer(1);
+		leftMotor2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 1);
+		leftMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 1);
 		
+//		driveMotor2018Left = new Victor(0);
+//		driveMotor2018Right = new Victor(1);
+		
+		// Set this to the correct drive motor
 		driveMotorLeft = driveMotor2018Left;
 		driveMotorRight = driveMotor2018Right;
+		
+		// Lifter motors
+		backriser = new Victor(0);
+		frontriser = new Victor(1);
+
+		intakeMotorLeft = new Victor(7);
+		intakeMotorRight = new Victor(8);
+
+		// Solenoids
+		intake = new Solenoid(2);	
+		shiftSolenoid = new Solenoid(1);
+		
+		//Sensor components
 		gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
-		ultrasound = new AnalogInput(0);
-		intake = new Solenoid(2);		
+		ultrasound = new AnalogInput(0); 
+		frontRiserPot = new AnalogPotentiometer(1);
+		backRiserPot = new AnalogPotentiometer(2);
 		camera = CameraServer.getInstance();
 		
 		//subsystems
@@ -91,7 +132,11 @@ public class RobotMap {
 		direction = new DirectionSensor();
 		distance = new DistanceSensor();
 		drivetrain = new DriveTrainMain();
-		
+		frontLifter = new FrontRiser("front");
+		backLifter = new BackRiser("back");
+		fourbar = new FourBarLifter();
+		cubeIntake = new CubeIntake();
+		shift = new Shift();
 	}
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TankDriveForward extends Command {
+public class TeleopDefault extends Command {
 	private double straightValue;
 	private double turnValue;
 	private double deadZone = .15;
@@ -17,11 +17,13 @@ public class TankDriveForward extends Command {
 	private double leftValue;
 	private double rightValue;
 	
-	public TankDriveForward() {
+	public TeleopDefault() {
     	requires(RobotMap.drivetrain);
     	requires(RobotMap.distance);
     	requires(RobotMap.range);
-
+    	requires(RobotMap.fourbar);
+    	requires(RobotMap.backLifter);
+    	requires(RobotMap.frontLifter);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -65,8 +67,12 @@ public class TankDriveForward extends Command {
     	}
     	SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
     	SmartDashboard.putNumber("range", RobotMap.range.getDistance());
-   
+    	RobotMap.frontLifter.move();
+    	RobotMap.backLifter.move();
+    	RobotMap.cubeIntake.devourCube();
+    	RobotMap.cubeIntake.spitCube();
     }
+   
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

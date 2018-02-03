@@ -3,24 +3,24 @@ package org.usfirst.frc.team5010.robot.commands;
 import org.usfirst.frc.team5010.robot.RobotMap;
 import org.usfirst.frc.team5010.robot.subsystems.Shift;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShiftDown extends Command {
-	Shift shift = null;
+public class OpenIntake extends Command {
 
-	public ShiftDown() {
-    	requires(RobotMap.shift);
-    	this.shift = RobotMap.shift;
-
+	public OpenIntake() {
+    	requires(RobotMap.cubeIntake);
     }
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		
+		RobotMap.cubeIntake.openIntake();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		shift.shiftDown();
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -30,12 +30,12 @@ public class ShiftDown extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		shift.stop();
+		RobotMap.cubeIntake.closeIntake();
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interrupted() {
-		end();
-	}
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    	end();
+    }
 }

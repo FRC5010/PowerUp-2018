@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5010.robot.commands;
+package org.usfirst.frc.team5010.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;

@@ -49,17 +49,19 @@ public class CubeIntake extends Subsystem {
 		return input;
 	}
 	
-	// TODO uncomment GearHolderPiston code when Pneumatic Control available.
-
+	/**
+	 * Close pnuematics.
+	 */
 	public void closeIntake() {
-		// TODO uncomment GearHolderPiston code when Pneumatic Control available.
-		RobotMap.intake.set(false);
+		RobotMap.intake.set(true);
 		System.out.println("Intake is closing");
 	}
 
+	/**
+	 * Open pnuematics.
+	 */
 	public void openIntake() {
-		// TODO uncomment GearHolderPiston code when Pneumatic Control available.
-		RobotMap.intake.set(true);
+		RobotMap.intake.set(false);
 		System.out.println("Intake is opening");
 	}
 

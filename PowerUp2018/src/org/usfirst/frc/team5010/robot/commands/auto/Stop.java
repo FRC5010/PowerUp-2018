@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5010.robot.commands;
+package org.usfirst.frc.team5010.robot.commands.auto;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
 
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveForDistance extends PIDCommand {
+public class Stop extends PIDCommand {
 	
 	private double currentAngle = 0;
 	private double startAngle = 0;
@@ -20,7 +20,7 @@ public class DriveForDistance extends PIDCommand {
 	private int stopCount = 0;
 	
 
-    public DriveForDistance() {
+    public Stop() {
     	super("DriveForDistance", p, i, d);
     	SmartDashboard.putNumber("P", p); 
     	SmartDashboard.putNumber("I", i);
@@ -29,22 +29,17 @@ public class DriveForDistance extends PIDCommand {
         requires(RobotMap.drivetrain);
         requires(RobotMap.direction);
         requires(RobotMap.distance);
-        getPIDController().setInputRange(0, 5000);
+        getPIDController().setInputRange(-100, 100);
         getPIDController().setOutputRange(-0.4, 0.4);
+        setSetpoint(0);
     }
-    public void setPoint(double setPoint) {
-    	setSetpoint(setPoint);
-    }
-    
-    public void setAngle(double setAngle) {
-    	startAngle = setAngle;
-    }
-
+    	
     // Called just before this Command runs the first time
     protected void initialize() {
     	getPIDController().setPID(SmartDashboard.getNumber("P", 0.12), SmartDashboard.getNumber("I", 0.04), SmartDashboard.getNumber("D", 0.04));
     	getPIDController().setAbsoluteTolerance(tolerance);
     	//RobotMap.direction.reset();
+        startAngle = RobotMap.direction.angle();
     	SmartDashboard.putNumber("startAngle", startAngle);
     	RobotMap.distance.reset();
     	
@@ -56,11 +51,13 @@ public class DriveForDistance extends PIDCommand {
     	SmartDashboard.putNumber("currentAngle", currentAngle);
     	SmartDashboard.putNumber("Error", getPIDController().getError());
     }
-    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         if(getPIDController().onTarget()) {
+        	stopCount++;
+        }
+        if(stopCount == 10) {
         	return true;
         }else {
         	return false;

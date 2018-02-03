@@ -3,6 +3,7 @@ import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class BackRiser extends PIDSubsystem {
 	 /* Default constructor.
@@ -11,20 +12,21 @@ public class BackRiser extends PIDSubsystem {
 	
 	public BackRiser(String name) {
 		super(name, 0.1, 0.0, 0.2);
+		disable();
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-
 	}
-
+	
 	public void move() {
 		//Handles raising and lowering
 		//Reason: Raising and lowering will never be done at the same time
-		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(4)) > 0.0) {
+		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(5)) > 0.0) {
 			//Raise and lower should be on the same axis, because they shouldn't be triggered at the same time.
-			RobotMap.backriser.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(4)));
+			double output = scaleInputs(Robot.oi.joyCoDriver.getRawAxis(5));
+			RobotMap.backriser.set(output);
+			SmartDashboard.putNumber("BackRiser", output);			
 		}
 	}
 
@@ -43,17 +45,20 @@ public class BackRiser extends PIDSubsystem {
 	public void setHeight(double height) {
 		setSetpoint(height);
 	}
-	@Override
-	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
+
+	public double getHeight() {
 		double potValue = RobotMap.backRiserPot.get();
 		double height = Math.sin(potValue)*RobotMap.armLength;
 		return height;
 	}
+	
+	@Override
+	protected double returnPIDInput() {
+		return getHeight();
+	}
 
 	@Override
 	protected void usePIDOutput(double output) {
-		// TODO Auto-generated method stub
 		RobotMap.backriser.set(output);
 	}
 }
