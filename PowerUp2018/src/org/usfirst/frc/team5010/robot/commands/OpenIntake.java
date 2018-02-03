@@ -15,7 +15,7 @@ public class OpenIntake extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		
-		RobotMap.cubeIntake.openIntake();
+		RobotMap.cubeIntake.closeIntake();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -30,7 +30,7 @@ public class OpenIntake extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		RobotMap.cubeIntake.closeIntake();
+		RobotMap.cubeIntake.openIntake();
 	}
 
     // Called when another command which requires one or more of the same

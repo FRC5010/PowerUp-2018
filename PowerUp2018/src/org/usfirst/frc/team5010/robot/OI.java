@@ -72,7 +72,7 @@ public class OI {
 
 		codriverButtonLB.whileHeld(new EatCube());
 		codriverButtonRB.whileHeld(new SpitCube());
-		codriverButtonA.whenPressed(new OpenIntake());
+		codriverButtonA.whileHeld(new OpenIntake());
 
 		joyDriver.getName();
 		SmartDashboard.putString("joystick Name", joyDriver.getName());

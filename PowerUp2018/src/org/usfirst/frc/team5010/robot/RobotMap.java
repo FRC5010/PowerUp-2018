@@ -61,12 +61,11 @@ public class RobotMap {
 	public static SpeedController driveMotor2017Right;
 	public static SpeedController driveMotor2018Left;
 	public static SpeedController driveMotor2018Right;
-	public static  AnalogInput ultrasound;
 	public static SpeedController backriser;
 	public static SpeedController intakeMotorLeft;
 	public static SpeedController intakeMotorRight;
 	public static Gyro gyro;
-	public static  Encoder encoder;
+	public static Encoder encoder;
 	public static DirectionSensor direction;
 	public static DistanceSensor distance;
 	public static DriveTrainMain drivetrain;
@@ -74,7 +73,6 @@ public class RobotMap {
 	public static AnalogPotentiometer backRiserPot;
 	public static AnalogPotentiometer frontRiserPot;
 	public static double armLength = 35;
-	public static UltrasonicSensor range;
 	public static Shift shift;
 	public static Solenoid intake;
 	public static Solenoid shiftSolenoid;
@@ -82,7 +80,11 @@ public class RobotMap {
 	public static BackRiser backLifter;
 	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;
-	
+	public static UltrasonicSensor range;
+
+	// UltrasonicSensor sensor
+	public static  AnalogInput ultrasound;
+
 	//Make sure front and back arms are same length, or change above code
 	public static void init() {
 		// Drive Train components
@@ -92,6 +94,7 @@ public class RobotMap {
 		leftMotor1 = new TalonSRX(1);
 		leftMotor2 = new TalonSRX(2);
 		leftMotor3 = new TalonSRX(3);
+		
 		
 		rightMotor2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
 		rightMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
@@ -110,11 +113,11 @@ public class RobotMap {
 		backriser = new Victor(0);
 		frontriser = new Victor(1);
 
-		intakeMotorLeft = new Victor(7);
-		intakeMotorRight = new Victor(8);
+		intakeMotorLeft = new Victor(2);
+		intakeMotorRight = new Victor(3);
 
 		// Solenoids
-		intake = new Solenoid(2);	
+		intake = new Solenoid(0);	
 		shiftSolenoid = new Solenoid(1);
 		
 		//Sensor components

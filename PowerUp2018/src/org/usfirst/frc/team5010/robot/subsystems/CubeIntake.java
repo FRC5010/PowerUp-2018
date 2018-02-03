@@ -4,6 +4,7 @@ import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Solenoid;
 
 
@@ -24,15 +25,15 @@ public class CubeIntake extends Subsystem {
 
 	public void devourCube() {
 		if (Robot.oi.joyCoDriver.getRawAxis(2) > 0) {
-			RobotMap.intakeMotorLeft.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)));
-			RobotMap.intakeMotorRight.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)));
+			RobotMap.intakeMotorLeft.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)) / 2);
+			RobotMap.intakeMotorRight.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)) / 2);
 		}
 	}
 	
 	public void spitCube() {
 		if (Robot.oi.joyCoDriver.getRawAxis(3) > 0) {
-			RobotMap.intakeMotorLeft.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)));
-			RobotMap.intakeMotorRight.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)));
+			RobotMap.intakeMotorLeft.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)) / 2);
+			RobotMap.intakeMotorRight.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)) / 2);
 		}		
 	}
 	
@@ -54,7 +55,7 @@ public class CubeIntake extends Subsystem {
 	 */
 	public void closeIntake() {
 		RobotMap.intake.set(true);
-		System.out.println("Intake is closing");
+		SmartDashboard.putBoolean("Intake open", true);
 	}
 
 	/**
@@ -62,7 +63,7 @@ public class CubeIntake extends Subsystem {
 	 */
 	public void openIntake() {
 		RobotMap.intake.set(false);
-		System.out.println("Intake is opening");
+		SmartDashboard.putBoolean("Intake open", false);
 	}
 
 	public void stop() {
