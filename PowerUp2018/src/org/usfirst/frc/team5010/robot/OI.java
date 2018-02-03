@@ -7,16 +7,15 @@
 
 package org.usfirst.frc.team5010.robot;
 
-import org.usfirst.frc.team5010.robot.commands.ShiftDown;
-import org.usfirst.frc.team5010.robot.commands.ShiftUp;
+import org.usfirst.frc.team5010.robot.commands.EatCube;
+import org.usfirst.frc.team5010.robot.commands.OpenIntake;
+import org.usfirst.frc.team5010.robot.commands.SpitCube;
 import org.usfirst.frc.team5010.robot.commands.SwitchDriveMode;
-import org.usfirst.frc.team5010.robot.commands.TurnToAngle;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,20 +50,28 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	public Joystick joyDriver = new Joystick(0);
-	//public Joystick joyDriver2 = new Joystick(1);
+	// public Joystick joyDriver2 = new Joystick(1);
 	public Joystick joyCoDriver = new Joystick(2);
-	
-	
+
 	private Button driverButtonY = new JoystickButton(joyDriver, 4);
-	private Button driverButtonBack = new JoystickButton(joyDriver,7);
+	private Button driverButtonBack = new JoystickButton(joyDriver, 7);
 	private Button driverButtonRB = new JoystickButton(joyDriver, 6);
 	private Button driverButtonLB = new JoystickButton(joyDriver, 5);
-	
-	public OI () {
+
+	private Button codriverButtonA = new JoystickButton(joyCoDriver, 1);
+	private Button codriverButtonLB = new JoystickButton(joyCoDriver, 5);
+	private Button codriverButtonRB = new JoystickButton(joyCoDriver, 6);
+
+	public OI() {
 		driverButtonY.whenPressed(new SwitchDriveMode());
-		//driverButtonBack.whenReleased(new TurnToAngle(45));
-		//driverButtonRB.whenPressed(new ShiftUp());
-		//driverButtonLB.whenPressed(new ShiftDown());
+		// driverButtonBack.whenReleased(new TurnToAngle(45));
+		// driverButtonRB.whenPressed(new ShiftUp());
+		// driverButtonLB.whenPressed(new ShiftDown());
+
+		codriverButtonLB.whileHeld(new EatCube());
+		codriverButtonRB.whileHeld(new SpitCube());
+		codriverButtonA.whenPressed(new OpenIntake());
+
 		joyDriver.getName();
 		SmartDashboard.putString("joystick Name", joyDriver.getName());
 	}
