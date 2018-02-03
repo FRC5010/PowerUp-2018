@@ -16,10 +16,11 @@ import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
 
 //components
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -62,6 +63,7 @@ public class RobotMap {
 	public static UltrasonicSensor range;
 	public static Shift shift;
 	public static Solenoid intake;
+	public static CameraServer camera;
 	//Make sure front and back arms are same length, or change above code
 	public static void init() {
 		//components
@@ -82,6 +84,7 @@ public class RobotMap {
 		encoder = new Encoder(0, 1);
 		ultrasound = new AnalogInput(0);
 		intake = new Solenoid(2);		
+		camera = CameraServer.getInstance();
 		
 		//subsystems
 		range = new UltrasonicSensor();
