@@ -55,11 +55,15 @@ public class FrontRiser extends PIDSubsystem {
 	public void setHeight(double height) {
 		setSetpoint(height);
 	}
-	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
-		double potValue = RobotMap.frontRiserPot.get();
+	
+	public double getHeight() {
+		double potValue = RobotMap.backRiserPot.get();
 		double height = Math.sin(potValue)*RobotMap.armLength;
 		return height;
+	}
+	
+	protected double returnPIDInput() {
+		return getHeight();
 	}
 	@Override
 	protected void usePIDOutput(double output) {

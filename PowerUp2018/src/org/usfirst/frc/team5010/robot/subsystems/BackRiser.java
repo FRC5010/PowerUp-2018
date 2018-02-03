@@ -18,25 +18,14 @@ public class BackRiser extends PIDSubsystem {
 	@Override
 	protected void initDefaultCommand() {
 	}
-
-	/**
-	 * Function determines whether joystick controller is being pressed or not.
-	 * @return boolean
-	 */
-	public boolean isAxisPressed() {
-		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(4)) > 0.0) {
-			return true;
-		}
-		return false;
-	}
 	
 	public void move() {
 		//Handles raising and lowering
 		//Reason: Raising and lowering will never be done at the same time
-		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(4)) > 0.0) {
+		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(5)) > 0.0) {
 			//Raise and lower should be on the same axis, because they shouldn't be triggered at the same time.
 			double output = scaleInputs(Robot.oi.joyCoDriver.getRawAxis(5));
-			RobotMap.backriser.set(output / 2);
+			RobotMap.backriser.set(output);
 			SmartDashboard.putNumber("BackRiser", output);			
 		}
 	}
@@ -56,11 +45,16 @@ public class BackRiser extends PIDSubsystem {
 	public void setHeight(double height) {
 		setSetpoint(height);
 	}
-	@Override
-	protected double returnPIDInput() {
+
+	public double getHeight() {
 		double potValue = RobotMap.backRiserPot.get();
 		double height = Math.sin(potValue)*RobotMap.armLength;
 		return height;
+	}
+	
+	@Override
+	protected double returnPIDInput() {
+		return getHeight();
 	}
 
 	@Override

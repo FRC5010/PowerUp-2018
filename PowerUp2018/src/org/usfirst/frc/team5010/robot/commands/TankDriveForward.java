@@ -67,7 +67,10 @@ public class TankDriveForward extends Command {
     	SmartDashboard.putNumber("range", RobotMap.range.getDistance());
     	RobotMap.frontLifter.move();
     	RobotMap.backLifter.move();
+    	RobotMap.cubeIntake.devourCube();
+    	RobotMap.cubeIntake.spitCube();
     }
+   
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

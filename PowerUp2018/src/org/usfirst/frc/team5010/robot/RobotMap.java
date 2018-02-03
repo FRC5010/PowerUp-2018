@@ -8,10 +8,12 @@
 package org.usfirst.frc.team5010.robot;
 
 import org.usfirst.frc.team5010.robot.subsystems.BackRiser;
+import org.usfirst.frc.team5010.robot.subsystems.CubeIntake;
 //subsystems
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
+import org.usfirst.frc.team5010.robot.subsystems.FourBar;
 import org.usfirst.frc.team5010.robot.subsystems.FrontRiser;
 import org.usfirst.frc.team5010.robot.subsystems.Shift;
 import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
@@ -40,7 +42,7 @@ public class RobotMap {
 		SmartDashboard.putNumber("D", 0.04);
 		SmartDashboard.putNumber("I", 0.04);
 		SmartDashboard.putNumber("P", 0.06);
-		SmartDashboard.put
+		
 		
 	}
 	// For example to map the left and right motors, you could define the
@@ -77,6 +79,8 @@ public class RobotMap {
 	public static Solenoid intake;
 	public static FrontRiser frontLifter;
 	public static BackRiser backLifter;
+	public static FourBar fourbar;
+	public static CubeIntake cubeIntake;
 	
 	//Make sure front and back arms are same length, or change above code
 	public static void init() {
@@ -125,6 +129,8 @@ public class RobotMap {
 		drivetrain = new DriveTrainMain();
 		frontLifter = new FrontRiser("front");
 		backLifter = new BackRiser("back");
+		fourbar = new FourBar();
+		cubeIntake = new CubeIntake();
 	}
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
