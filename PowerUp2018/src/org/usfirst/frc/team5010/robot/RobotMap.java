@@ -13,7 +13,7 @@ import org.usfirst.frc.team5010.robot.subsystems.CubeIntake;
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DistanceSensor;
 import org.usfirst.frc.team5010.robot.subsystems.DriveTrainMain;
-import org.usfirst.frc.team5010.robot.subsystems.FourBar;
+import org.usfirst.frc.team5010.robot.subsystems.FourBarLifter;
 import org.usfirst.frc.team5010.robot.subsystems.FrontRiser;
 import org.usfirst.frc.team5010.robot.subsystems.Shift;
 import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
@@ -80,7 +80,7 @@ public class RobotMap {
 	public static Solenoid shiftSolenoid;
 	public static FrontRiser frontLifter;
 	public static BackRiser backLifter;
-	public static FourBar fourbar;
+	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;
 	
 	//Make sure front and back arms are same length, or change above code
@@ -131,7 +131,7 @@ public class RobotMap {
 		drivetrain = new DriveTrainMain();
 		frontLifter = new FrontRiser("front");
 		backLifter = new BackRiser("back");
-		fourbar = new FourBar();
+		fourbar = new FourBarLifter();
 		cubeIntake = new CubeIntake();
 		shift = new Shift();
 	}

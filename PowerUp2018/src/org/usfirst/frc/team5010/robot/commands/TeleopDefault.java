@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TankDriveForward extends Command {
+public class TeleopDefault extends Command {
 	private double straightValue;
 	private double turnValue;
 	private double deadZone = .15;
@@ -17,7 +17,7 @@ public class TankDriveForward extends Command {
 	private double leftValue;
 	private double rightValue;
 	
-	public TankDriveForward() {
+	public TeleopDefault() {
     	requires(RobotMap.drivetrain);
     	requires(RobotMap.distance);
     	requires(RobotMap.range);
