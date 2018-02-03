@@ -34,7 +34,7 @@ public class ShiftUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		return (startTime + 1000 < System.currentTimeMillis());
+		return (startTime + 100000 < System.currentTimeMillis());
     }
 
     // Called once after isFinished returns true
@@ -45,5 +45,6 @@ public class ShiftUp extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

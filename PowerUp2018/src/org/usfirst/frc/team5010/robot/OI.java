@@ -9,6 +9,8 @@ package org.usfirst.frc.team5010.robot;
 
 import org.usfirst.frc.team5010.robot.commands.EatCube;
 import org.usfirst.frc.team5010.robot.commands.OpenIntake;
+import org.usfirst.frc.team5010.robot.commands.ShiftDown;
+import org.usfirst.frc.team5010.robot.commands.ShiftUp;
 import org.usfirst.frc.team5010.robot.commands.SpitCube;
 import org.usfirst.frc.team5010.robot.commands.SwitchDriveMode;
 
@@ -65,8 +67,8 @@ public class OI {
 	public OI() {
 		driverButtonY.whenPressed(new SwitchDriveMode());
 		// driverButtonBack.whenReleased(new TurnToAngle(45));
-		// driverButtonRB.whenPressed(new ShiftUp());
-		// driverButtonLB.whenPressed(new ShiftDown());
+		 driverButtonRB.whenPressed(new ShiftUp());
+		 driverButtonLB.whenPressed(new ShiftDown());
 
 		codriverButtonLB.whileHeld(new EatCube());
 		codriverButtonRB.whileHeld(new SpitCube());

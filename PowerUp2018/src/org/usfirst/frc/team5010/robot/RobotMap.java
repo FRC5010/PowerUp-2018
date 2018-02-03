@@ -77,6 +77,7 @@ public class RobotMap {
 	public static UltrasonicSensor range;
 	public static Shift shift;
 	public static Solenoid intake;
+	public static Solenoid shiftSolenoid;
 	public static FrontRiser frontLifter;
 	public static BackRiser backLifter;
 	public static FourBar fourbar;
@@ -113,7 +114,8 @@ public class RobotMap {
 		intakeMotorRight = new Victor(8);
 
 		// Solenoids
-		intake = new Solenoid(2);		
+		intake = new Solenoid(2);	
+		shiftSolenoid = new Solenoid(1);
 		
 		//Sensor components
 		gyro = new ADXRS450_Gyro();
@@ -131,6 +133,7 @@ public class RobotMap {
 		backLifter = new BackRiser("back");
 		fourbar = new FourBar();
 		cubeIntake = new CubeIntake();
+		shift = new Shift();
 	}
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
