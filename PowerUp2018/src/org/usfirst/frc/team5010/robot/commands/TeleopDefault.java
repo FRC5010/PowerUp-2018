@@ -21,7 +21,9 @@ public class TeleopDefault extends Command {
     	requires(RobotMap.drivetrain);
     	requires(RobotMap.distance);
     	requires(RobotMap.range);
-
+    	requires(RobotMap.fourbar);
+    	requires(RobotMap.backLifter);
+    	requires(RobotMap.frontLifter);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

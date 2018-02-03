@@ -14,6 +14,7 @@ public class EatCube extends Command {
 	public void execute() {
 		RobotMap.cubeIntake.devourCube();
 	}
+	
 	@Override
 	public void end() {
 		RobotMap.cubeIntake.stop();
@@ -23,5 +24,8 @@ public class EatCube extends Command {
 		
 		return false;
 	}
-
+	
+	protected void interrupted() {
+		end();
+	}
 }

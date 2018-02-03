@@ -6,19 +6,10 @@ import org.usfirst.frc.team5010.robot.subsystems.Shift;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class OpenIntake extends Command {
-	
 
-	/**
-	 * Default constructor.
-	 */
 	public OpenIntake() {
     	requires(RobotMap.cubeIntake);
-    	
-
     }
 
 	// Called just before this Command runs the first time
