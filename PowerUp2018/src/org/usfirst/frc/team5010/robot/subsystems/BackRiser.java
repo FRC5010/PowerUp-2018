@@ -20,8 +20,7 @@ public class BackRiser extends PIDSubsystem {
 	}
 	
 	public void move() {
-		//Handles raising and lowering
-		//Reason: Raising and lowering will never be done at the same time
+		//Allows for raising and lowering on same axis.
 		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(5)) > 0.0) {
 			//Raise and lower should be on the same axis, because they shouldn't be triggered at the same time.
 			double output = scaleInputs(Robot.oi.joyCoDriver.getRawAxis(5));
@@ -47,8 +46,9 @@ public class BackRiser extends PIDSubsystem {
 	}
 
 	public double getHeight() {
+		//Determine what angle the potentiometer measures
 		double potValue = RobotMap.backRiserPot.get();
-		double height = Math.sin(potValue)*RobotMap.armLength;
+		double height = Math.sin(potValue)*RobotMap.backarmLength;
 		return height;
 	}
 	

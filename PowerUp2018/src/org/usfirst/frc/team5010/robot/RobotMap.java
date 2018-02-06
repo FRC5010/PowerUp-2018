@@ -74,7 +74,6 @@ public class RobotMap {
 	public static SpeedController frontriser;
 	public static AnalogPotentiometer backRiserPot;
 	public static AnalogPotentiometer frontRiserPot;
-	public static double armLength = 35;
 	public static UltrasonicSensor range;
 	public static Shift shift;
 	public static Solenoid intake;
@@ -83,9 +82,12 @@ public class RobotMap {
 	public static FrontRiser frontLifter;
 	public static BackRiser backLifter;
 	public static FourBarLifter fourbar;
-	public static CubeIntake cubeIntake;
+	public static CubeIntake cubeIntake;	
+	//Find real arm lengths
+	public static double frontarmLength = 35;
+	public static double backarmLength = 35;
+
 	
-	//Make sure front and back arms are same length, or change above code
 	public static void init() {
 		// Drive Train components
 		rightMotor1 = new TalonSRX(4);
