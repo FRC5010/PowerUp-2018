@@ -46,9 +46,9 @@ public class BackRiser extends PIDSubsystem {
 	}
 
 	public double getHeight() {
-		//Determine what angle the potentiometer measures
+		//height = bbarheight -(backarmlength)*cos(angle)
 		double potValue = RobotMap.backRiserPot.get();
-		double height = Math.sin(potValue)*RobotMap.backarmLength;
+		double height = RobotMap.backarmheight-(Math.cos(potValue))*RobotMap.backarmLength;
 		return height;
 	}
 	

@@ -57,11 +57,9 @@ public class FrontRiser extends PIDSubsystem {
 	}
 	
 	public double getHeight() {
-		//Determine what potentiometer measures
-		//If angle is angle between frame and arm
-		//then height = armlength(1-cos(angle))
+		//height = fbarheight+armlength(-cos(angle))
 		double potValue = RobotMap.backRiserPot.get();
-		double height = Math.sin(potValue)*RobotMap.frontarmLength;
+		double height = RobotMap.frontarmheight-(Math.cos(potValue))*RobotMap.frontarmLength;
 		return height;
 	}
 	

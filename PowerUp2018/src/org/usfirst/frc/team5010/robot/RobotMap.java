@@ -83,9 +83,13 @@ public class RobotMap {
 	public static BackRiser backLifter;
 	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;	
-	//Find real arm lengths
+	//TODO Find real arm lengths
+	//TODO Find the vertical heights
+	//Height of grabber above ground = height variables from front and back risers + height of frontbar above ground
 	public static double frontarmLength = 35;
 	public static double backarmLength = 35;
+	public static double frontarmheight = 45;
+	public static double backarmheight = 45;
 
 	
 	public static void init() {
