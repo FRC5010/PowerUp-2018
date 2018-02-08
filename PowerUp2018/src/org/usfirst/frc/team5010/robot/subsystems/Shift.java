@@ -2,7 +2,6 @@ package org.usfirst.frc.team5010.robot.subsystems;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,15 +20,15 @@ public class Shift extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public void shiftUp() {
-		SmartDashboard.setDefaultBoolean("Shifted", true);
+		SmartDashboard.setDefaultBoolean("High Gear Active", true);
 		EvoShift.set(true);
 	}
 	public void shiftDown() {
-		SmartDashboard.setDefaultBoolean("Shifted", false);
+		SmartDashboard.setDefaultBoolean("High Gear Active", false);
 		EvoShift.set(false);
 	}
 	public void stop() {
-		SmartDashboard.setDefaultBoolean("Shifted", false);
+		SmartDashboard.setDefaultBoolean("High Gear Active", false);
 		EvoShift.set(false);
 	}
 

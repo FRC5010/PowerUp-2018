@@ -59,9 +59,9 @@ public class FrontRiser extends Subsystem{// extends PIDSubsystem {
 	}
 
 	public double getHeight() {
-		double potValue = RobotMap.backRiserPot.get();
+		double potValue = RobotMap.backRiserPotent.get();
 		double height = Math.sin(potValue) * RobotMap.armLength;
-		SmartDashboard.putNumber("Front Riser current height:", height);
+		SmartDashboard.putNumber("FrontRiser height:", height);
 		return height;
 	}
 
@@ -71,7 +71,7 @@ public class FrontRiser extends Subsystem{// extends PIDSubsystem {
 
 	//@Override
 	protected void usePIDOutput(double output) {
-		SmartDashboard.putNumber("Front Riser output:", output);
+		SmartDashboard.putNumber("FrontRiser PID output:", output);
 		// RobotMap.frontriser.set(output);
 	}
 

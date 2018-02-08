@@ -2,14 +2,28 @@ package org.usfirst.frc.team5010.robot.subsystems;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class FourBarLifter extends Subsystem {
+	Potentiometer backpotentMeter;
+	Potentiometer frontpotentMeter;
 
+	/**
+	 * Default constructor.
+	 */
+	public FourBarLifter() {
+		this.backpotentMeter = RobotMap.backRiserPotent;
+		this.frontpotentMeter = RobotMap.frontRiserPotent;
+		
+	}
+	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	/** setHeight - determine what height to set each of the separate lifters */
@@ -29,6 +43,7 @@ public class FourBarLifter extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+
     }
 }
 

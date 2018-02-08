@@ -53,7 +53,7 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	public Joystick joyDriver = new Joystick(0);
 	// public Joystick joyDriver2 = new Joystick(1);
-	public Joystick joyCoDriver = new Joystick(2);
+	public Joystick joyCoDriver = new Joystick(1);
 
 	private Button driverButtonY = new JoystickButton(joyDriver, 4);
 	private Button driverButtonBack = new JoystickButton(joyDriver, 7);
@@ -72,7 +72,7 @@ public class OI {
 
 		codriverButtonLB.whileHeld(new EatCube());
 		codriverButtonRB.whileHeld(new SpitCube());
-		codriverButtonA.whileHeld(new OpenIntake());
+		//codriverButtonA.whileHeld(new OpenIntake());
 
 		joyDriver.getName();
 		SmartDashboard.putString("joystick Name", joyDriver.getName());

@@ -26,7 +26,7 @@ public class BackRiser extends Subsystem {//extends PIDSubsystem {
 			//Raise and lower should be on the same axis, because they shouldn't be triggered at the same time.
 			double output = scaleInputs(Robot.oi.joyCoDriver.getRawAxis(5));
 			RobotMap.backriser.set(output);
-			SmartDashboard.putNumber("BackRiser move:", output);			
+			SmartDashboard.putNumber("BackRiser speed:", output);			
 		}
 	}
 
@@ -47,9 +47,9 @@ public class BackRiser extends Subsystem {//extends PIDSubsystem {
 	}
 
 	public double getHeight() {
-		double potValue = RobotMap.backRiserPot.get();
+		double potValue = RobotMap.backRiserPotent.get();
 		double height = Math.sin(potValue)*RobotMap.armLength;
-		SmartDashboard.putNumber("Back Riser height:", height);
+		SmartDashboard.putNumber("BackRiser height:", height);
 		return height;
 	}
 	
@@ -60,7 +60,7 @@ public class BackRiser extends Subsystem {//extends PIDSubsystem {
 
 	//@Override
 	protected void usePIDOutput(double output) {
-		SmartDashboard.putNumber("Back Riser output:", output);
+		SmartDashboard.putNumber("BackRiser PID output:", output);
 		//RobotMap.backriser.set(output);
 	}
 }

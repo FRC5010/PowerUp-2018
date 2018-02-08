@@ -24,14 +24,14 @@ public class CubeIntake extends Subsystem {
 	}
 
 	public void devourCube() {
-		if (Robot.oi.joyCoDriver.getRawAxis(2) > 0) {
+		if (Robot.oi.joyCoDriver.getRawAxis(2) > deadZone) {
 			RobotMap.intakeMotorLeft.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)) / 2);
 			RobotMap.intakeMotorRight.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(2)) / 2);
 		}
 	}
 	
 	public void spitCube() {
-		if (Robot.oi.joyCoDriver.getRawAxis(3) > 0) {
+		if (Robot.oi.joyCoDriver.getRawAxis(3) > deadZone) {
 			RobotMap.intakeMotorLeft.set(-scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)) / 2);
 			RobotMap.intakeMotorRight.set(scaleInputs(Robot.oi.joyCoDriver.getRawAxis(3)) / 2);
 		}		

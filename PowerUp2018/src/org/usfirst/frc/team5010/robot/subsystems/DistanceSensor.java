@@ -10,13 +10,12 @@ public class DistanceSensor extends Subsystem {
 	public DistanceSensor() {
 		RobotMap.encoder.reset();
 		double dpp = RobotMap.encoder.getDistancePerPulse();
-		SmartDashboard.getNumber("distance per pulse", dpp);
-		RobotMap.encoder.setDistancePerPulse(SmartDashboard.getNumber("distance per pulse", 0.09));
+		SmartDashboard.getNumber("Distance per pulse", dpp);
+		RobotMap.encoder.setDistancePerPulse(SmartDashboard.getNumber("Distance per pulse", 0.09));
 	}
 
 	public DistanceSensor(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 	public double getDistance() {
 		return -RobotMap.encoder.getDistance();
@@ -27,18 +26,6 @@ public class DistanceSensor extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 	}
 
 }

@@ -25,7 +25,7 @@ public class UltrasonicSensor extends Subsystem {
     
     public double getDistance() {
     	double value = ultrasound.getValue()/8.553;
-    	SmartDashboard.putNumber("value", value);
+    	SmartDashboard.putNumber("Ultrasonic range", value);
     	return value;
     }
 }

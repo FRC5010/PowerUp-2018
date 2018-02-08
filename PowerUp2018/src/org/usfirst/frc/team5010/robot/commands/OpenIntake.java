@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5010.robot.commands;
+/*package org.usfirst.frc.team5010.robot.commands;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
 import org.usfirst.frc.team5010.robot.subsystems.Shift;
@@ -39,3 +39,4 @@ public class OpenIntake extends Command {
     	end();
     }
 }
+*/

@@ -66,12 +66,13 @@ public class RobotMap {
 	public static SpeedController intakeMotorRight;
 	public static Gyro gyro;
 	public static Encoder encoder;
+	public static AnalogPotentiometer backRiserPotent;
+	public static AnalogPotentiometer frontRiserPotent;
+	
 	public static DirectionSensor direction;
 	public static DistanceSensor distance;
 	public static DriveTrainMain drivetrain;
 	public static SpeedController frontriser;
-	public static AnalogPotentiometer backRiserPot;
-	public static AnalogPotentiometer frontRiserPot;
 	public static double armLength = 35;
 	public static Shift shift;
 	public static Solenoid intake;
@@ -94,7 +95,7 @@ public class RobotMap {
 		leftMotor1 = new TalonSRX(1);
 		leftMotor2 = new TalonSRX(2);
 		leftMotor3 = new TalonSRX(3);
-		
+
 		
 		rightMotor2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
 		rightMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
@@ -124,8 +125,8 @@ public class RobotMap {
 		gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
 		ultrasound = new AnalogInput(0); 
-		frontRiserPot = new AnalogPotentiometer(1);
-		backRiserPot = new AnalogPotentiometer(2);
+		frontRiserPotent = new AnalogPotentiometer(1, 360, 30);
+		backRiserPotent = new AnalogPotentiometer(2, 360, 30);
 		
 		//subsystems
 		range = new UltrasonicSensor();
