@@ -85,12 +85,13 @@ public class RobotMap {
 	public static CubeIntake cubeIntake;	
 	//TODO Find real arm lengths
 	//TODO Find the vertical heights
+	//TODO Find the base height
 	//Height of grabber above ground = height variables from front and back risers + height of frontbar above ground
 	public static double frontarmLength = 35;
 	public static double backarmLength = 35;
 	public static double frontarmheight = 45;
 	public static double backarmheight = 45;
-
+	public static double baseheight = 12;
 	
 	public static void init() {
 		// Drive Train components
