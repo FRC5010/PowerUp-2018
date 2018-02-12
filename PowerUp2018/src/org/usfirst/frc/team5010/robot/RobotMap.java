@@ -22,6 +22,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -73,13 +74,21 @@ public class RobotMap {
 	public static DistanceSensor distance;
 	public static DriveTrainMain drivetrain;
 	public static SpeedController frontriser;
+<<<<<<< HEAD
 	public static double armLength = 35;
+=======
+	public static AnalogPotentiometer backRiserPot;
+	public static AnalogPotentiometer frontRiserPot;
+	public static UltrasonicSensor range;
+>>>>>>> origin/master
 	public static Shift shift;
 	public static Solenoid intake;
+	public static CameraServer camera;
 	public static Solenoid shiftSolenoid;
 	public static FrontRiser frontLifter;
 	public static BackRiser backLifter;
 	public static FourBarLifter fourbar;
+<<<<<<< HEAD
 	public static CubeIntake cubeIntake;
 	public static UltrasonicSensor range;
 	
@@ -89,6 +98,19 @@ public class RobotMap {
 	
 
 	//Make sure front and back arms are same length, or change above code
+=======
+	public static CubeIntake cubeIntake;	
+	//TODO Find real arm lengths
+	//TODO Find the vertical heights
+	//TODO Find the base height
+	//Height of grabber above ground = height variables from front and back risers + height of frontbar above ground
+	public static double frontarmLength = 35;
+	public static double backarmLength = 35;
+	public static double frontarmheight = 45;
+	public static double backarmheight = 45;
+	public static double baseheight = 12;
+	
+>>>>>>> origin/master
 	public static void init() {
 		// Drive Train components
 		rightMotor1 = new TalonSRX(4);
@@ -126,10 +148,17 @@ public class RobotMap {
 		//Sensor components
 		//gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
+<<<<<<< HEAD
 		frontUltrasound = new AnalogInput(0); 
 		backUltrasound = new AnalogInput(3);
 		frontRiserPotent = new AnalogPotentiometer(1, 270, 42);
 		backRiserPotent = new AnalogPotentiometer(2, 270, 80);
+=======
+		ultrasound = new AnalogInput(0); 
+		frontRiserPot = new AnalogPotentiometer(1);
+		backRiserPot = new AnalogPotentiometer(2);
+		camera = CameraServer.getInstance();
+>>>>>>> origin/master
 		
 		//subsystems
 		range = new UltrasonicSensor();

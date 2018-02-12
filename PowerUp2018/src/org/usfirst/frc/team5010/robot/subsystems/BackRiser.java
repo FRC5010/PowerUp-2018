@@ -34,8 +34,7 @@ public class BackRiser extends PIDSubsystem {
 	}
 	
 	public void move() {
-		//Handles raising and lowering
-		//Reason: Raising and lowering will never be done at the same time
+		//Allows for raising and lowering on same axis.
 		if (Math.abs(Robot.oi.joyCoDriver.getRawAxis(5)) > 0.0) {
 			//Raise and lower should be on the same axis, because they shouldn't be triggered at the same time.
 			double output = scaleInputs(Robot.oi.joyCoDriver.getRawAxis(5));
@@ -66,9 +65,15 @@ public class BackRiser extends PIDSubsystem {
 
 	//armlength 22 // //h1 30.25 // 
 	public double getHeight() {
+<<<<<<< HEAD
 		double potValue = getPotValue();
 		double height = 30.25 - 22 * Math.cos(potValue * (Math.PI / 180));
 		//SmartDashboard.putNumber("BackRiser height:", height);
+=======
+		//height = bbarheight -(backarmlength)*cos(angle)
+		double potValue = RobotMap.backRiserPot.get();
+		double height = RobotMap.backarmheight-(Math.cos(potValue))*RobotMap.backarmLength;
+>>>>>>> origin/master
 		return height;
 	}
 	

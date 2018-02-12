@@ -80,9 +80,15 @@ public class FrontRiser extends PIDSubsystem {
 
 	// armlength 29. //a1 19 //
 	public double getHeight() {
+<<<<<<< HEAD
 		double potValue = RobotMap.frontRiserPotent.get();
 		double height = 19 - 29 * Math.cos(potValue * (Math.PI / 180));
 		// SmartDashboard.putNumber("FrontRiser height:", height);
+=======
+		//height = fbarheight+armlength(-cos(angle))
+		double potValue = RobotMap.backRiserPot.get();
+		double height = RobotMap.frontarmheight-(Math.cos(potValue))*RobotMap.frontarmLength;
+>>>>>>> origin/master
 		return height;
 	}
 
