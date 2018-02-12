@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5010.robot.commands;
+/*package org.usfirst.frc.team5010.robot.commands;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
 
@@ -70,3 +70,4 @@ public class SetArmHeight extends PIDCommand {
 	}
 
 }
+*/

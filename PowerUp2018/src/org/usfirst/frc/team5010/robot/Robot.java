@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
 		positionChooser.addObject("Position2", new ExampleAuto2());
 		positionChooser.addDefault("Default", new AutoCenter());
 		SmartDashboard.putData("Auton mode", positionChooser);
+		SmartDashboard.putNumber("Height to raise to", 30);
 	}
 
 	/**

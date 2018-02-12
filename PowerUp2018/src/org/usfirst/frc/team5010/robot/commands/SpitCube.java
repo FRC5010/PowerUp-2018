@@ -12,10 +12,11 @@ public class SpitCube extends Command {
 	
 	public void execute() {
 		RobotMap.cubeIntake.spitCube();
+		RobotMap.cubeIntake.checkForStop();
 	}
 	
 	public void end() {
-		RobotMap.cubeIntake.stop();
+		RobotMap.cubeIntake.stopIntakeMotors();
 	}
 	
 	@Override

@@ -10,16 +10,17 @@ public class DirectionSensor extends Subsystem {
 	private Gyro gyro;
 	
 	public DirectionSensor() {
-		RobotMap.gyro.reset();
-		this.gyro = RobotMap.gyro;
+		//RobotMap.gyro.reset();
+		//this.gyro = RobotMap.gyro;
 	}
 	
 	public double angle() {
-		return gyro.getAngle();
+	//	return gyro.getAngle();
+		return 0;
 	}
 	
 	public void reset() {
-		gyro.reset();
+	//	gyro.reset();
 	}
 
 	@Override

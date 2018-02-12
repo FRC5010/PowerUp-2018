@@ -1,4 +1,4 @@
-/*package org.usfirst.frc.team5010.robot.commands;
+package org.usfirst.frc.team5010.robot.commands;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
 import org.usfirst.frc.team5010.robot.subsystems.Shift;
@@ -14,7 +14,6 @@ public class OpenIntake extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		
 		RobotMap.cubeIntake.closeIntake();
 	}
 
@@ -25,12 +24,12 @@ public class OpenIntake extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		RobotMap.cubeIntake.openIntake();
+		//RobotMap.cubeIntake.openIntake();
 	}
 
     // Called when another command which requires one or more of the same
@@ -39,4 +38,3 @@ public class OpenIntake extends Command {
     	end();
     }
 }
-*/

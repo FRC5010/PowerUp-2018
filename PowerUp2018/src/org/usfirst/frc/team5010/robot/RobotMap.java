@@ -20,12 +20,11 @@ import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-//components
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -61,6 +60,7 @@ public class RobotMap {
 	public static SpeedController driveMotor2017Right;
 	public static SpeedController driveMotor2018Left;
 	public static SpeedController driveMotor2018Right;
+	
 	public static SpeedController backriser;
 	public static SpeedController intakeMotorLeft;
 	public static SpeedController intakeMotorRight;
@@ -82,9 +82,11 @@ public class RobotMap {
 	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;
 	public static UltrasonicSensor range;
-
+	
 	// UltrasonicSensor sensor
-	public static  AnalogInput ultrasound;
+	public static  AnalogInput frontUltrasound;
+	public static AnalogInput backUltrasound;
+	
 
 	//Make sure front and back arms are same length, or change above code
 	public static void init() {
@@ -111,7 +113,7 @@ public class RobotMap {
 		driveMotorRight = driveMotor2018Right;
 		
 		// Lifter motors
-		backriser = new Victor(0);
+		backriser = new Spark(4);
 		frontriser = new Victor(1);
 
 		intakeMotorLeft = new Victor(2);
@@ -122,11 +124,12 @@ public class RobotMap {
 		shiftSolenoid = new Solenoid(1);
 		
 		//Sensor components
-		gyro = new ADXRS450_Gyro();
+		//gyro = new ADXRS450_Gyro();
 		encoder = new Encoder(0, 1);
-		ultrasound = new AnalogInput(0); 
-		frontRiserPotent = new AnalogPotentiometer(1, 360, 30);
-		backRiserPotent = new AnalogPotentiometer(2, 360, 30);
+		frontUltrasound = new AnalogInput(0); 
+		backUltrasound = new AnalogInput(3);
+		frontRiserPotent = new AnalogPotentiometer(1, 270, 42);
+		backRiserPotent = new AnalogPotentiometer(2, 270, 80);
 		
 		//subsystems
 		range = new UltrasonicSensor();

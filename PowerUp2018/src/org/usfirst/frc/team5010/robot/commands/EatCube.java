@@ -13,11 +13,12 @@ public class EatCube extends Command {
 
 	public void execute() {
 		RobotMap.cubeIntake.devourCube();
+		RobotMap.cubeIntake.checkForStop();
 	}
 	
 	@Override
 	public void end() {
-		RobotMap.cubeIntake.stop();
+		RobotMap.cubeIntake.stopIntakeMotors();
 	}
 	
 	protected boolean isFinished() {

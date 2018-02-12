@@ -90,7 +90,7 @@ public class DriveUntilDistance extends PIDCommand {
 
 	@Override
 	protected double returnPIDInput() {
-		double range = RobotMap.range.getDistance();
+		double range = RobotMap.range.getFrontDistance();
     	SmartDashboard.putNumber("range", range);
 		return range;
 	}

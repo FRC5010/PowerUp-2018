@@ -10,22 +10,30 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class UltrasonicSensor extends Subsystem {
-	public final AnalogInput ultrasound;
+	public final AnalogInput frontUltrasound;
+	public final AnalogInput backUltrasound;
 	
 	public UltrasonicSensor() {
-		this.ultrasound = RobotMap.ultrasound;
+		this.frontUltrasound = RobotMap.frontUltrasound;
+		this.backUltrasound = RobotMap.backUltrasound;
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
+        //Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public double getDistance() {
-    	double value = ultrasound.getValue()/8.553;
-    	SmartDashboard.putNumber("Ultrasonic range", value);
+    public double getFrontDistance() {
+    	double value = frontUltrasound.getValue()/8.553;
+    	SmartDashboard.putNumber("front ultrasonic range", value);
+    	return value;
+    }
+    
+    public double getBackDistance() {
+    	double value = backUltrasound.getValue()/8.553;
+    	SmartDashboard.putNumber("back ultrasonic range", value);
     	return value;
     }
 }
