@@ -50,8 +50,10 @@ public class Robot extends IterativeRobot {
 		positionChooser.addObject("Position2", new ExampleAuto2());
 		positionChooser.addDefault("Default", new AutoCenter());
 		SmartDashboard.putData("Auton mode", positionChooser);
-		SmartDashboard.putNumber("Height to raise to", 30);
+		SmartDashboard.putNumber("Height to raise front to", 1);
+		SmartDashboard.putNumber("Height to raise back to", 10);
 	}
+	
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.

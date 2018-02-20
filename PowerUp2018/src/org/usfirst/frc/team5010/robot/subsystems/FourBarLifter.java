@@ -19,8 +19,8 @@ public class FourBarLifter extends Subsystem {
 	 * Default constructor.
 	 */
 	public FourBarLifter() {
-		this.backpotentMeter = RobotMap.backRiserPotent;
-		this.frontpotentMeter = RobotMap.frontRiserPotent;
+		this.backpotentMeter = RobotMap.lowerRiserPotent;
+		this.frontpotentMeter = RobotMap.upperRiserPotent;
 		
 	}
 	
@@ -29,13 +29,18 @@ public class FourBarLifter extends Subsystem {
 	/** setHeight - determine what height to set each of the separate lifters */
 	public void setHeight(double height) {
 		SmartDashboard.putNumber("FourBarLifter Target Height:", height);
-		RobotMap.frontLifter.setHeight(height/2);
-		RobotMap.backLifter.setHeight(height/2);
+		if(height <= UpperRiser.MAX_HEIGHT) {
+			RobotMap.lowerLifter.setHeight(0);
+			RobotMap.upperLifter.setHeight(height);
+		}else {
+			RobotMap.lowerLifter.setHeight(LowerRiser.MAX_HEIGHT);
+			RobotMap.upperLifter.setHeight(height - LowerRiser.MAX_HEIGHT);
+		}
 	}
 
 	/** getHeight - combine the height of both frontLifter and backLifter */
 	public double getHeight() {
-		double height = RobotMap.frontLifter.getHeight()+RobotMap.backLifter.getHeight();
+		double height = RobotMap.upperLifter.getHeight()+RobotMap.lowerLifter.getHeight();
 		SmartDashboard.putNumber("FourBarLifter Current Height:", height);
 		return height;
 	}

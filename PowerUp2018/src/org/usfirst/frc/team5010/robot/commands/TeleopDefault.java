@@ -64,10 +64,15 @@ public class TeleopDefault extends Command {
 			// rightValue = -scaleInputs(Robot.oi.joyDriver2.getRawAxis(1));
 			RobotMap.drivetrain.drive(leftValue, rightValue);
 		}
-		SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
-		SmartDashboard.putNumber("range front", RobotMap.range.getFrontDistance());
+		//SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
+		//SmartDashboard.putNumber("range front", RobotMap.range.getFrontUltrasound());
+		//RobotMap.range.getBackUltrasound();
+		RobotMap.range.getFrontDistance();
+		RobotMap.range.getBackDistance();
+		RobotMap.distance.getDistance();
 		SmartDashboard.putNumber("total Height", RobotMap.fourbar.getHeight());
 		SmartDashboard.putNumber("range back", RobotMap.range.getBackDistance());
+		
 
 		// RobotMap.frontLifter.move();
 		// RobotMap.backLifter.move();
@@ -78,7 +83,7 @@ public class TeleopDefault extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return false;//isCanceled();
 	}
 
 	// Called once after isFinished returns true

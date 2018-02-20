@@ -5,6 +5,7 @@ import org.usfirst.frc.team5010.robot.subsystems.Shift;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OpenIntake extends Command {
 
@@ -14,7 +15,8 @@ public class OpenIntake extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		RobotMap.cubeIntake.closeIntake();
+		RobotMap.cubeIntake.openIntake();
+		SmartDashboard.putBoolean("open called", true);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

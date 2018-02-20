@@ -6,22 +6,34 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DistanceSensor extends Subsystem {
-
+	
+	double forwardDPP = .16;
+	
+	
 	public DistanceSensor() {
-		RobotMap.encoder.reset();
-		double dpp = RobotMap.encoder.getDistancePerPulse();
+		RobotMap.forwardEncoder.reset();
+		RobotMap.reverseEncoder.reset();
+		double dpp = RobotMap.forwardEncoder.getDistancePerPulse();
 		SmartDashboard.getNumber("Distance per pulse", dpp);
-		RobotMap.encoder.setDistancePerPulse(SmartDashboard.getNumber("Distance per pulse", 0.09));
+		RobotMap.forwardEncoder.setDistancePerPulse(forwardDPP);
+		RobotMap.reverseEncoder.setDistancePerPulse(forwardDPP);
+		
 	}
 
 	public DistanceSensor(String name) {
 		super(name);
 	}
 	public double getDistance() {
-		return -RobotMap.encoder.getDistance();
+		SmartDashboard.putNumber("right encoder raw", RobotMap.forwardEncoder.getRaw());
+		SmartDashboard.putNumber("right encoder distance", RobotMap.forwardEncoder.getDistance());
+		
+		SmartDashboard.putNumber("left encoder raw", RobotMap.reverseEncoder.getRaw());
+		SmartDashboard.putNumber("left encoder distance", RobotMap.reverseEncoder.getDistance());
+		
+		return RobotMap.forwardEncoder.getDistance();
 	}
 	public void reset() {
-		RobotMap.encoder.reset();
+		RobotMap.forwardEncoder.reset();
 	}
 	@Override
 	protected void initDefaultCommand() {

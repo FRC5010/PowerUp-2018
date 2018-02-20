@@ -25,15 +25,27 @@ public class UltrasonicSensor extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public double getFrontDistance() {
-    	double value = frontUltrasound.getValue()/8.553;
+    public double getFrontUltrasound() {
+    	double value = frontUltrasound.getValue();
     	SmartDashboard.putNumber("front ultrasonic range", value);
     	return value;
     }
     
-    public double getBackDistance() {
-    	double value = backUltrasound.getValue()/8.553;
+    public double getFrontDistance() {
+    	double value = frontUltrasound.getValue()/8.425 ;
+    	SmartDashboard.putNumber("front distance", value);
+    	return value;
+    }
+    
+    public double getBackUltrasound() {
+    	double value = backUltrasound.getValue();
     	SmartDashboard.putNumber("back ultrasonic range", value);
+    	return value;
+    }
+    
+    public double getBackDistance() {
+    	double value = frontUltrasound.getValue()/7.583;
+    	SmartDashboard.putNumber("back distance", value);
     	return value;
     }
 }

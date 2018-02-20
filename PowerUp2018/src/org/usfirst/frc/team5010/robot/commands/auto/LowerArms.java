@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LowerArms extends Command {
 
     public LowerArms() {
-        requires(RobotMap.backLifter);
-        requires(RobotMap.frontLifter);
+        requires(RobotMap.lowerLifter);
+        requires(RobotMap.upperLifter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.frontLifter.setHeight(1);
+    	RobotMap.upperLifter.setHeight(1);
     	//RobotMap.backLifter.setHeight(10.9);
     }
 
