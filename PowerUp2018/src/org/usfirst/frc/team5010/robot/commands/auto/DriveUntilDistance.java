@@ -17,6 +17,7 @@ public class DriveUntilDistance extends PIDCommand {
 	private static double d = 0.04;
 	private static double tolerance = 2;
 	private int stopCount = 0;
+	
 	 //p 0.06 i 0.04 d 0.04
     public DriveUntilDistance() {
         super("DriveUntilDistance", p, i, d);
@@ -84,11 +85,17 @@ public class DriveUntilDistance extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {    
+    	SmartDashboard.putNumber("DUD Count", stopCount);
     	if(getPIDController().onTarget()) {
-        	return true;
-        }else {
-        	return false;
-        }
+    		stopCount++;
+    	}else {
+    		stopCount = 0;
+    	}
+    	if(stopCount++ > 10) {
+    		return true;
+    	}else {
+    		return false;
+    	}
     }
 
     // Called once after isFinished returns true

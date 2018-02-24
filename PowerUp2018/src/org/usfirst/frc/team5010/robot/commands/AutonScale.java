@@ -29,15 +29,21 @@ public class AutonScale extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-//    	addSequential(new DriveForDistance(220));
-//    	addSequential(new TurnToAngle(90));
-//    	addSequential(new DriveForDistance(200, 90));
-//    	addSequential(new DriveUntilDistance(70, 90));
-//    	addSequential(new TurnToAngle(180));
-//    	addSequential(new DriveUntilDistance(51, 0));
+    	addParallel(new ReleaseIntake());
+    	addSequential(new DriveForDistance(200));
+    	
+    	addSequential(new DriveForDistance(30, 30));
+    	addSequential(new DriveForDistance(30, 60));
+    	addSequential(new DriveForDistance(30, 90));
+ 
+    	addSequential(new DriveForDistance(120, 90));
+    	//addSequential(new ShiftDown());
+    	addSequential(new DriveUntilDistance(75, 90));
+    	addSequential(new TurnToAngle(180));
+    	addSequential(new DriveUntilDistance(50, 0));
 //    	addSequential(new AutoBackScaleCube());
-////    	
-    	addSequential(new DriveForDistance(30, 0));
-    	addSequential(new DriveForDistance(100, 90));
+//   	
+//    	addSequential(new DriveForDistance(30, 0));
+//    	addSequential(new DriveForDistance(100, 90));
     }
 }

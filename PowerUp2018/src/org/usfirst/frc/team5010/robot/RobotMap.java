@@ -20,6 +20,7 @@ import org.usfirst.frc.team5010.robot.subsystems.UpperRiser;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -137,15 +138,17 @@ public class RobotMap {
 		backUltrasound = new AnalogInput(3);
 		
 
-		//CameraServer.getInstance().startAutomaticCapture();
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(960, 540);
+		camera.setFPS(30);
 		
 		//subsystems
 		range = new UltrasonicSensor();
 		direction = new DirectionSensor();
 		distance = new DistanceSensor();
 		drivetrain = new DriveTrainMain();
-		upperLifter = new UpperRiser("upper");
-		lowerLifter = new LowerRiser("lower");
+		upperLifter = new UpperRiser();
+		lowerLifter = new LowerRiser();
 		fourbar = new FourBarLifter();
 		cubeIntake = new CubeIntake();
 		shift = new Shift();

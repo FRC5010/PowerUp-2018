@@ -15,8 +15,6 @@ public class LowerHeightJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.lowerLifter.getPIDController().disable();
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,8 +29,6 @@ public class LowerHeightJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	RobotMap.lowerLifter.setHeight(RobotMap.lowerLifter.getHeight());
-    	RobotMap.lowerLifter.getPIDController().enable();
     }
 
     // Called when another command which requires one or more of the same

@@ -25,16 +25,16 @@ public class CubeIntake extends Subsystem {
 
 	public void devourCube() { // Pretty self explanatory, if the user says to eat the cube, tell the motors to
 								// eat the cube
-		if (Robot.oi.joyDriver.getRawAxis(2) > deadZone) {
-			RobotMap.leftIntakeMotor.set(scaleInputs(Robot.oi.joyDriver.getRawAxis(2)) / 2);
-			RobotMap.rightIntakeMotor.set(-scaleInputs(Robot.oi.joyDriver.getRawAxis(2)) / 2);
+		if (Robot.oi.joyDriver.getRawAxis(3) > deadZone) {
+			RobotMap.leftIntakeMotor.set(scaleInputs(Robot.oi.joyDriver.getRawAxis(3)) / 2);
+			RobotMap.rightIntakeMotor.set(-scaleInputs(Robot.oi.joyDriver.getRawAxis(3)) / 2);
 		}
 	}
 
 	public void spitCube() { // same as last function, but for output instead
-		if (Robot.oi.joyDriver.getRawAxis(3) > deadZone) {
-			RobotMap.leftIntakeMotor.set(-scaleInputs(Robot.oi.joyDriver.getRawAxis(3)) / 2);
-			RobotMap.rightIntakeMotor.set(scaleInputs(Robot.oi.joyDriver.getRawAxis(3)) / 2);
+		if (Robot.oi.joyDriver.getRawAxis(2) > deadZone) {
+			RobotMap.leftIntakeMotor.set(-scaleInputs(Robot.oi.joyDriver.getRawAxis(2)) / 2);
+			RobotMap.rightIntakeMotor.set(scaleInputs(Robot.oi.joyDriver.getRawAxis(2)) / 2);
 		}
 	}
 

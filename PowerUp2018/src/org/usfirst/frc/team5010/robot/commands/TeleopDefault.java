@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5010.robot.commands;
 
+import org.usfirst.frc.team5010.robot.OI;
 import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
 
@@ -47,35 +48,19 @@ public class TeleopDefault extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Robot.toa) {
+		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
+		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
+		RobotMap.drivetrain.drive(leftValue + rightValue, leftValue - rightValue);
 
-			// arcade mode
-
-			// leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-			// rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(2));
-			leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-			rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
-			RobotMap.drivetrain.drive(leftValue + rightValue, leftValue - rightValue);
-		} else if (!Robot.toa) {
-			// tank mode
-			leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-			rightValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(5));
-			// leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-			// rightValue = -scaleInputs(Robot.oi.joyDriver2.getRawAxis(1));
-			RobotMap.drivetrain.drive(leftValue, rightValue);
-		}
-		//SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
-		//SmartDashboard.putNumber("range front", RobotMap.range.getFrontUltrasound());
-		//RobotMap.range.getBackUltrasound();
+		// SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
+		// SmartDashboard.putNumber("range front", RobotMap.range.getFrontUltrasound());
+		// RobotMap.range.getBackUltrasound();
 		RobotMap.range.getFrontDistance();
 		RobotMap.range.getBackDistance();
 		RobotMap.distance.getDistance();
-		SmartDashboard.putNumber("total Height", RobotMap.fourbar.getHeight());
+		RobotMap.lowerLifter.getHeight();
 		SmartDashboard.putNumber("range back", RobotMap.range.getBackDistance());
-		
 
-		// RobotMap.frontLifter.move();
-		// RobotMap.backLifter.move();
 		RobotMap.cubeIntake.devourCube();
 		RobotMap.cubeIntake.spitCube();
 		RobotMap.cubeIntake.checkForStop();
@@ -83,7 +68,7 @@ public class TeleopDefault extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;//isCanceled();
+		return false;// isCanceled();
 	}
 
 	// Called once after isFinished returns true

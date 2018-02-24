@@ -44,7 +44,7 @@ public class UltrasonicSensor extends Subsystem {
     }
     
     public double getBackDistance() {
-    	double value = frontUltrasound.getValue()/7.583;
+    	double value = backUltrasound.getValue()/7.583;
     	SmartDashboard.putNumber("back distance", value);
     	return value;
     }

@@ -28,14 +28,14 @@ public class FourBarLifter extends Subsystem {
     // here. Call these from Commands.
 	/** setHeight - determine what height to set each of the separate lifters */
 	public void setHeight(double height) {
-		SmartDashboard.putNumber("FourBarLifter Target Height:", height);
-		if(height <= UpperRiser.MAX_HEIGHT) {
-			RobotMap.lowerLifter.setHeight(0);
-			RobotMap.upperLifter.setHeight(height);
-		}else {
-			RobotMap.lowerLifter.setHeight(LowerRiser.MAX_HEIGHT);
-			RobotMap.upperLifter.setHeight(height - LowerRiser.MAX_HEIGHT);
-		}
+//		SmartDashboard.putNumber("FourBarLifter Target Height:", height);
+//		if(height <= UpperRiser.MAX_HEIGHT) {
+//			RobotMap.lowerLifter.setHeight(0);
+//			RobotMap.upperLifter.setHeight(height);
+//		}else {
+//			RobotMap.lowerLifter.setHeight(LowerRiser.MAX_HEIGHT);
+//			RobotMap.upperLifter.setHeight(height - LowerRiser.MAX_HEIGHT);
+//		}
 	}
 
 	/** getHeight - combine the height of both frontLifter and backLifter */

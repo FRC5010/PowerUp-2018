@@ -1,17 +1,13 @@
-package org.usfirst.frc.team5010.robot.commands.auto;
-
-import org.usfirst.frc.team5010.robot.commands.LowerArms;
-import org.usfirst.frc.team5010.robot.commands.SetLowerHeight;
-import org.usfirst.frc.team5010.robot.commands.SetUpperHeight;
+package org.usfirst.frc.team5010.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoBackScaleCube extends CommandGroup {
+public class LowerArms extends CommandGroup {
 
-    public AutoBackScaleCube() {
+    public LowerArms() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,11 +24,7 @@ public class AutoBackScaleCube extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
-    	addSequential(new SetUpperHeight(true));
-    	addSequential(new SetLowerHeight(true));
-    	addSequential(new SetUpperHeight(true));
-    	addSequential(new LowerArms());
-    	
+    	addSequential(new SetLowerHeight(false));
+    	addSequential(new SetUpperHeight(false));
     }
 }
