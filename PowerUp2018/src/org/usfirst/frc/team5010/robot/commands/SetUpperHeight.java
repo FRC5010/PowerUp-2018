@@ -15,14 +15,16 @@ public class SetUpperHeight extends PIDCommand {
 	double height;
 	boolean goUp = false;
 	boolean bailOut = false;
-
+	double lastHeight = 0;
+	int lastHeightCount = 0;
+	
 	public SetUpperHeight(boolean goUp) {
 		super(0.1, 0.0, 0.0);
 		requires(RobotMap.upperLifter);
 		PID = getPIDController();
 		PID.setAbsoluteTolerance(2);
 		PID.setInputRange(RobotMap.upperLifter.MIN_ANGLE, RobotMap.upperLifter.MAX_ANGLE);
-		PID.setOutputRange(-.4, .6);
+		PID.setOutputRange(-.4, .8);
 		this.goUp = goUp;
 		PID.reset();
 	}
@@ -39,7 +41,10 @@ public class SetUpperHeight extends PIDCommand {
 		} else {
 			height = RobotMap.upperLifter.MIN_ANGLE;
 		}
-
+		
+		lastHeight = RobotMap.upperLifter.getHeight();
+		lastHeightCount = 0;
+		
 		if (RobotMap.lowerLifter.getHeight() > RobotMap.lowerLifter.MIN_ANGLE + 20 && !goUp) {
 			bailOut = true;
 		} else {
@@ -55,8 +60,17 @@ public class SetUpperHeight extends PIDCommand {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		RobotMap.upperLifter.getHeight();
-
+		double currentHeight = RobotMap.upperLifter.getHeight();
+		if (currentHeight == lastHeight) {
+			lastHeightCount++;
+		} else {
+			lastHeightCount = 0;
+		}
+		lastHeight = currentHeight;
+		if (lastHeightCount > 10) {
+			bailOut = true;
+		}
+		
 		SmartDashboard.putNumber("FrontRiser PID ERROR ", PID.getError());
 		SmartDashboard.putNumber("FrontRiser PID SetPoint ", PID.getSetpoint());
 	}

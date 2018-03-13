@@ -7,13 +7,14 @@
 
 package org.usfirst.frc.team5010.robot;
 
-import org.usfirst.frc.team5010.robot.commands.AutonScale;
 import org.usfirst.frc.team5010.robot.commands.CalibratePots;
 import org.usfirst.frc.team5010.robot.commands.CloseIntake;
-import org.usfirst.frc.team5010.robot.commands.LowerArms;
 import org.usfirst.frc.team5010.robot.commands.LowerHeightJoystick;
+import org.usfirst.frc.team5010.robot.commands.MPTest;
 import org.usfirst.frc.team5010.robot.commands.OpenIntake;
+import org.usfirst.frc.team5010.robot.commands.RaiseArms;
 import org.usfirst.frc.team5010.robot.commands.ResetGyro;
+import org.usfirst.frc.team5010.robot.commands.ReverseMPTest;
 import org.usfirst.frc.team5010.robot.commands.SetLowerHeight;
 import org.usfirst.frc.team5010.robot.commands.SetUpperHeight;
 import org.usfirst.frc.team5010.robot.commands.ShiftDown;
@@ -70,7 +71,8 @@ public class OI {
 	private Button driverButtonB = new JoystickButton(joyDriver, 2);
 	private Button driverButtonRJoy = new JoystickButton(joyDriver, 10);
 	private Button driverButtonLJoy = new JoystickButton(joyDriver, 9);
-
+	private Button driverButtonSel = new JoystickButton(joyDriver, 8);
+	
 	private Button codriverButtonA = new JoystickButton(joyCoDriver, 1);
 	private Button codriverButtonB = new JoystickButton(joyCoDriver, 2);
 	private Button codriverButtonX = new JoystickButton(joyCoDriver, 3);
@@ -87,26 +89,36 @@ public class OI {
 		driverButtonRB.whenPressed(new CloseIntake());
 		driverButtonLB.whenPressed(new OpenIntake());
 		
+		
 		driverButtonRJoy.whenPressed(new ShiftUp());
 		driverButtonLJoy.whenPressed(new ShiftDown());
 		
+		driverButtonSel.whenPressed(new ResetGyro());
+		driverButtonSel.whenPressed(new ReverseMPTest());
+		
+		driverButtonBack.whenPressed(new ResetGyro());
+		driverButtonBack.whenPressed(new MPTest());
+		
+		
 		
 	
-		codriverButtonLB.whileHeld(new LowerHeightJoystick());
+		//codriverButtonLB.whileHeld(new LowerHeightJoystick());
 		codriverButtonRB.whileHeld(new UpperHeightJoystick());
-		
-		
+		codriverButtonRB.whileHeld(new LowerHeightJoystick());
+				
 		codriverButtonA.whenPressed(new SetUpperHeight(false));
 		codriverButtonB.whenPressed(new SetUpperHeight(true));
-		codriverButtonX.whenPressed(new LowerArms());
+		codriverButtonX.whenPressed(new SetLowerHeight(false));
 		codriverButtonY.whenPressed(new SetLowerHeight(true));
 		
-		codriverButtonSel.whenPressed(new ResetGyro());
-		codriverButtonSel.whenPressed(new AutonScale());
+		
+//		codriverButtonSel.whenPressed(new AutonScale());
 //		codriverButtonSel.whenPressed(new AutonScale());
 		// codriverButtonY.whenPressed(new SetUpperHeight());
 		//	codriverButtonX.whenPressed(new SetLowerHeight());
 		codriverButtonBack.whenPressed(new CalibratePots());
+		
+		codriverButtonSel.whenPressed(new RaiseArms());
 		driverButtonBack.whenPressed(new CalibratePots());
 
 		joyDriver.getName();

@@ -13,16 +13,24 @@ public class TurnToAngle extends PIDCommand {
 	private double tolerance = 0.25;
 	private double setPoint;
 	
+	private static final double driveTrainWidth = 24.375;
+	double radius;
+	double smallOutputRatio;
+	
 
-	public TurnToAngle(double setPoint) {
+	public TurnToAngle(double setPoint, double radius) {
 		super("TurnToAngle", p, i, d);
 		setSetpoint(setPoint);
 		this.setPoint = setPoint;
+		this.radius = radius;
+		smallOutputRatio = radius / (this.radius + driveTrainWidth);
 		requires(RobotMap.drivetrain);
 		requires(RobotMap.direction);
 		getPIDController().setAbsoluteTolerance(tolerance);
-		getPIDController().setOutputRange(-0.6, 0.6);
+		getPIDController().setOutputRange(-.5, .5);
 		getPIDController().setInputRange(-360, 361);
+		
+		SmartDashboard.putNumber("smallOutput ratio", smallOutputRatio);
 	}
 
 	@Override
@@ -45,10 +53,17 @@ public class TurnToAngle extends PIDCommand {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		RobotMap.drivetrain.spin(output);
-		SmartDashboard.putNumber("output", output);
-		
-
+		double smallOutput = smallOutputRatio * output;
+		if(getPIDController().getSetpoint() < 0) {
+			RobotMap.drivetrain.drive(smallOutput, output);
+			SmartDashboard.putNumber("left output", output);
+			SmartDashboard.putNumber("right output", smallOutput);
+			
+		}else {
+			RobotMap.drivetrain.drive(output, smallOutput);
+			SmartDashboard.putNumber("left output", smallOutput);
+			SmartDashboard.putNumber("right output", output);
+		}
 	}
 
 	protected void end() {

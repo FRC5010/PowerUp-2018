@@ -7,16 +7,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DistanceSensor extends Subsystem {
 	
-	double forwardDPP = .16;
+	double rightDPP = .16;
+	//right encoder reversed?
 	
 	
 	public DistanceSensor() {
-		RobotMap.forwardEncoder.reset();
-		RobotMap.reverseEncoder.reset();
-		double dpp = RobotMap.forwardEncoder.getDistancePerPulse();
+		RobotMap.rightEncoder.reset();
+		RobotMap.leftEncoder.reset();
+		
+		double dpp = RobotMap.rightEncoder.getDistancePerPulse();
 		SmartDashboard.getNumber("Distance per pulse", dpp);
-		RobotMap.forwardEncoder.setDistancePerPulse(forwardDPP);
-		RobotMap.reverseEncoder.setDistancePerPulse(forwardDPP);
+		
+		RobotMap.rightEncoder.setDistancePerPulse(rightDPP);
+		RobotMap.leftEncoder.setDistancePerPulse(rightDPP);
 		
 	}
 
@@ -24,16 +27,25 @@ public class DistanceSensor extends Subsystem {
 		super(name);
 	}
 	public double getDistance() {
-		SmartDashboard.putNumber("right encoder raw", RobotMap.forwardEncoder.getRaw());
-		SmartDashboard.putNumber("right encoder distance", RobotMap.forwardEncoder.getDistance());
+		SmartDashboard.putNumber("right encoder raw", -RobotMap.rightEncoder.getRaw());
+		SmartDashboard.putNumber("right encoder distance", -RobotMap.rightEncoder.getDistance());
 		
-		SmartDashboard.putNumber("left encoder raw", RobotMap.reverseEncoder.getRaw());
-		SmartDashboard.putNumber("left encoder distance", RobotMap.reverseEncoder.getDistance());
+		SmartDashboard.putNumber("left encoder raw", RobotMap.leftEncoder.getRaw());
+		SmartDashboard.putNumber("left encoder distance", RobotMap.leftEncoder.getDistance());
 		
-		return RobotMap.forwardEncoder.getDistance();
+		return -RobotMap.rightEncoder.getDistance();
+	}
+	
+	public int getLeftRaw() {
+		return RobotMap.leftEncoder.getRaw();
+	}
+	
+	public int getRightRaw() {
+		return -RobotMap.rightEncoder.getRaw();
+		
 	}
 	public void reset() {
-		RobotMap.forwardEncoder.reset();
+		RobotMap.rightEncoder.reset();
 	}
 	@Override
 	protected void initDefaultCommand() {

@@ -3,6 +3,7 @@ package org.usfirst.frc.team5010.robot.commands;
 import org.usfirst.frc.team5010.robot.OI;
 import org.usfirst.frc.team5010.robot.Robot;
 import org.usfirst.frc.team5010.robot.RobotMap;
+import org.usfirst.frc.team5010.robot.subsystems.LowerRiser;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -59,7 +60,13 @@ public class TeleopDefault extends Command {
 		RobotMap.range.getBackDistance();
 		RobotMap.distance.getDistance();
 		RobotMap.lowerLifter.getHeight();
-		SmartDashboard.putNumber("range back", RobotMap.range.getBackDistance());
+		RobotMap.upperLifter.getHeight();
+		SmartDashboard.putNumber("Upper Lifter Angle", RobotMap.upperLifter.getPotValue());
+		SmartDashboard.putNumber("Lower Lifter Angle", LowerRiser.getPotValue());
+		
+		SmartDashboard.putNumber("Gyro Angle", RobotMap.direction.angle());
+		SmartDashboard.putNumber("Range Back", RobotMap.range.getBackDistance());
+		
 
 		RobotMap.cubeIntake.devourCube();
 		RobotMap.cubeIntake.spitCube();

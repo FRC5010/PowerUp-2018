@@ -15,6 +15,8 @@ public class SetLowerHeight extends PIDCommand {
 	private PIDController PID;
 	private boolean bailOut = false;
 	boolean goUp;
+	double lastHeight = 0;
+	int lastHeightCount = 0;
 	
 	public SetLowerHeight(boolean goUp) {
 		super(0.2, 0.0, 0.0);
@@ -50,6 +52,16 @@ public class SetLowerHeight extends PIDCommand {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		double currentHeight = RobotMap.lowerLifter.getHeight();
+		if (currentHeight == lastHeight) {
+			lastHeightCount++;
+		} else {
+			lastHeightCount = 0;
+		}
+		lastHeight = currentHeight;
+		if (lastHeightCount > 10) {
+			bailOut = true;
+		}
 		SmartDashboard.putNumber("backRiser PID ERROR ", PID.getError());
 		SmartDashboard.putNumber("backRiser PID SetPoint ", PID.getSetpoint());
 	}
@@ -80,6 +92,6 @@ public class SetLowerHeight extends PIDCommand {
 	@Override
 	protected void usePIDOutput(double output) {
 		SmartDashboard.putNumber("backRiser PID output:", output);
-		RobotMap.lowerRiserMotor.set(-output);
+		RobotMap.lowerRiserMotor.set(output);
 	}
 }

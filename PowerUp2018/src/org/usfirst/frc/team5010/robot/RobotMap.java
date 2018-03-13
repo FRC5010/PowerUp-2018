@@ -33,6 +33,9 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Waypoint;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -57,7 +60,7 @@ public class RobotMap {
 	public static TalonSRX leftMotor1; 
 	public static TalonSRX leftMotor2;
 	public static TalonSRX leftMotor3;
-	
+		
 	public static SpeedController lowerRiserMotor;
 	public static SpeedController upperRiserMotor;
 	public static SpeedController leftIntakeMotor;
@@ -69,8 +72,8 @@ public class RobotMap {
 	
 	
 	public static Gyro gyro;
-	public static Encoder forwardEncoder;
-	public static Encoder reverseEncoder;
+	public static Encoder rightEncoder;
+	public static Encoder leftEncoder;
 	
 	public static AnalogPotentiometer lowerRiserPotent;
 	public static AnalogPotentiometer upperRiserPotent;
@@ -89,6 +92,21 @@ public class RobotMap {
 	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;
 	
+	static Trajectory.Config config;
+	public static Trajectory trajectory;
+	
+	static Waypoint[] points;
+	static Waypoint[] leftSideLeftScale;
+	static Waypoint[] leftSideRightScale;
+	static Waypoint[] RightSideLeftScale;
+	static Waypoint[] RightSideRightScale;
+	
+	static Waypoint[] middleSideLeftSwitch;
+	static Waypoint[] middleSideRightSwitch;
+	
+	
+	
+	
 	
 //	//Height of grabber above ground = height variables from front and back risers + height of frontbar above ground
 	public static double upperarmLength = 29;
@@ -97,7 +115,41 @@ public class RobotMap {
 	public static double lowerarmheight = 28.5;
 //	public static double baseheight = 12;
 
+	//another motor backwards somewhere
+	public static void initPractice() {
+		lowerRiserMotor = new Spark(0);
+		upperRiserMotor = new Spark(1);
+		leftIntakeMotor = new Spark(2);
+		rightIntakeMotor = new Spark(3);
+	}
+	
+	public static void initComp() {
+		lowerRiserMotor = new Victor(0);
+		upperRiserMotor = new Victor(1);
+		leftIntakeMotor = new Victor(2);
+		rightIntakeMotor = new Victor(3);
+	}
+	
+	public static void waypoints() {
+		points = new Waypoint[] {
+    		    new Waypoint(0, 0, 0), 
+    		    new Waypoint(3, 3, Pathfinder.d2r(90)),   
+    		    new Waypoint(0, 6, Pathfinder.d2r(180)),                        
+    		    new Waypoint(-3, 3, Pathfinder.d2r(270)),		
+    		    new Waypoint(0, 0, Pathfinder.d2r(0))
+    	};
+		
+		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1, .1, 60.0);
+		trajectory = Pathfinder.generate(points, config);
+		
+	}
+	
+	
 	public static void init() {
+		initPractice();
+		waypoints();
+		
+		
 		// Drive Train components
 		rightMotor1 = new TalonSRX(4);
 		rightMotor2 = new TalonSRX(5);
@@ -113,14 +165,6 @@ public class RobotMap {
 		leftMotor2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 1);
 		leftMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 1);
 		
-		// Lifter motors
-		lowerRiserMotor = new Spark(4);   //practice spark 4    //comp Victor 0
-		//lowerRiserMotor = new Victor(0);
-		upperRiserMotor = new Victor(1);
-
-		leftIntakeMotor = new Spark(5);  //practice spark 5   // comp victor 2
-		//leftIntakeMotor = new Victor(2);
-		rightIntakeMotor = new Victor(3);  
 
 		// Solenoids
 		intake = new DoubleSolenoid(2,3);	
@@ -128,8 +172,8 @@ public class RobotMap {
 		
 		//Sensor components
 		gyro = new ADXRS450_Gyro();
-		forwardEncoder = new Encoder(0, 1);
-		reverseEncoder = new Encoder(2, 3);
+		rightEncoder = new Encoder(2, 3);
+		leftEncoder = new Encoder(0, 1);
 		
 		lowerRiserPotent = new AnalogPotentiometer(0, 270, 0);
 		upperRiserPotent = new AnalogPotentiometer(1, 270, 0);

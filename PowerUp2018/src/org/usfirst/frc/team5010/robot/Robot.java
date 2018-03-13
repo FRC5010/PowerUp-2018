@@ -7,9 +7,7 @@
 
 package org.usfirst.frc.team5010.robot;
 
-import org.usfirst.frc.team5010.robot.commands.auto.AutoCenter;
-import org.usfirst.frc.team5010.robot.commands.auto.ExampleAuto1;
-import org.usfirst.frc.team5010.robot.commands.auto.ExampleAuto2;
+import org.usfirst.frc.team5010.robot.commands.auto.FieldMovement;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -29,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser<Command> positionChooser = new SendableChooser<>();
+	SendableChooser<String> positionChooser = new SendableChooser<>();
 	
 	
 	//tank or arcade mode. tank is true, arcade is false
@@ -45,10 +43,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		
-		positionChooser.addObject("Position1", new ExampleAuto1());
-		positionChooser.addObject("Position2", new ExampleAuto2());
-		positionChooser.addDefault("Default", new AutoCenter());
+		positionChooser.addObject("Left", "Left");
+		positionChooser.addObject("Middle", "Middle");
+		positionChooser.addDefault("Right", "Right");
 		SmartDashboard.putData("Auton mode", positionChooser);
+		
+		
 		SmartDashboard.putNumber("Height to raise front to", 1);
 		SmartDashboard.putNumber("Height to raise back to", 10);
 	}
@@ -67,6 +67,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("left encoder good", Math.abs(RobotMap.distance.getLeftRaw()) < 20);
+		SmartDashboard.putBoolean("right encoder good", Math.abs(RobotMap.distance.getRightRaw()) < 20);
+		SmartDashboard.putBoolean("front ultrasound good", RobotMap.range.getFrontDistance() > 100);
+		SmartDashboard.putBoolean("back ultrasound good", Math.abs(RobotMap.range.getBackDistance()) < 10);
+		
 	}
 
 	/**
@@ -82,7 +87,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = positionChooser.getSelected();
+		SmartDashboard.putString("Position chooser", positionChooser.getSelected());
+		autonomousCommand = new FieldMovement(positionChooser.getSelected());
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
