@@ -41,8 +41,8 @@ public class PathReverse extends Command{
     		// 'getEncPosition' function.
     		// 1000 is the amount of encoder ticks per full revolution
     		// Wheel Diameter is the diameter of your wheels (or pulley for a track system) in meters
-    		left.configureEncoder(RobotMap.distance.getLeftRaw(), 480, .5); //opposite for reverse
-    		right.configureEncoder(RobotMap.distance.getRightRaw(), 480, .5);
+    		left.configureEncoder(-RobotMap.distance.getLeftRaw(), 480, .5); //opposite for reverse
+    		right.configureEncoder(-RobotMap.distance.getRightRaw(), 480, .5);
     		
     		// The first argument is the proportional gain. Usually this will be quite high
     		// The second argument is the integral gain. This is unused for motion profiling

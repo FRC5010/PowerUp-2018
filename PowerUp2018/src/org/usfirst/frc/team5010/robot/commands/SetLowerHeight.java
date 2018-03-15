@@ -24,13 +24,13 @@ public class SetLowerHeight extends PIDCommand {
 		this.goUp = goUp;
 		PID = getPIDController();
 		PID.setAbsoluteTolerance(2);
-		PID.setInputRange(RobotMap.lowerLifter.MIN_ANGLE, RobotMap.lowerLifter.MAX_ANGLE);
-		PID.setOutputRange(-.5, .8);
+		PID.setOutputRange(-.6, .8);
 		PID.reset();
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		PID.setInputRange(RobotMap.lowerLifter.MIN_ANGLE, RobotMap.lowerLifter.MAX_ANGLE);
 		bailOut = false;
 		if(goUp) {
 			height = RobotMap.lowerLifter.MAX_ANGLE;
@@ -40,6 +40,7 @@ public class SetLowerHeight extends PIDCommand {
 		
 		if((RobotMap.upperLifter.MIN_ANGLE + 20) < RobotMap.upperLifter.getHeight()) {
 			bailOut = false;
+			SmartDashboard.putNumber("lower riser set point", height);
 			PID.setSetpoint(height);
 			PID.enable();
 		} else {
@@ -60,7 +61,7 @@ public class SetLowerHeight extends PIDCommand {
 		}
 		lastHeight = currentHeight;
 		if (lastHeightCount > 100) {
-			bailOut = true;
+		//	bailOut = true;
 			SmartDashboard.putBoolean("bailed out lower", bailOut);
 			
 		}

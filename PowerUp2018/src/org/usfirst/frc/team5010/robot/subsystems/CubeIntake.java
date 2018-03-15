@@ -45,7 +45,7 @@ public class CubeIntake extends Subsystem {
 	}
 
 	public void setMotors(double power) {
-		RobotMap.leftIntakeMotor.set(power);
+		RobotMap.leftIntakeMotor.set(-power);
 		RobotMap.rightIntakeMotor.set(power);
 	}
 

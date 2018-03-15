@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5010.robot.commands;
 
+import org.usfirst.frc.team5010.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -24,7 +26,8 @@ public class LowerArms extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addSequential(new SetUpperHeight((RobotMap.upperLifter.MAX_ANGLE - RobotMap.upperLifter.MIN_ANGLE) / 2));
     	addSequential(new SetLowerHeight(false));
-    	addSequential(new SetUpperHeight(false));
+    	addSequential(new SetUpperHeight(RobotMap.upperLifter.MIN_ANGLE));
     }
 }

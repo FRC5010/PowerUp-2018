@@ -1,7 +1,10 @@
 package org.usfirst.frc.team5010.robot.commands.auto;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
+import org.usfirst.frc.team5010.robot.commands.LowerArms;
 import org.usfirst.frc.team5010.robot.commands.PathReverse;
+import org.usfirst.frc.team5010.robot.commands.RaiseArms;
+import org.usfirst.frc.team5010.robot.commands.SetUpperHeight;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -20,13 +23,17 @@ public class FieldMovement extends CommandGroup {
 			if (gameData.charAt(1) == 'L') {
 				SmartDashboard.putString("Auto Selection", "Left Start; Left Scale");
 				addSequential(new PathReverse(RobotMap.lStartLScaleTraj));
+				addSequential(new RaiseArms());
+				addSequential(new LowerArms());
 			} else if (gameData.charAt(1) == 'R') {
 				if(objective.compareTo("cross") == 0) {
 					SmartDashboard.putString("Auto Selection", "Left Start; Auto Line");
 					addSequential(new DriveForDistance(120));
 				}else if(objective.compareTo("switch") == 0) {
 					SmartDashboard.putString("Auto Selection", "Left Start; Left Switch");
+					addParallel(new SetUpperHeight(true));
 					addSequential(new PathReverse(RobotMap.lStartLSwitchTraj));
+					addSequential(new SetUpperHeight(true));
 				}
 
 			} else {
@@ -35,10 +42,15 @@ public class FieldMovement extends CommandGroup {
 		} else if (start.compareTo("Middle") == 0) {
 			if (gameData.charAt(0) == 'L') {
 				SmartDashboard.putString("Auto Selection", "Middle Start; Left Switch");
+				addParallel(new SetUpperHeight(true));
 				addSequential(new PathReverse(RobotMap.mStartLSwitchTraj));
-
+				addSequential(new SetUpperHeight(true));
+			
 			} else if (gameData.charAt(0) == 'R') {
+				addParallel(new SetUpperHeight(true));
 				addSequential(new PathReverse(RobotMap.mStartRSwitchTraj));
+				addSequential(new SetUpperHeight(true));
+			
 				SmartDashboard.putString("Auto Selection", "Middle Start; Right Switch");
 
 			} else {
