@@ -60,11 +60,11 @@ public class LowerRiser extends Subsystem {
 	// armlength 22 // //h1 30.25 //
 	public double getHeight() {
 		double potValue = getPotValue();
-		if (potValue < MIN_ANGLE || potValue > MAX_ANGLE) {
-			potValue = lastAngle;
-		} else {
-			lastAngle = potValue;
-		}
+//		if (potValue < MIN_ANGLE || potValue > MAX_ANGLE) {
+//			potValue = lastAngle;
+//		} else {
+//			lastAngle = potValue;
+//		}
 		
 		SmartDashboard.putNumber("Back Riser Potentiometer", potValue);
 		return potValue;

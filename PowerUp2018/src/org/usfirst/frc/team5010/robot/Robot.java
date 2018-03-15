@@ -28,6 +28,7 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<String> positionChooser = new SendableChooser<>();
+	SendableChooser<String> objectiveChooser = new SendableChooser<>();
 	
 	
 	//tank or arcade mode. tank is true, arcade is false
@@ -46,11 +47,12 @@ public class Robot extends IterativeRobot {
 		positionChooser.addObject("Left", "Left");
 		positionChooser.addObject("Middle", "Middle");
 		positionChooser.addDefault("Right", "Right");
-		SmartDashboard.putData("Auton mode", positionChooser);
+		SmartDashboard.putData("Auton start location", positionChooser);
 		
+		objectiveChooser.addObject("Cross Scale", "cross");
+		objectiveChooser.addDefault("Switch", "switch");
+		SmartDashboard.putData("Auton objective", objectiveChooser);
 		
-		SmartDashboard.putNumber("Height to raise front to", 1);
-		SmartDashboard.putNumber("Height to raise back to", 10);
 	}
 	
 
@@ -88,7 +90,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		SmartDashboard.putString("Position chooser", positionChooser.getSelected());
-		autonomousCommand = new FieldMovement(positionChooser.getSelected());
+		autonomousCommand = new FieldMovement(positionChooser.getSelected(), objectiveChooser.getSelected());
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

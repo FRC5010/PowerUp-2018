@@ -38,7 +38,7 @@ public class SetLowerHeight extends PIDCommand {
 			height = RobotMap.lowerLifter.MIN_ANGLE;
 		}
 		
-		if((RobotMap.upperLifter.MIN_ANGLE + 30) < RobotMap.upperLifter.getHeight()) {
+		if((RobotMap.upperLifter.MIN_ANGLE + 20) < RobotMap.upperLifter.getHeight()) {
 			bailOut = false;
 			PID.setSetpoint(height);
 			PID.enable();
@@ -59,8 +59,10 @@ public class SetLowerHeight extends PIDCommand {
 			lastHeightCount = 0;
 		}
 		lastHeight = currentHeight;
-		if (lastHeightCount > 10) {
+		if (lastHeightCount > 100) {
 			bailOut = true;
+			SmartDashboard.putBoolean("bailed out lower", bailOut);
+			
 		}
 		SmartDashboard.putNumber("backRiser PID ERROR ", PID.getError());
 		SmartDashboard.putNumber("backRiser PID SetPoint ", PID.getSetpoint());

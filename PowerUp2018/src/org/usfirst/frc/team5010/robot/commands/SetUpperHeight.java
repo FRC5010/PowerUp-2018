@@ -45,7 +45,7 @@ public class SetUpperHeight extends PIDCommand {
 		lastHeight = RobotMap.upperLifter.getHeight();
 		lastHeightCount = 0;
 		
-		if (RobotMap.lowerLifter.getHeight() > RobotMap.lowerLifter.MIN_ANGLE + 20 && !goUp) {
+		if (RobotMap.lowerLifter.getHeight() > RobotMap.lowerLifter.MIN_ANGLE + 30 && !goUp) {
 			bailOut = true;
 		} else {
 			PID.setSetpoint(height);
@@ -67,7 +67,7 @@ public class SetUpperHeight extends PIDCommand {
 			lastHeightCount = 0;
 		}
 		lastHeight = currentHeight;
-		if (lastHeightCount > 10) {
+		if (lastHeightCount > 40) {
 			bailOut = true;
 		}
 		

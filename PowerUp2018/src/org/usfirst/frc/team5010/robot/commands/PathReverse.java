@@ -13,7 +13,7 @@ import jaci.pathfinder.modifiers.TankModifier;
 /**
  *
  */
-public class MPTest extends Command{
+public class PathReverse extends Command{
 	
 	 private static final double max_velocity = 17.89;
 	    
@@ -24,13 +24,11 @@ public class MPTest extends Command{
 	    Waypoint [] points;
 	  
 
-    public MPTest() {
-    	trajectory = RobotMap.trajectory;
-		
+    public PathReverse(Trajectory traj) {
+    	trajectory = traj;
 		modifier = new TankModifier(trajectory).modify(2.02);
-		
-		left = new EncoderFollower(modifier.getLeftTrajectory());
-		right = new EncoderFollower(modifier.getRightTrajectory());
+		left = new EncoderFollower(modifier.getRightTrajectory());
+		right = new EncoderFollower(modifier.getLeftTrajectory());
     }
     
    
@@ -38,13 +36,12 @@ public class MPTest extends Command{
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	SmartDashboard.putBoolean("Running", true);
-        	
+    		
     		// Encoder Position is the current, cumulative position of your encoder. If you're using an SRX, this will be the
     		// 'getEncPosition' function.
     		// 1000 is the amount of encoder ticks per full revolution
     		// Wheel Diameter is the diameter of your wheels (or pulley for a track system) in meters
-    		left.configureEncoder(RobotMap.distance.getLeftRaw(), 480, .5);
+    		left.configureEncoder(RobotMap.distance.getLeftRaw(), 480, .5); //opposite for reverse
     		right.configureEncoder(RobotMap.distance.getRightRaw(), 480, .5);
     		
     		// The first argument is the proportional gain. Usually this will be quite high
@@ -60,8 +57,8 @@ public class MPTest extends Command{
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	double l = left.calculate(RobotMap.distance.getLeftRaw());
-    	double r = right.calculate(RobotMap.distance.getRightRaw());
+    	double l = -left.calculate(-RobotMap.distance.getLeftRaw());
+    	double r = -right.calculate(-RobotMap.distance.getRightRaw());
 
     	double gyro_heading = (-RobotMap.direction.angle());// Assuming the gyro is giving a value in degrees
     	SmartDashboard.putNumber("gyro heading", gyro_heading);
@@ -70,8 +67,7 @@ public class MPTest extends Command{
 
     	double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
     	SmartDashboard.putNumber("angle difference", angleDifference);
-    	double turn = 0.8 * (-1.0/80.0) * angleDifference;  
-    	//turn = 0;
+    	double turn = 0.8 * (-1.0/80.0) * angleDifference; 
     	
     	SmartDashboard.putNumber("left output", (l + turn));
     	SmartDashboard.putNumber("right output", (r - turn));

@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team5010.robot;
 
+import java.io.File;
+
 import org.usfirst.frc.team5010.robot.subsystems.CubeIntake;
 //subsystems
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
@@ -44,112 +46,154 @@ import jaci.pathfinder.Waypoint;
  * floating around.
  */
 public class RobotMap {
+	public static boolean regenAllTrajectories = false;
+
 	public static void smartDashboard() {
 		SmartDashboard.putNumber("D", 0.04);
 		SmartDashboard.putNumber("I", 0.04);
 		SmartDashboard.putNumber("P", 0.06);
-		
-		
+
 	}
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
-	
+
 	public static TalonSRX rightMotor1;
 	public static TalonSRX rightMotor2;
 	public static TalonSRX rightMotor3;
-	public static TalonSRX leftMotor1; 
+	public static TalonSRX leftMotor1;
 	public static TalonSRX leftMotor2;
 	public static TalonSRX leftMotor3;
-		
+
 	public static SpeedController lowerRiserMotor;
 	public static SpeedController upperRiserMotor;
 	public static SpeedController leftIntakeMotor;
 	public static SpeedController rightIntakeMotor;
-	
+
 	public static DoubleSolenoid intake;
 	public static Solenoid shiftSolenoid;
 	public static CameraServer camera;
-	
-	
+
 	public static Gyro gyro;
 	public static Encoder rightEncoder;
 	public static Encoder leftEncoder;
-	
+
 	public static AnalogPotentiometer lowerRiserPotent;
 	public static AnalogPotentiometer upperRiserPotent;
 	public static AnalogInput frontUltrasound;
 	public static AnalogInput backUltrasound;
-	
+
 	public static DirectionSensor direction;
 	public static DistanceSensor distance;
-	
+
 	public static DriveTrainMain drivetrain;
 	public static UltrasonicSensor range;
 	public static Shift shift;
-	
+
 	public static UpperRiser upperLifter;
 	public static LowerRiser lowerLifter;
 	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;
-	
+
 	static Trajectory.Config config;
+	
 	public static Trajectory trajectory;
-	
+	public static Trajectory mStartLSwitchTraj;
+	public static Trajectory mStartRSwitchTraj;
+	public static Trajectory lStartLScaleTraj;
+	public static Trajectory lStartLSwitchTraj;
+
 	static Waypoint[] points;
-	static Waypoint[] leftSideLeftScale;
-	static Waypoint[] leftSideRightScale;
-	static Waypoint[] RightSideLeftScale;
-	static Waypoint[] RightSideRightScale;
-	
-	static Waypoint[] middleSideLeftSwitch;
-	static Waypoint[] middleSideRightSwitch;
-	
-	
-	
-	
-	
-//	//Height of grabber above ground = height variables from front and back risers + height of frontbar above ground
+	static Waypoint[] mStartLSwitchPoints;
+	static Waypoint[] mStartRSwitchPoints;
+	static Waypoint[] lStartLScalePoints;
+	static Waypoint[] lStartLSwitchPoints;
+
+	// //Height of grabber above ground = height variables from front and back
+	// risers + height of frontbar above ground
 	public static double upperarmLength = 29;
 	public static double lowerarmLength = 22;
 	public static double upperarmheight = 19;
 	public static double lowerarmheight = 28.5;
-//	public static double baseheight = 12;
+	// public static double baseheight = 12;
 
-	//another motor backwards somewhere
+	// another motor backwards somewhere
 	public static void initPractice() {
 		lowerRiserMotor = new Spark(0);
 		upperRiserMotor = new Spark(1);
 		leftIntakeMotor = new Spark(2);
 		rightIntakeMotor = new Spark(3);
 	}
-	
+
 	public static void initComp() {
 		lowerRiserMotor = new Victor(0);
 		upperRiserMotor = new Victor(1);
 		leftIntakeMotor = new Victor(2);
 		rightIntakeMotor = new Victor(3);
 	}
-	
+
 	public static void waypoints() {
-		points = new Waypoint[] {
-    		    new Waypoint(0, 0, 0), 
-    		    new Waypoint(3, 3, Pathfinder.d2r(90)),   
-    		    new Waypoint(0, 6, Pathfinder.d2r(180)),                        
-    		    new Waypoint(-3, 3, Pathfinder.d2r(270)),		
-    		    new Waypoint(0, 0, Pathfinder.d2r(0))
-    	};
+		config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 5.45, .4, 60);
 		
-		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1, .1, 60.0);
-		trajectory = Pathfinder.generate(points, config);
+		points = new Waypoint[] { 
+				new Waypoint(0, 0, 0), 
+				new Waypoint(3, 3, Pathfinder.d2r(90)),
+				new Waypoint(0, 6, Pathfinder.d2r(180)), 
+				new Waypoint(-3, 3, Pathfinder.d2r(270)),
+				new Waypoint(0, 0, Pathfinder.d2r(0))};
+
+		trajectory = generateTrajectory("test.csv", points, config, false);
+		
+		mStartLSwitchPoints = new Waypoint[] { 
+				new Waypoint(1.58, 14, 0), 
+				new Waypoint(10, 18.5, 0)};
+				
+		mStartLSwitchTraj = generateTrajectory("mStartLSwitchTraj.csv", mStartLSwitchPoints, config, false);
+		
+		mStartRSwitchPoints = new Waypoint[] {
+				new Waypoint(1.58, 14, 0),
+				new Waypoint(10, 9.5, 0)};
+	
+		mStartRSwitchTraj = generateTrajectory("mStartRSwitchTraj.csv", mStartRSwitchPoints, config, false);
+		
+		lStartLScalePoints = new Waypoint[] {
+				new Waypoint(1.58, 23, 0),
+				new Waypoint(16, 22, Pathfinder.d2r(-15)),
+				new Waypoint(23 ,20.5, 0)};
+		
+	
+		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, false);
+		
+		lStartLSwitchPoints = new Waypoint[] {
+				new Waypoint(1.58, 23, 0),
+				new Waypoint(10, 23.5, Pathfinder.d2r(20)),
+				new Waypoint(14 ,21, Pathfinder.d2r(-90))};
+		
+		lStartLSwitchTraj = generateTrajectory("lStartLSwitchTraj.csv", lStartLSwitchPoints, config, false);
+		
+		
 		
 	}
-	
-	
+
+	//returns trajectory given by file name. if none found creates and stores new trajectory.
+	public static Trajectory generateTrajectory(String name, Waypoint[] points,
+			Trajectory.Config config, boolean regen) {
+		Trajectory trajectory;
+		File dir = new File("/Trajectories/" + name);
+		if (dir.exists() && !regen && !regenAllTrajectories) {
+			System.out.println("Reading " + name);
+			trajectory = Pathfinder.readFromCSV(dir);
+		} else {
+			System.out.println("Generating " + name);
+			trajectory = Pathfinder.generate(points, config);
+			Pathfinder.writeToCSV(dir, trajectory);
+		}
+		return trajectory;
+	}
+
 	public static void init() {
 		initPractice();
 		waypoints();
-		
-		
+
 		// Drive Train components
 		rightMotor1 = new TalonSRX(4);
 		rightMotor2 = new TalonSRX(5);
@@ -158,35 +202,32 @@ public class RobotMap {
 		leftMotor2 = new TalonSRX(2);
 		leftMotor3 = new TalonSRX(3);
 
-		
 		rightMotor2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
 		rightMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 4);
-		
+
 		leftMotor2.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 1);
 		leftMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 1);
-		
 
 		// Solenoids
-		intake = new DoubleSolenoid(2,3);	
+		intake = new DoubleSolenoid(2, 3);
 		shiftSolenoid = new Solenoid(1);
-		
-		//Sensor components
+
+		// Sensor components
 		gyro = new ADXRS450_Gyro();
 		rightEncoder = new Encoder(2, 3);
 		leftEncoder = new Encoder(0, 1);
-		
+
 		lowerRiserPotent = new AnalogPotentiometer(0, 270, 0);
 		upperRiserPotent = new AnalogPotentiometer(1, 270, 0);
-		
+
 		frontUltrasound = new AnalogInput(2);
 		backUltrasound = new AnalogInput(3);
-		
 
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(960, 540);
 		camera.setFPS(30);
-		
-		//subsystems
+
+		// subsystems
 		range = new UltrasonicSensor();
 		direction = new DirectionSensor();
 		distance = new DistanceSensor();
@@ -196,15 +237,14 @@ public class RobotMap {
 		fourbar = new FourBarLifter();
 		cubeIntake = new CubeIntake();
 		shift = new Shift();
-		
+
 		LowerRiser.calibratePot();
 		UpperRiser.calibratePot();
-		
+
 	}
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 
-	
 }
