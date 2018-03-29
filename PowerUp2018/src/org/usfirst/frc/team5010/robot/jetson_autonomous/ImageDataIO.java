@@ -4,16 +4,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.networktables.ITable;
 import edu.wpi.first.wpilibj.networktables.ITableListener;
 
-public class ImageDataIO implements ITableListener, Runnable {
-    
-    //A workaround to pass doubles by reference
-    public class DoublePointer {
-        public double val;
-        public DoublePointer() {
-            val = 0.0;
-        } 
-    }
-    
+public class ImageDataIO implements ITableListener, Runnable { 
     //member variables
     private double x;
     private double y;
