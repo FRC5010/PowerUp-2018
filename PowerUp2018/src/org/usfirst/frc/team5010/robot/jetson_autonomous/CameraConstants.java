@@ -7,4 +7,5 @@ public class CameraConstants {
     public static final double CAMERA_ANGLE_X_YZ_INTERVAL_SIZE = 0;
     public static final double CAMERA_ANGLE_X_YZ_OFFSET = 0;
     public static final double CAMERA_WIDTH = 0;
+    public static final double CAMERA_PIXEL_WIDTH = 0;
 }
