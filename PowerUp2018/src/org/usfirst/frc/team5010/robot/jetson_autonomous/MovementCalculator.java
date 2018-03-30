@@ -37,20 +37,20 @@ public class MovementCalculator {
         
         if (simple) {
             theta.val = CameraConstants.CAMERA_ANGLE_X_YZ_INTERVAL_SIZE * (x * 2 - 1);
-	        magnitude.val = 1 - cameraSize;
+	    magnitude.val = 1 - cameraSize;
         } else {
 
             DoublePointer x, y, z;
-	        double x0, y0, z0;
+	    double x0, y0, z0;
 
             x = new DoublePointer();
-	        y = new DoublePointer();
-	        z = new DoublePointer();
+	    y = new DoublePointer();
+	    z = new DoublePointer();
             calculateRelativeXYZPosition(x, y, z, cameraX, cameraY, cameraSize, cameraReserved);
 
-	        theta.val = z.val == 0.0 ? (x.val < 0.0 ? -Math.PI / 2 : Math.PI / 2) :  Math.atan(x.val / z.val);
-	        theta.val *= CameraConstants.CAMERA_ANGLE_X_YZ_INTERVAL_SIZE / (Math.PI / 2);
-	        magnitude.val = ( sigmoid( Math.sqrt( sqr(x.val) + sqr(z.val))) + 1 - cameraSize) / 2;
+	    theta.val = z.val == 0.0 ? (x.val < 0.0 ? -Math.PI / 2 : Math.PI / 2) :  Math.atan(x.val / z.val);
+	    theta.val *= CameraConstants.CAMERA_ANGLE_X_YZ_INTERVAL_SIZE / (Math.PI / 2);
+	    magnitude.val = ( sigmoid( Math.sqrt( sqr(x.val) + sqr(z.val))) + 1 - cameraSize) / 2;
         }
     }
 }
