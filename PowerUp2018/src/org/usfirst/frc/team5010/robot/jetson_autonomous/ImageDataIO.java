@@ -14,7 +14,7 @@ public class ImageDataIO implements ITableListener, Runnable {
     private NetworkTable table;
     
     //method that will initialize a new network table and the member variables, not unalike a constructor, but more suited to being multithreaded
-    public void run() {
+    public static void run() {
         NetworkTable.setClientMode():
         NetworkTable.setIPAddress("10.1.90.2");
         table = new NetworkTable();
