@@ -41,7 +41,6 @@ public class MovementCalculator {
         } else {
 
             DoublePointer x, y, z;
-	    double x0, y0, z0;
 
             x = new DoublePointer();
 	    y = new DoublePointer();
