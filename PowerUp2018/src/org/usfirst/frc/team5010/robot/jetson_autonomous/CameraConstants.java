@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5010.robot.jetson_autonomous;
 
 public class CameraConstants {
+    public static final double ANGLED_HEIGHT = 0;
     public static final double HEIGHT = 0;
     public static final double THETA_Y_XZ = 0;
     public static final double FOCAL_LENGTH = 0;
