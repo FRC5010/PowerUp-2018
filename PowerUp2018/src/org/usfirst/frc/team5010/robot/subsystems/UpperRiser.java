@@ -13,7 +13,7 @@ public class UpperRiser extends Subsystem{
 	 */
 	private double deadZone = .15;
 	public static double MAX_ANGLE = 180;
-	private static final double ANGLE_RANGE = 100;
+	public static final double ANGLE_RANGE = 100;
 	public static double MIN_ANGLE = 0;
 	private static double lastAngle = 0;
 	

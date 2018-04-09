@@ -9,12 +9,11 @@ package org.usfirst.frc.team5010.robot;
 
 import org.usfirst.frc.team5010.robot.commands.CalibratePots;
 import org.usfirst.frc.team5010.robot.commands.CloseIntake;
+import org.usfirst.frc.team5010.robot.commands.GhettoUpperLift;
 import org.usfirst.frc.team5010.robot.commands.LowerArms;
 import org.usfirst.frc.team5010.robot.commands.LowerHeightJoystick;
 import org.usfirst.frc.team5010.robot.commands.OpenIntake;
-import org.usfirst.frc.team5010.robot.commands.PathForward;
 import org.usfirst.frc.team5010.robot.commands.RaiseArms;
-import org.usfirst.frc.team5010.robot.commands.ResetGyro;
 import org.usfirst.frc.team5010.robot.commands.SetLowerHeight;
 import org.usfirst.frc.team5010.robot.commands.SetUpperHeight;
 import org.usfirst.frc.team5010.robot.commands.ShiftDown;
@@ -94,11 +93,11 @@ public class OI {
 		driverButtonRJoy.whenPressed(new ShiftUp());
 		driverButtonLJoy.whenPressed(new ShiftDown());
 		
-		driverButtonSel.whenPressed(new ResetGyro());
-		driverButtonSel.whenPressed(new CaptureCube());
+		//driverButtonSel.whenPressed(new ResetGyro());
+		//driverButtonSel.whenPressed(new CaptureCube());
 		
-		driverButtonBack.whenPressed(new ResetGyro());
-		driverButtonBack.whenPressed(new PathForward());
+		//driverButtonBack.whenPressed(new ResetGyro());
+		driverButtonBack.whenPressed(new CaptureCube());
 		
 		
 		
@@ -107,6 +106,7 @@ public class OI {
 		codriverButtonRB.whileHeld(new UpperHeightJoystick());
 		codriverButtonRB.whileHeld(new LowerHeightJoystick());
 				
+		//codriverButtonA.whenPressed(new GhettoUpperLift());
 		codriverButtonA.whenPressed(new SetUpperHeight(false));
 		codriverButtonB.whenPressed(new SetUpperHeight(true));
 		codriverButtonX.whenPressed(new LowerArms());

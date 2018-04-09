@@ -19,6 +19,7 @@ import org.usfirst.frc.team5010.robot.subsystems.LowerRiser;
 import org.usfirst.frc.team5010.robot.subsystems.Shift;
 import org.usfirst.frc.team5010.robot.subsystems.UltrasonicSensor;
 import org.usfirst.frc.team5010.robot.subsystems.UpperRiser;
+import org.usfirst.frc.team5010.robot.subsystems.Vision;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -27,6 +28,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -93,21 +95,58 @@ public class RobotMap {
 	public static LowerRiser lowerLifter;
 	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;
+	public static Vision vision;
 
 	static Trajectory.Config config;
 	
 	public static Trajectory trajectory;
+	
+	public static Trajectory autoLineTraj;
+	
+	//middles start
 	public static Trajectory mStartLSwitchTraj;
 	public static Trajectory mStartRSwitchTraj;
+	
+	//left start
 	public static Trajectory lStartLScaleTraj;
+	public static Trajectory lStartRScaleTraj1;
+	public static Trajectory lStartRScaleTraj2;
 	public static Trajectory lStartLSwitchTraj;
-
+	public static Trajectory LSwitchSidetoLSwitchCubeTraj1;
+	public static Trajectory LSwitchSidetoLSwitchCubeTraj2;
+	public static Trajectory LSwitchSidetoLSwitchCubeTraj3;
+	
+	//right start
+	public static Trajectory rStartRScaleTraj;
+	public static Trajectory rStartLScaleTraj1;
+	public static Trajectory rStartLScaleTraj2;
+	public static Trajectory rStartRSwitchTraj;
+	
+	
 	static Waypoint[] points;
+	
+	static Waypoint[] autoLinePoints;
+	
+	//middle start
 	static Waypoint[] mStartLSwitchPoints;
 	static Waypoint[] mStartRSwitchPoints;
+	
+	//left start
 	static Waypoint[] lStartLScalePoints;
+	static Waypoint[] lStartRScalePoints1;
+	static Waypoint[] lStartRScalePoints2;
 	static Waypoint[] lStartLSwitchPoints;
-
+	static Waypoint[] LSwitchSidetoLSwitchCubePoints1;
+	static Waypoint[] LSwitchSidetoLSwitchCubePoints2;
+	static Waypoint[] LSwitchSidetoLSwitchCubePoints3;
+	
+	//right start
+	static Waypoint[] rStartRScalePoints;
+	static Waypoint[] rStartLScalePoints1;
+	static Waypoint[] rStartLScalePoints2;
+	static Waypoint[] rStartRSwitchPoints;
+	
+	
 	// //Height of grabber above ground = height variables from front and back
 	// risers + height of frontbar above ground
 	public static double upperarmLength = 29;
@@ -116,61 +155,169 @@ public class RobotMap {
 	public static double lowerarmheight = 28.5;
 	// public static double baseheight = 12;
 
-	// another motor backwards somewhere
+	
+	
 	public static void initPractice() {
 		lowerRiserMotor = new Spark(0);
 		upperRiserMotor = new Spark(1);
 		leftIntakeMotor = new Spark(2);
 		rightIntakeMotor = new Spark(3);
+		
+		rightEncoder = new Encoder(2, 3);  //2, 3
+		leftEncoder = new Encoder(4, 5);   // 0, 1
 	}
-
+	
 	public static void initComp() {
+		
 		lowerRiserMotor = new Victor(0);
 		upperRiserMotor = new Victor(1);
 		leftIntakeMotor = new Victor(2);
 		rightIntakeMotor = new Victor(3);
+		lowerRiserMotor.setInverted(true);
+		
+		rightEncoder = new Encoder(0, 1);
+		leftEncoder = new Encoder(2, 3);
+		
+		rightEncoder.setReverseDirection(true);
+		leftEncoder.setReverseDirection(true);
+		
 	}
 
 	public static void waypoints() {
-		config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 5.45, .4, 60);
+		config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 5.45, .6, 60);
 		
+		//INDEPENDENT OF START TRAJECTORIES
 		points = new Waypoint[] { 
 				new Waypoint(0, 0, 0), 
 				new Waypoint(3, 3, Pathfinder.d2r(90)),
 				new Waypoint(0, 6, Pathfinder.d2r(180)), 
 				new Waypoint(-3, 3, Pathfinder.d2r(270)),
 				new Waypoint(0, 0, Pathfinder.d2r(0))};
-
 		trajectory = generateTrajectory("test.csv", points, config, false);
 		
+		autoLinePoints = new Waypoint[] {
+				new Waypoint(0,0,0),
+				new Waypoint(15, 0, 0)};
+		autoLineTraj = generateTrajectory("autoLinePoints.csv", autoLinePoints, config, false);
+		
+		//MIDDLE START TRAJECTORIES
+		
+		
 		mStartLSwitchPoints = new Waypoint[] { 
-				new Waypoint(1.58, 14, 0), 
-				new Waypoint(10, 18.5, 0)};
-				
+				new Waypoint(1.58, 12, 0), 
+				new Waypoint(10.1, 18.5, 0)};
 		mStartLSwitchTraj = generateTrajectory("mStartLSwitchTraj.csv", mStartLSwitchPoints, config, false);
 		
 		mStartRSwitchPoints = new Waypoint[] {
-				new Waypoint(1.58, 14, 0),
-				new Waypoint(10, 9.5, 0)};
-	
+				new Waypoint(1.58, 12, 0),
+				new Waypoint(10.1, 9.5, 0)};
 		mStartRSwitchTraj = generateTrajectory("mStartRSwitchTraj.csv", mStartRSwitchPoints, config, false);
 		
-		lStartLScalePoints = new Waypoint[] {
-				new Waypoint(1.58, 23, 0),
-				new Waypoint(16, 22, Pathfinder.d2r(-15)),
-				new Waypoint(23 ,20.5, 0)};
 		
-	
+		//LEFT START TRAJECTORIES
+		
+		//90 d
+		lStartLScalePoints = new Waypoint[] {
+				new Waypoint(1.58, 23.5, 0),
+				new Waypoint(12, 23.5, 0),
+				new Waypoint(23 ,25, 0),
+				new Waypoint(27 ,23, Pathfinder.d2r(-90))};
 		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, false);
 		
+		//s curve
+//		lStartLScalePoints = new Waypoint[] {
+//				new Waypoint(1.58, 23.5, 0),
+//				new Waypoint(16.5, 22, Pathfinder.d2r(-15)),
+//				new Waypoint(22.7 ,20.5, 0)};
+//		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, true);
+//		
+		//angle aproach
+//		lStartLScalePoints = new Waypoint[] {
+//				new Waypoint(1.58, 23.5, 0),
+//				new Waypoint(10, 23.5, 0),
+//				new Waypoint(20 ,24, Pathfinder.d2r(-45)),
+//				new Waypoint(23.5 ,22, Pathfinder.d2r(-45))};
+//		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, true);
+//		
+		
+		
+		lStartRScalePoints1 = new Waypoint[] {
+				new Waypoint(1.58, 23.5, 0),
+				new Waypoint(12, 23.5, 0),
+				new Waypoint(17.25, 12, Pathfinder.d2r(90))};
+		
+		lStartRScaleTraj1 = generateTrajectory("lStartRScaleTraj1.csv", lStartRScalePoints1, config, false);
+		
+		lStartRScalePoints2 = new Waypoint[] {
+				new Waypoint(17.25, 12, Pathfinder.d2r(90)),
+				new Waypoint(20.75, 6.5, 0)};
+				
+		lStartRScaleTraj2 = generateTrajectory("lStartRScaleTraj2.csv", lStartRScalePoints2, config, false);
+		
+		
 		lStartLSwitchPoints = new Waypoint[] {
-				new Waypoint(1.58, 23, 0),
-				new Waypoint(10, 23.5, Pathfinder.d2r(20)),
-				new Waypoint(14 ,21, Pathfinder.d2r(-90))};
+				new Waypoint(1.58, 23.5, 0),
+				new Waypoint(10, 24, 0),
+				new Waypoint(13 ,21.6, Pathfinder.d2r(270)),
+				new Waypoint(13 ,20.8, Pathfinder.d2r(270))};
 		
 		lStartLSwitchTraj = generateTrajectory("lStartLSwitchTraj.csv", lStartLSwitchPoints, config, false);
 		
+		//forward
+		LSwitchSidetoLSwitchCubePoints1 = new Waypoint[] {
+				new Waypoint(13, 21, Pathfinder.d2r(270)),
+				new Waypoint(10, 23.5, Pathfinder.d2r(180))};
 		
+		LSwitchSidetoLSwitchCubeTraj1 = generateTrajectory("LSwitchSidetoLSwitchCubeTraj1.csv", LSwitchSidetoLSwitchCubePoints1, config, false);
+		
+		//reverse
+		LSwitchSidetoLSwitchCubePoints2 = new Waypoint[] {
+				new Waypoint(10, 23.5, Pathfinder.d2r(180)),
+				new Waypoint(23.50, 20.5, 0)};
+		
+		LSwitchSidetoLSwitchCubeTraj2 = generateTrajectory("LSwitchSidetoLSwitchCubeTraj2.csv", LSwitchSidetoLSwitchCubePoints2, config, false);
+		
+		//forward
+		LSwitchSidetoLSwitchCubePoints3 = new Waypoint[] {
+				new Waypoint(23, 20.5, 0),
+				new Waypoint(19.5, 19.5, 0)};
+		
+		LSwitchSidetoLSwitchCubeTraj3 = generateTrajectory("LSwitchSidetoLSwistchCubeTraj3.csv", LSwitchSidetoLSwitchCubePoints3, config, false);
+		
+		
+		//RIGHT START TRAJECTORIES
+		
+//		rStartRScalePoints = new Waypoint[] {
+//				new Waypoint(1.58, 4.00, 0),
+//				new Waypoint(16, 5.5, Pathfinder.d2r(15)),
+//				new Waypoint(22.3 ,7.5, 0)};
+//		rStartRScaleTraj = generateTrajectory("rStartRScaleTraj.csv", rStartRScalePoints, config, false);
+		
+		rStartRScalePoints = new Waypoint[] {
+				new Waypoint(1.58, 3.5, 0),
+				new Waypoint(12, 3.5, 0),
+				new Waypoint(23 ,2, 0),
+				new Waypoint(27 ,4.5, Pathfinder.d2r(90))};
+		rStartRScaleTraj = generateTrajectory("rStartRScaleTraj.csv", rStartRScalePoints, config, false);
+		
+		
+		rStartLScalePoints1 = new Waypoint[] {
+				new Waypoint(1.58, 3.5, 0),
+				new Waypoint(12, 3.5, 0),
+				new Waypoint(17.25, 15, Pathfinder.d2r(-90))};		
+		rStartLScaleTraj1 = generateTrajectory("rStartLScaleTraj1.csv", rStartLScalePoints1, config, false);
+		
+		rStartLScalePoints2 = new Waypoint[] {
+				new Waypoint(17.25, 15, Pathfinder.d2r(-90)),
+				new Waypoint(20.75, 21.75, 0)};
+		rStartLScaleTraj2 = generateTrajectory("rStartLScaleTraj2.csv", rStartLScalePoints2, config, false);
+		
+		rStartRSwitchPoints = new Waypoint[] {
+				new Waypoint(1.58, 3.5, 0),
+				new Waypoint(10, 3, 0),
+				new Waypoint(13, 5.4, Pathfinder.d2r(270)),
+				new Waypoint(13, 6.2, Pathfinder.d2r(270))};
+		rStartRSwitchTraj = generateTrajectory("rStartRSwitchTraj.csv", rStartRSwitchPoints, config, false);
 		
 	}
 
@@ -191,8 +338,11 @@ public class RobotMap {
 	}
 
 	public static void init() {
-		initPractice();
+		initComp();
 		waypoints();
+		
+		rightIntakeMotor.setInverted(true);
+		leftIntakeMotor.setInverted(true);
 
 		// Drive Train components
 		rightMotor1 = new TalonSRX(4);
@@ -209,13 +359,12 @@ public class RobotMap {
 		leftMotor3.set(com.ctre.phoenix.motorcontrol.ControlMode.Follower, 1);
 
 		// Solenoids
-		intake = new DoubleSolenoid(2, 3);
+		intake = new DoubleSolenoid(3, 2);
 		shiftSolenoid = new Solenoid(1);
 
 		// Sensor components
 		gyro = new ADXRS450_Gyro();
-		rightEncoder = new Encoder(2, 3);
-		leftEncoder = new Encoder(0, 1);
+		
 
 		lowerRiserPotent = new AnalogPotentiometer(0, 270, 0);
 		upperRiserPotent = new AnalogPotentiometer(1, 270, 0);
@@ -224,7 +373,7 @@ public class RobotMap {
 		backUltrasound = new AnalogInput(3);
 
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(960, 540);
+		camera.setResolution(470, 270);
 		camera.setFPS(30);
 
 		// subsystems
@@ -237,6 +386,8 @@ public class RobotMap {
 		fourbar = new FourBarLifter();
 		cubeIntake = new CubeIntake();
 		shift = new Shift();
+		
+		vision = new Vision();
 
 		LowerRiser.calibratePot();
 		UpperRiser.calibratePot();

@@ -26,7 +26,7 @@ public class LowerArms extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new SetUpperHeight((RobotMap.upperLifter.MAX_ANGLE - RobotMap.upperLifter.MIN_ANGLE) / 2));
+    	addSequential(new SetUpperHeight( RobotMap.upperLifter.MIN_ANGLE + (RobotMap.upperLifter.MAX_ANGLE - RobotMap.upperLifter.MIN_ANGLE) / 2));
     	addSequential(new SetLowerHeight(false));
     	addSequential(new SetUpperHeight(RobotMap.upperLifter.MIN_ANGLE));
     }

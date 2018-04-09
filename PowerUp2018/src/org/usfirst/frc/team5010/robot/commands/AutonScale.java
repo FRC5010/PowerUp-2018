@@ -15,7 +15,7 @@ public class AutonScale extends CommandGroup {
     	addSequential(new ResetGyro());
     	addParallel(new ReleaseIntake());
     	addSequential(new DriveForDistance(164, 0));
-    	addSequential(new TurnToAngle(90,2.5));
+    	//addSequential(new TurnToAngle(90,2.5));
     	addSequential(new DriveForDistance(100, 90));
     	
 //    	addSequential(new DriveForDistance(200));

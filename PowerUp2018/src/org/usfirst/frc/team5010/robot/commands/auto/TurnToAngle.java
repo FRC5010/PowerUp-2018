@@ -12,30 +12,24 @@ public class TurnToAngle extends PIDCommand {
 	private static double d = 0.2;
 	private double tolerance = 0.25;
 	private double setPoint;
-	
-	private static final double driveTrainWidth = 24.375;
-	double radius;
-	double smallOutputRatio;
-	
 
-	public TurnToAngle(double setPoint, double radius) {
+	private static final double driveTrainWidth = 24.375;
+
+	public TurnToAngle(double setPoint) {
 		super("TurnToAngle", p, i, d);
 		setSetpoint(setPoint);
 		this.setPoint = setPoint;
-		this.radius = radius;
-		smallOutputRatio = radius / (this.radius + driveTrainWidth);
 		requires(RobotMap.drivetrain);
 		requires(RobotMap.direction);
 		getPIDController().setAbsoluteTolerance(tolerance);
-		getPIDController().setOutputRange(-.5, .5);
+		getPIDController().setOutputRange(-.4, .4);
 		getPIDController().setInputRange(-360, 361);
-		
-		SmartDashboard.putNumber("smallOutput ratio", smallOutputRatio);
+
 	}
 
 	@Override
 	protected double returnPIDInput() {
-		
+
 		return RobotMap.direction.angle();
 	}
 
@@ -46,24 +40,14 @@ public class TurnToAngle extends PIDCommand {
 
 	protected void initialize() {
 		setSetpoint(setPoint);
-		//RobotMap.direction.reset();
+		// RobotMap.direction.reset();
 		getPIDController().setPID(SmartDashboard.getNumber("P", 0.01), SmartDashboard.getNumber("I", 0),
 				SmartDashboard.getNumber("D", 0));
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
-		double smallOutput = smallOutputRatio * output;
-		if(getPIDController().getSetpoint() < 0) {
-			RobotMap.drivetrain.drive(smallOutput, output);
-			SmartDashboard.putNumber("left output", output);
-			SmartDashboard.putNumber("right output", smallOutput);
-			
-		}else {
-			RobotMap.drivetrain.drive(output, smallOutput);
-			SmartDashboard.putNumber("left output", smallOutput);
-			SmartDashboard.putNumber("right output", output);
-		}
+		RobotMap.drivetrain.drive(output, -output);
 	}
 
 	protected void end() {
@@ -78,8 +62,7 @@ public class TurnToAngle extends PIDCommand {
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		SmartDashboard.putNumber("Error",getPIDController().getError());
+		SmartDashboard.putNumber("Error", getPIDController().getError());
 		return getPIDController().onTarget();
 
 	}

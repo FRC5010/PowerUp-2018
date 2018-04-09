@@ -61,8 +61,9 @@ public class TeleopDefault extends Command {
 		RobotMap.distance.getDistance();
 		RobotMap.lowerLifter.getHeight();
 		RobotMap.upperLifter.getHeight();
-		SmartDashboard.putNumber("Upper Lifter Angle", RobotMap.upperLifter.getPotValue());
+		SmartDashboard.putNumber("Upper Lifter Angle", RobotMap.upperLifter.getHeight());
 		SmartDashboard.putNumber("Lower Lifter Angle", LowerRiser.getPotValue());
+			
 		
 		SmartDashboard.putNumber("Gyro Angle", RobotMap.direction.angle());
 		SmartDashboard.putNumber("Range Back", RobotMap.range.getBackDistance());
@@ -71,6 +72,8 @@ public class TeleopDefault extends Command {
 		RobotMap.cubeIntake.devourCube();
 		RobotMap.cubeIntake.spitCube();
 		RobotMap.cubeIntake.checkForStop();
+		
+		SmartDashboard.putNumber("BoxX", RobotMap.vision.getBoxX());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -36,7 +36,8 @@ public class PathReverse extends Command{
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		
+    		RobotMap.distance.reset();
+    		RobotMap.gyro.reset();
     		// Encoder Position is the current, cumulative position of your encoder. If you're using an SRX, this will be the
     		// 'getEncPosition' function.
     		// 1000 is the amount of encoder ticks per full revolution

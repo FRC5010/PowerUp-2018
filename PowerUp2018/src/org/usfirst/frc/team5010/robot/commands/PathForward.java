@@ -13,86 +13,88 @@ import jaci.pathfinder.modifiers.TankModifier;
 /**
  *
  */
-public class PathForward extends Command{
-	
-	 private static final double max_velocity = 17.89;
-	    
-	    EncoderFollower left, right;
-	    Trajectory.Config config;
-	    Trajectory trajectory;
-	    TankModifier modifier;
-	    Waypoint [] points;
-	  
+public class PathForward extends Command {
 
-    public PathForward() {
-    	trajectory = RobotMap.trajectory;
-		
+	private static final double max_velocity = 17.89;
+
+	EncoderFollower left, right;
+	Trajectory.Config config;
+	Trajectory trajectory;
+	TankModifier modifier;
+	Waypoint[] points;
+
+	public PathForward(Trajectory traj) {
+		trajectory = traj;
 		modifier = new TankModifier(trajectory).modify(2.02);
-		
 		left = new EncoderFollower(modifier.getLeftTrajectory());
 		right = new EncoderFollower(modifier.getRightTrajectory());
-    }
-    
-   
-    
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	SmartDashboard.putBoolean("Running", true);
-        	
-    		// Encoder Position is the current, cumulative position of your encoder. If you're using an SRX, this will be the
-    		// 'getEncPosition' function.
-    		// 1000 is the amount of encoder ticks per full revolution
-    		// Wheel Diameter is the diameter of your wheels (or pulley for a track system) in meters
-    		left.configureEncoder(RobotMap.distance.getLeftRaw(), 480, .5);
-    		right.configureEncoder(RobotMap.distance.getRightRaw(), 480, .5);
-    		
-    		// The first argument is the proportional gain. Usually this will be quite high
-    		// The second argument is the integral gain. This is unused for motion profiling
-    		// The third argument is the derivative gain. Tweak this if you are unhappy with the tracking of the trajectory
-    		// The fourth argument is the velocity ratio. This is 1 over the maximum velocity you provided in the 
-//    		      trajectory configuration (it translates m/s to a -1 to 1 scale that your motors can read)
-    		// The fifth argument is your acceleration gain. Tweak this if you want to get to a higher or lower speed quicker
-    		left.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
-    		right.configurePIDVA(1.0, 0, 0, 1 / max_velocity, 0);
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		SmartDashboard.putBoolean("Running", true);
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	
-    	double l = left.calculate(RobotMap.distance.getLeftRaw());
-    	double r = right.calculate(RobotMap.distance.getRightRaw());
+		// Encoder Position is the current, cumulative position of your encoder. If
+		// you're using an SRX, this will be the
+		// 'getEncPosition' function.
+		// 1000 is the amount of encoder ticks per full revolution
+		// Wheel Diameter is the diameter of your wheels (or pulley for a track system)
+		// in meters
+		RobotMap.leftEncoder.reset();
+		RobotMap.rightEncoder.reset();
+		left.configureEncoder(RobotMap.distance.getLeftRaw(), 480, .5);
+		right.configureEncoder(RobotMap.distance.getRightRaw(), 480, .5);
 
-    	double gyro_heading = (-RobotMap.direction.angle());// Assuming the gyro is giving a value in degrees
-    	SmartDashboard.putNumber("gyro heading", gyro_heading);
-    	double desired_heading = Pathfinder.r2d(left.getHeading());  // Should also be in degrees
-    	SmartDashboard.putNumber("desired Heading", desired_heading);
+		// The first argument is the proportional gain. Usually this will be quite high
+		// The second argument is the integral gain. This is unused for motion profiling
+		// The third argument is the derivative gain. Tweak this if you are unhappy with
+		// the tracking of the trajectory
+		// The fourth argument is the velocity ratio. This is 1 over the maximum
+		// velocity you provided in the
+		// trajectory configuration (it translates m/s to a -1 to 1 scale that your
+		// motors can read)
+		// The fifth argument is your acceleration gain. Tweak this if you want to get
+		// to a higher or lower speed quicker
+		left.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
+		right.configurePIDVA(1.0, 0, 0, 1 / max_velocity, 0);
+	}
 
-    	double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
-    	SmartDashboard.putNumber("angle difference", angleDifference);
-    	double turn = 0.8 * (-1.0/80.0) * angleDifference;  
-    	//turn = 0;
-    	
-    	SmartDashboard.putNumber("left output", (l + turn));
-    	SmartDashboard.putNumber("right output", (r - turn));
-    	SmartDashboard.putNumber("turn ", turn);
-    	RobotMap.drivetrain.drive((l + turn), (r - turn));
-    	
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	return left.isFinished() && right.isFinished();
-    }
+		double l = left.calculate(RobotMap.distance.getLeftRaw());
+		double r = right.calculate(RobotMap.distance.getRightRaw());
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	RobotMap.drivetrain.drive(0, 0);
-    	SmartDashboard.putBoolean("Running", false);
-    }
+		double gyro_heading = (-RobotMap.direction.angle());// Assuming the gyro is giving a value in degrees
+		SmartDashboard.putNumber("gyro heading", gyro_heading);
+		double desired_heading = Pathfinder.r2d(left.getHeading()); // Should also be in degrees
+		SmartDashboard.putNumber("desired Heading", desired_heading);
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
+		SmartDashboard.putNumber("angle difference", angleDifference);
+		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
+		// turn = 0;
+
+		SmartDashboard.putNumber("left output", (l + turn));
+		SmartDashboard.putNumber("right output", (r - turn));
+		SmartDashboard.putNumber("turn ", turn);
+		RobotMap.drivetrain.drive((l + turn), (r - turn));
+
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return left.isFinished() && right.isFinished();
+	}
+
+	// Called once after isFinished returns true
+	protected void end() {
+		RobotMap.drivetrain.drive(0, 0);
+		SmartDashboard.putBoolean("Running", false);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }
