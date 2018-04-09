@@ -1,23 +1,29 @@
 package org.usfirst.frc.team5010.robot.jetson_autonomous;
 
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.networktables.ITable;
-import edu.wpi.first.wpilibj.networktables.ITableListener;
+import java.util.function.Consumer;
 
-public class ImageDataIO implements ITableListener, Runnable { 
+import edu.wpi.first.networktables.EntryListenerFlags;
+import edu.wpi.first.networktables.EntryNotification;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
+public class ImageDataIO implements Runnable { 
     //member variables
-    private double x;
-    private double y;
-    private double siz;
-    private double reserved;
-    private boolean isUpdating;
-    private NetworkTable table;
+    private static double x;
+    private static double y;
+    private static double siz;
+    private static double reserved;
+    private static boolean isUpdating;
+    private static NetworkTable table;
+    private static NetworkTableInstance instance;
     
     //method that will initialize a new network table and the member variables, not unalike a constructor, but more suited to being multithreaded
-    public static void run() {
-        NetworkTable.setClientMode():
-        NetworkTable.setIPAddress("10.1.90.2");
-        table = new NetworkTable();
+    public void run() {
+        Consumer<EntryNotification> listener = (x) -> {valueChanged(x.name, x.value, true);};
+        instance = NetworkTableInstance.getDefault();
+        for (String s : new String[] {"BoxX", "BoxY", "BoxSize", "BoxReserved"})
+        	instance.addEntryListener(s, listener, EntryListenerFlags.kUpdate);
+        
         
         x = Float.NaN;
         y = Float.NaN;
@@ -28,26 +34,25 @@ public class ImageDataIO implements ITableListener, Runnable {
     
     //callback for when any value in table changes
     //all values are synchronized as to make sure they are threadsafe, and the boolean flag isUpdating is set during the operation
-    @Override
-    public void valueChanged(ITable table, String s, Object o, boolean b) {
-        synchronized isUpdating = true;
+    public synchronized static void valueChanged(String s, Object o, boolean b)  {
+        isUpdating = true;
         
         if (b == false) {
             if (s.equals("BoxX")) {
-                synchronized x = (double)o;
+                x = ((double)o);
             } else if (s.equals("BoxY")) {
-                synchronized y = (double)o;
-            } else if (s.equals("BoxSize") {
-                synchronized siz = (double)o;
+            	y = ((double)o);
+            } else if (s.equals("BoxSize")) {
+                siz = (double)o;
             } else if (s.equals("BoxReseved")) {
-                synchronized reserved = (double)o;
+                reserved = (double)o;
             } else {
-                synchronized isUpdating = false;
-                throw new Exception("Erroneous update to data table.\n");
+                isUpdating = false;
+                throw new IllegalArgumentException("Erroneous update to data table.\n");
             }
         }
         
-        synchronized isUpdating = false;
+        isUpdating = false;
     }
     
     //Getters
@@ -82,7 +87,7 @@ public class ImageDataIO implements ITableListener, Runnable {
     }
     
     //This getter is the recommended getter, which obtains the values x, y, size, and reserved
-    public boolean getValues(float[] values) {
+    public boolean getValues(double[] values) {
         DoublePointer d = new DoublePointer();
         boolean obtainDuringUpdate = false;
         

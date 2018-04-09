@@ -9,7 +9,6 @@ package org.usfirst.frc.team5010.robot;
 
 import org.usfirst.frc.team5010.robot.commands.CalibratePots;
 import org.usfirst.frc.team5010.robot.commands.CloseIntake;
-import org.usfirst.frc.team5010.robot.commands.GhettoUpperLift;
 import org.usfirst.frc.team5010.robot.commands.LowerArms;
 import org.usfirst.frc.team5010.robot.commands.LowerHeightJoystick;
 import org.usfirst.frc.team5010.robot.commands.OpenIntake;
@@ -19,6 +18,7 @@ import org.usfirst.frc.team5010.robot.commands.SetUpperHeight;
 import org.usfirst.frc.team5010.robot.commands.ShiftDown;
 import org.usfirst.frc.team5010.robot.commands.ShiftUp;
 import org.usfirst.frc.team5010.robot.commands.UpperHeightJoystick;
+import org.usfirst.frc.team5010.robot.commands.VisionMovement;
 import org.usfirst.frc.team5010.robot.commands.auto.CaptureCube;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -93,7 +93,8 @@ public class OI {
 		driverButtonRJoy.whenPressed(new ShiftUp());
 		driverButtonLJoy.whenPressed(new ShiftDown());
 		
-		//driverButtonSel.whenPressed(new ResetGyro());
+		driverButtonSel.whileHeld(new VisionMovement());
+		
 		//driverButtonSel.whenPressed(new CaptureCube());
 		
 		//driverButtonBack.whenPressed(new ResetGyro());

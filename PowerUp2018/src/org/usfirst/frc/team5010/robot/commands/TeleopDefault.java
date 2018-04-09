@@ -53,9 +53,6 @@ public class TeleopDefault extends Command {
 		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
 		RobotMap.drivetrain.drive(leftValue + rightValue, leftValue - rightValue);
 
-		// SmartDashboard.putNumber("encoder", RobotMap.distance.getDistance());
-		// SmartDashboard.putNumber("range front", RobotMap.range.getFrontUltrasound());
-		// RobotMap.range.getBackUltrasound();
 		RobotMap.range.getFrontDistance();
 		RobotMap.range.getBackDistance();
 		RobotMap.distance.getDistance();
@@ -63,17 +60,14 @@ public class TeleopDefault extends Command {
 		RobotMap.upperLifter.getHeight();
 		SmartDashboard.putNumber("Upper Lifter Angle", RobotMap.upperLifter.getHeight());
 		SmartDashboard.putNumber("Lower Lifter Angle", LowerRiser.getPotValue());
-			
-		
+
 		SmartDashboard.putNumber("Gyro Angle", RobotMap.direction.angle());
 		SmartDashboard.putNumber("Range Back", RobotMap.range.getBackDistance());
-		
 
 		RobotMap.cubeIntake.devourCube();
 		RobotMap.cubeIntake.spitCube();
 		RobotMap.cubeIntake.checkForStop();
-		
-		SmartDashboard.putNumber("BoxX", RobotMap.vision.getBoxX());
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -28,10 +28,8 @@ public class DistanceSensor extends Subsystem {
 	}
 	public double getDistance() {
 		SmartDashboard.putNumber("right encoder getRaw", RobotMap.rightEncoder.getRaw());
-		SmartDashboard.putNumber("right encoder get", RobotMap.rightEncoder.get());
 		
 		SmartDashboard.putNumber("left encoder getRaw", -RobotMap.leftEncoder.getRaw());
-		SmartDashboard.putNumber("left encoder get", -RobotMap.leftEncoder.get());
 		
 		return -RobotMap.rightEncoder.getDistance();
 	}

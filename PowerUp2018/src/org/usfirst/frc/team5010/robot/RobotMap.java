@@ -9,6 +9,7 @@ package org.usfirst.frc.team5010.robot;
 
 import java.io.File;
 
+import org.usfirst.frc.team5010.robot.jetson_autonomous.ImageDataIO;
 import org.usfirst.frc.team5010.robot.subsystems.CubeIntake;
 //subsystems
 import org.usfirst.frc.team5010.robot.subsystems.DirectionSensor;
@@ -28,7 +29,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -76,9 +76,11 @@ public class RobotMap {
 	public static CameraServer camera;
 
 	public static Gyro gyro;
+	
 	public static Encoder rightEncoder;
 	public static Encoder leftEncoder;
-
+	public static int encoderPPR;
+	
 	public static AnalogPotentiometer lowerRiserPotent;
 	public static AnalogPotentiometer upperRiserPotent;
 	public static AnalogInput frontUltrasound;
@@ -96,7 +98,8 @@ public class RobotMap {
 	public static FourBarLifter fourbar;
 	public static CubeIntake cubeIntake;
 	public static Vision vision;
-
+	public static ImageDataIO visionIO;
+	
 	static Trajectory.Config config;
 	
 	public static Trajectory trajectory;
@@ -163,8 +166,10 @@ public class RobotMap {
 		leftIntakeMotor = new Spark(2);
 		rightIntakeMotor = new Spark(3);
 		
-		rightEncoder = new Encoder(2, 3);  //2, 3
-		leftEncoder = new Encoder(4, 5);   // 0, 1
+		rightEncoder = new Encoder(0, 1);  //0, 1
+		leftEncoder = new Encoder(2, 3);   // 2, 3
+		
+		encoderPPR = 20;
 	}
 	
 	public static void initComp() {
@@ -180,6 +185,8 @@ public class RobotMap {
 		
 		rightEncoder.setReverseDirection(true);
 		leftEncoder.setReverseDirection(true);
+		
+		encoderPPR = 480;
 		
 	}
 
@@ -338,7 +345,7 @@ public class RobotMap {
 	}
 
 	public static void init() {
-		initComp();
+		initPractice();
 		waypoints();
 		
 		rightIntakeMotor.setInverted(true);
@@ -387,8 +394,10 @@ public class RobotMap {
 		cubeIntake = new CubeIntake();
 		shift = new Shift();
 		
-		vision = new Vision();
-
+		visionIO = new ImageDataIO();
+		Thread t = new Thread(visionIO);
+		t.start();
+		
 		LowerRiser.calibratePot();
 		UpperRiser.calibratePot();
 

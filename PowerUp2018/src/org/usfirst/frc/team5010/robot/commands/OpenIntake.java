@@ -10,18 +10,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OpenIntake extends Command {
 
 	public OpenIntake() {
-    	requires(RobotMap.cubeIntake);
-    }
+		requires(RobotMap.cubeIntake);
+	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		RobotMap.cubeIntake.openIntake();
-		SmartDashboard.putBoolean("open called", true);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -31,12 +30,12 @@ public class OpenIntake extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		//RobotMap.cubeIntake.openIntake();
+		// RobotMap.cubeIntake.openIntake();
 	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

@@ -42,8 +42,8 @@ public class PathForward extends Command {
 		// in meters
 		RobotMap.leftEncoder.reset();
 		RobotMap.rightEncoder.reset();
-		left.configureEncoder(RobotMap.distance.getLeftRaw(), 480, .5);
-		right.configureEncoder(RobotMap.distance.getRightRaw(), 480, .5);
+		left.configureEncoder(RobotMap.distance.getLeftRaw(), RobotMap.encoderPPR, .5);
+		right.configureEncoder(RobotMap.distance.getRightRaw(),RobotMap.encoderPPR, .5);
 
 		// The first argument is the proportional gain. Usually this will be quite high
 		// The second argument is the integral gain. This is unused for motion profiling
@@ -90,7 +90,6 @@ public class PathForward extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		RobotMap.drivetrain.drive(0, 0);
-		SmartDashboard.putBoolean("Running", false);
 	}
 
 	// Called when another command which requires one or more of the same
