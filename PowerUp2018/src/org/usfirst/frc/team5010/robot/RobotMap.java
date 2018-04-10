@@ -345,7 +345,7 @@ public class RobotMap {
 	}
 
 	public static void init() {
-		initPractice();
+		initComp();
 		waypoints();
 		
 		rightIntakeMotor.setInverted(true);
