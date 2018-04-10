@@ -394,9 +394,9 @@ public class RobotMap {
 		cubeIntake = new CubeIntake();
 		shift = new Shift();
 		
-		visionIO = new ImageDataIO();
-		Thread t = new Thread(visionIO);
-		t.start();
+//		visionIO = new ImageDataIO();
+//		Thread t = new Thread(visionIO);
+//		t.start();
 		
 		LowerRiser.calibratePot();
 		UpperRiser.calibratePot();

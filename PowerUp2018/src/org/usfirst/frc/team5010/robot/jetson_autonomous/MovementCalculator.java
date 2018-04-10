@@ -3,15 +3,13 @@ package org.usfirst.frc.team5010.robot.jetson_autonomous;
 public class MovementCalculator {
 
 	// Member variables
-	private ImageDataIO IDTable;
 	private double[] data;
 
 	// boolean denoting whether the more accurate or the simple method is used
 	private boolean simple = true;
 
 	// Constructor
-	public void MovementCalculator(ImageDataIO i) {
-		IDTable = i;
+	public MovementCalculator() {
 		data = new double[4];
 	}
 
@@ -46,14 +44,18 @@ public class MovementCalculator {
 	}
 
 	// Computes next vectorized trajectory
-	public void computeNextValues(DoublePointer theta, DoublePointer magnitude, double cameraX, double cameraY,
-			double cameraSize, double cameraReserved) {
+	public void computeNextValues(DoublePointer theta, DoublePointer magnitude) {
+		double cameraX; double cameraY;
+		double cameraSize; double cameraReserved;
 		// Keep obtaining values until they are recieved in a manner such that they are
 		// not mid-update
 		try {
-			while (!IDTable.getValues(data))
-				;
-
+			ImageDataIO.getValues(data);
+			cameraX = data[0];
+			cameraY = data[1];
+			cameraSize = data[2];
+			cameraReserved = data[3];
+			
 			if (simple) {
 				theta.val = CameraConstants.CAMERA_ANGLE_X_YZ_INTERVAL_SIZE * (cameraX * 2 - 1);
 				magnitude.val = 1 - cameraSize;
