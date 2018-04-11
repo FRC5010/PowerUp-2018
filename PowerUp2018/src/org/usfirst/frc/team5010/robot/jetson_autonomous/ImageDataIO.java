@@ -80,25 +80,25 @@ public class ImageDataIO implements Runnable {
         return table;
     }
     
-    public synchronized double getX() {
+    public synchronized static double getX() {
         return x;
     }
-    public synchronized double getY() {
+    public synchronized static double getY() {
         return y;
     }
-    public synchronized double getSize() {
+    public synchronized static double getSize() {
         return siz;
     }
-    public synchronized double getReserved() {
+    public synchronized static double getReserved() {
         return reserved;
     }
     
   //This getter is the recommended getter, which obtains the values x, y, size, and reserved
     public synchronized static void getValues(double[] values) {
-    	x = rand.nextDouble();
-    	y = rand.nextDouble();
-    	siz = rand.nextDouble();
-    	reserved = rand.nextDouble();
+    	x = getX();
+    	y = getY();
+    	siz = getSize();
+    	reserved = getReserved();
     	values[0] = x;
         values[1] = y;
         values[2] = siz;

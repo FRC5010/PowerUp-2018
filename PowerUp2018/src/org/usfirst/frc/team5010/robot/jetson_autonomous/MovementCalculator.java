@@ -4,7 +4,7 @@ public class MovementCalculator {
 
 	// Member variables
 	private double[] data;
-
+	
 	// boolean denoting whether the more accurate or the simple method is used
 	private boolean simple = true;
 
