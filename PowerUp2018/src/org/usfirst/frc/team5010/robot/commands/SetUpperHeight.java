@@ -50,7 +50,7 @@ public class SetUpperHeight extends PIDCommand {
 				if (RobotMap.upperLifter.getHeight() < RobotMap.upperLifter.MIN_ANGLE
 						+ RobotMap.upperLifter.ANGLE_RANGE / 3) {
 					height = RobotMap.upperLifter.MIN_ANGLE
-							+ (RobotMap.upperLifter.MAX_ANGLE - RobotMap.upperLifter.MIN_ANGLE) / 2;
+							+ (RobotMap.upperLifter.MAX_ANGLE - RobotMap.upperLifter.MIN_ANGLE) / 1.5;
 				} else {
 					height = RobotMap.upperLifter.MAX_ANGLE;
 				}

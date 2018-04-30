@@ -211,12 +211,12 @@ public class RobotMap {
 		
 		
 		mStartLSwitchPoints = new Waypoint[] { 
-				new Waypoint(1.58, 12, 0), 
+				new Waypoint(1.58, 13, 0), 
 				new Waypoint(10.1, 18.5, 0)};
 		mStartLSwitchTraj = generateTrajectory("mStartLSwitchTraj.csv", mStartLSwitchPoints, config, false);
 		
 		mStartRSwitchPoints = new Waypoint[] {
-				new Waypoint(1.58, 12, 0),
+				new Waypoint(1.58, 13, 0),
 				new Waypoint(10.1, 9.5, 0)};
 		mStartRSwitchTraj = generateTrajectory("mStartRSwitchTraj.csv", mStartRSwitchPoints, config, false);
 		
@@ -224,32 +224,32 @@ public class RobotMap {
 		//LEFT START TRAJECTORIES
 		
 		//90 d
-		lStartLScalePoints = new Waypoint[] {
-				new Waypoint(1.58, 23.5, 0),
-				new Waypoint(12, 23.5, 0),
-				new Waypoint(23 ,25, 0),
-				new Waypoint(27 ,23, Pathfinder.d2r(-90))};
-		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, false);
-		
-		//s curve
 //		lStartLScalePoints = new Waypoint[] {
 //				new Waypoint(1.58, 23.5, 0),
-//				new Waypoint(16.5, 22, Pathfinder.d2r(-15)),
-//				new Waypoint(22.7 ,20.5, 0)};
-//		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, true);
+//				new Waypoint(12, 23.5, 0),
+//				new Waypoint(23 ,25, 0),
+//				new Waypoint(27 ,23, Pathfinder.d2r(-90))};
+//		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, false);
 //		
+		//s curve
+		lStartLScalePoints = new Waypoint[] {
+				new Waypoint(1.58, 23.5, 0),
+				new Waypoint(16.5, 22, Pathfinder.d2r(-15)),
+				new Waypoint(22.7 ,20.5, 0)};
+		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, false);
+		
 		//angle aproach
 //		lStartLScalePoints = new Waypoint[] {
 //				new Waypoint(1.58, 23.5, 0),
 //				new Waypoint(10, 23.5, 0),
 //				new Waypoint(20 ,24, Pathfinder.d2r(-45)),
 //				new Waypoint(23.5 ,22, Pathfinder.d2r(-45))};
-//		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, true);
+//		lStartLScaleTraj = generateTrajectory("lStartLScaleTraj.csv", lStartLScalePoints, config, false);
 //		
 		
 		
 		lStartRScalePoints1 = new Waypoint[] {
-				new Waypoint(1.58, 23.5, 0),
+				new Waypoint(1.75, 23.5, 0),
 				new Waypoint(12, 23.5, 0),
 				new Waypoint(17.25, 12, Pathfinder.d2r(90))};
 		
@@ -257,7 +257,7 @@ public class RobotMap {
 		
 		lStartRScalePoints2 = new Waypoint[] {
 				new Waypoint(17.25, 12, Pathfinder.d2r(90)),
-				new Waypoint(20.75, 6.5, 0)};
+				new Waypoint(20.75, 5.25, 0)};
 				
 		lStartRScaleTraj2 = generateTrajectory("lStartRScaleTraj2.csv", lStartRScalePoints2, config, false);
 		
@@ -294,22 +294,22 @@ public class RobotMap {
 		
 		//RIGHT START TRAJECTORIES
 		
-//		rStartRScalePoints = new Waypoint[] {
-//				new Waypoint(1.58, 4.00, 0),
-//				new Waypoint(16, 5.5, Pathfinder.d2r(15)),
-//				new Waypoint(22.3 ,7.5, 0)};
-//		rStartRScaleTraj = generateTrajectory("rStartRScaleTraj.csv", rStartRScalePoints, config, false);
-		
 		rStartRScalePoints = new Waypoint[] {
-				new Waypoint(1.58, 3.5, 0),
-				new Waypoint(12, 3.5, 0),
-				new Waypoint(23 ,2, 0),
-				new Waypoint(27 ,4.5, Pathfinder.d2r(90))};
+				new Waypoint(1.58, 4.00, 0),
+				new Waypoint(16, 5.5, Pathfinder.d2r(15)),
+				new Waypoint(22.3 ,7.5, 0)};
 		rStartRScaleTraj = generateTrajectory("rStartRScaleTraj.csv", rStartRScalePoints, config, false);
+		
+//		rStartRScalePoints = new Waypoint[] {
+//				new Waypoint(1.58, 3.5, 0),
+//				new Waypoint(12, 3.5, 0),
+//				new Waypoint(23 ,2, 0),
+//				new Waypoint(27 ,4.5, Pathfinder.d2r(90))};
+//		rStartRScaleTraj = generateTrajectory("rStartRScaleTraj.csv", rStartRScalePoints, config, false);
 		
 		
 		rStartLScalePoints1 = new Waypoint[] {
-				new Waypoint(1.58, 3.5, 0),
+				new Waypoint(1.75, 3.5, 0),
 				new Waypoint(12, 3.5, 0),
 				new Waypoint(17.25, 15, Pathfinder.d2r(-90))};		
 		rStartLScaleTraj1 = generateTrajectory("rStartLScaleTraj1.csv", rStartLScalePoints1, config, false);

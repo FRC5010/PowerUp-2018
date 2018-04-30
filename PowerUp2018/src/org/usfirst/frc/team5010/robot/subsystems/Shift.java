@@ -21,11 +21,11 @@ public class Shift extends Subsystem {
     // here. Call these from Commands.
 	public void shiftUp() {
 		SmartDashboard.setDefaultBoolean("High Gear Active", true);
-		EvoShift.set(true);
+		EvoShift.set(false);
 	}
 	public void shiftDown() {
 		SmartDashboard.setDefaultBoolean("High Gear Active", false);
-		EvoShift.set(false);
+		EvoShift.set(true);
 	}
 	public void stop() {
 		SmartDashboard.setDefaultBoolean("High Gear Active", false);

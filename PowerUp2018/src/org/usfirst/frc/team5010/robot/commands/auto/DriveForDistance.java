@@ -28,7 +28,7 @@ public class DriveForDistance extends PIDCommand {
 		requires(RobotMap.direction);
 		requires(RobotMap.distance);
 		getPIDController().setInputRange(-5000, 5000);
-		getPIDController().setOutputRange(-.5, .5);
+		getPIDController().setOutputRange(-.2, .2);
 	}
 
 	public DriveForDistance(double distance) {
@@ -41,7 +41,7 @@ public class DriveForDistance extends PIDCommand {
 		requires(RobotMap.direction);
 		requires(RobotMap.distance);
 		getPIDController().setInputRange(-5000, 5000);
-		getPIDController().setOutputRange(-.5, .5);
+		getPIDController().setOutputRange(-.2, .2);
 		getPIDController().setSetpoint(distance);
 	}
 
@@ -55,7 +55,7 @@ public class DriveForDistance extends PIDCommand {
 		requires(RobotMap.direction);
 		requires(RobotMap.distance);
 		getPIDController().setInputRange(-5000, 5000);
-		getPIDController().setOutputRange(-.5, .5);
+		getPIDController().setOutputRange(-.2, .2);
 		getPIDController().setSetpoint(distance);
 		setAngle(angle);
 	}
@@ -108,7 +108,7 @@ public class DriveForDistance extends PIDCommand {
 
 	@Override
 	protected double returnPIDInput() {
-		double distance = RobotMap.distance.getDistance();
+		double distance = -RobotMap.distance.getDistance();
 		SmartDashboard.putNumber("distance", distance);
 		return distance;
 

@@ -90,8 +90,8 @@ public class OI {
 		driverButtonLB.whenPressed(new OpenIntake());
 		
 		
-		driverButtonRJoy.whenPressed(new ShiftUp());
-		driverButtonLJoy.whenPressed(new ShiftDown());
+		driverButtonLJoy.whenPressed(new ShiftUp());
+		driverButtonRJoy.whenPressed(new ShiftDown());
 		
 		driverButtonSel.whileHeld(new VisionMovement());
 		

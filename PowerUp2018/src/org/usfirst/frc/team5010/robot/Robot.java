@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auton start location", positionChooser);
 		
 		objectiveChooser.addObject("Cross Scale", "cross");
+		objectiveChooser.addObject("Dont get in the way of alliance cross auto", "outofway");
 		objectiveChooser.addDefault("Switch", "switch");
 		SmartDashboard.putData("Auton objective", objectiveChooser);
 		
@@ -63,7 +64,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		RobotMap.cubeIntake.closeIntake();
 	}
 
 	@Override
