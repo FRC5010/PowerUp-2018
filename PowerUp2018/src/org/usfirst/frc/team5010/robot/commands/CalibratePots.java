@@ -19,6 +19,8 @@ public class CalibratePots extends Command {
     protected void initialize() {
     	LowerRiser.calibratePot();
     	UpperRiser.calibratePot();
+    	RobotMap.leftEncoder.reset();
+    	RobotMap.rightEncoder.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run

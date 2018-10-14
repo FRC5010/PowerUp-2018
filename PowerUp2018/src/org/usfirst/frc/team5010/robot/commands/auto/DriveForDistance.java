@@ -108,7 +108,7 @@ public class DriveForDistance extends PIDCommand {
 
 	@Override
 	protected double returnPIDInput() {
-		double distance = -RobotMap.distance.getDistance();
+		double distance = RobotMap.distance.getDistance();
 		SmartDashboard.putNumber("distance", distance);
 		return distance;
 

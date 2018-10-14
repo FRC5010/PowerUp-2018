@@ -2,11 +2,13 @@ package org.usfirst.frc.team5010.robot.commands.auto;
 
 import org.usfirst.frc.team5010.robot.RobotMap;
 import org.usfirst.frc.team5010.robot.commands.AutonScaleScore;
+import org.usfirst.frc.team5010.robot.commands.EatCube;
 import org.usfirst.frc.team5010.robot.commands.LowerArms;
 import org.usfirst.frc.team5010.robot.commands.PathForward;
 import org.usfirst.frc.team5010.robot.commands.PathReverse;
 import org.usfirst.frc.team5010.robot.commands.RaiseArms;
 import org.usfirst.frc.team5010.robot.commands.ReleaseCubeIntake;
+import org.usfirst.frc.team5010.robot.commands.ReleaseIntake;
 import org.usfirst.frc.team5010.robot.commands.SetUpperHeight;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -22,9 +24,11 @@ public class FieldMovement extends CommandGroup {
 			SmartDashboard.putString("Auto Selection", "No game data");
 			return;
 		}
-
+		// removed for testing
+		addSequential(new ReleaseIntake());
 		addParallel(new SetUpperHeight(true));
-
+//		addSequential(new DriveForDistance(40));
+		
 		if (start.compareTo("Left") == 0) {
 			if (gameData.charAt(1) == 'L') {
 				if (objective.compareTo("outofway") != 0) {
@@ -62,7 +66,7 @@ public class FieldMovement extends CommandGroup {
 					} else {
 						SmartDashboard.putString("Auto Selection", "Left Start; Auto Line");
 						addSequential(new PathForward(RobotMap.autoLineTraj));
-					
+
 					}
 
 				} else {
@@ -139,6 +143,5 @@ public class FieldMovement extends CommandGroup {
 		} else {
 			SmartDashboard.putString("Auto Selection", "Bad sendable chooser");
 		}
-
 	}
 }

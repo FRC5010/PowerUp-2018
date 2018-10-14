@@ -19,7 +19,7 @@ public class DirectionSensor extends Subsystem {
 	}
 	
 	public void reset() {
-	gyro.reset();
+		gyro.reset();
 	}
 
 	@Override

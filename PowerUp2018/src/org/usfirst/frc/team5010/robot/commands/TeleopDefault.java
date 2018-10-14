@@ -28,6 +28,7 @@ public class TeleopDefault extends Command {
 		// requires(RobotMap.frontLifter);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		RobotMap.distance.reset();
 	}
 
 	public double scaleInputs(double input) {
@@ -39,7 +40,7 @@ public class TeleopDefault extends Command {
 			input = (input + deadZone) * 1 / (1 - deadZone);
 		}
 
-		return input;
+		return input * input * input;
 	}
 
 	// Called just before this Command runs the first time
@@ -50,23 +51,24 @@ public class TeleopDefault extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		leftValue = -scaleInputs(Robot.oi.joyDriver.getRawAxis(1));
-		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4));
+		rightValue = scaleInputs(Robot.oi.joyDriver.getRawAxis(4)) * 0.4f;
 		RobotMap.drivetrain.drive(leftValue + rightValue, leftValue - rightValue);
 
-		RobotMap.range.getFrontDistance();
-		RobotMap.range.getBackDistance();
+	//	RobotMap.range.getFrontDistance();
+		//RobotMap.range.getBackDistance();
 		RobotMap.distance.getDistance();
 		RobotMap.lowerLifter.getHeight();
 		RobotMap.upperLifter.getHeight();
-		SmartDashboard.putNumber("Upper Lifter Angle", RobotMap.upperLifter.getHeight());
-		SmartDashboard.putNumber("Lower Lifter Angle", LowerRiser.getPotValue());
+		//SmartDashboard.putNumber("Upper Lifter Angle", RobotMap.upperLifter.getHeight());
+		//SmartDashboard.putNumber("Lower Lifter Angle", LowerRiser.getPotValue());
 
 		SmartDashboard.putNumber("Gyro Angle", RobotMap.direction.angle());
-		SmartDashboard.putNumber("Range Back", RobotMap.range.getBackDistance());
+		//SmartDashboard.putNumber("Range Back", RobotMap.range.getBackDistance());
 
 		RobotMap.cubeIntake.devourCube();
 		RobotMap.cubeIntake.spitCube();
 		RobotMap.cubeIntake.checkForStop();
+		
 
 	}
 

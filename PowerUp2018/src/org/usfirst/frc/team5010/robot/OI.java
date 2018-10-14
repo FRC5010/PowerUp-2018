@@ -20,6 +20,7 @@ import org.usfirst.frc.team5010.robot.commands.ShiftUp;
 import org.usfirst.frc.team5010.robot.commands.UpperHeightJoystick;
 import org.usfirst.frc.team5010.robot.commands.VisionMovement;
 import org.usfirst.frc.team5010.robot.commands.auto.CaptureCube;
+import org.usfirst.frc.team5010.robot.jetson_autonomous.ImageDataIO;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -93,15 +94,12 @@ public class OI {
 		driverButtonLJoy.whenPressed(new ShiftUp());
 		driverButtonRJoy.whenPressed(new ShiftDown());
 		
-		driverButtonSel.whileHeld(new VisionMovement());
+		//driverButtonSel.whileHeld(new VisionMovement());
 		
-		//driverButtonSel.whenPressed(new CaptureCube());
+		//driverButtonSel.toggleWhenPressed(new ImageDataIO());
 		
 		//driverButtonBack.whenPressed(new ResetGyro());
-		driverButtonBack.whenPressed(new CaptureCube());
-		
-		
-		
+		//driverButtonBack.whenPressed(new CaptureCube());
 	
 		//codriverButtonLB.whileHeld(new LowerHeightJoystick());
 		codriverButtonRB.whileHeld(new UpperHeightJoystick());

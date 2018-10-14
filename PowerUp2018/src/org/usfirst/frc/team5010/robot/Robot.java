@@ -31,7 +31,6 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> objectiveChooser = new SendableChooser<>();
 	
 	
-	//tank or arcade mode. tank is true, arcade is false
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,7 +42,6 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();
 		oi = new OI();
 		
-		
 		positionChooser.addObject("Left", "Left");
 		positionChooser.addObject("Middle", "Middle");
 		positionChooser.addDefault("Right", "Right");
@@ -53,7 +51,7 @@ public class Robot extends IterativeRobot {
 		objectiveChooser.addObject("Dont get in the way of alliance cross auto", "outofway");
 		objectiveChooser.addDefault("Switch", "switch");
 		SmartDashboard.putData("Auton objective", objectiveChooser);
-		
+		RobotMap.direction.reset();
 	}
 	
 

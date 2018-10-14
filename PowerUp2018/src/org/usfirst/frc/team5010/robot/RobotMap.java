@@ -166,7 +166,7 @@ public class RobotMap {
 		leftIntakeMotor = new Spark(2);
 		rightIntakeMotor = new Spark(3);
 		
-		rightEncoder = new Encoder(0, 1);  //0, 1
+		rightEncoder = new Encoder(0,1);  //0, 1
 		leftEncoder = new Encoder(2, 3);   // 2, 3
 		
 		encoderPPR = 20;
@@ -180,11 +180,11 @@ public class RobotMap {
 		rightIntakeMotor = new Victor(3);
 		lowerRiserMotor.setInverted(true);
 		
-		rightEncoder = new Encoder(0, 1);
-		leftEncoder = new Encoder(2, 3);
+		rightEncoder = new Encoder(0,1);
+		leftEncoder = new Encoder(2,3);
 		
 		rightEncoder.setReverseDirection(true);
-		leftEncoder.setReverseDirection(true);
+		//leftEncoder.setReverseDirection(true);
 		
 		encoderPPR = 480;
 		

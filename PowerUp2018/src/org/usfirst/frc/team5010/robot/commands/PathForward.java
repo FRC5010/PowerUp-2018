@@ -42,7 +42,8 @@ public class PathForward extends Command {
 		// in meters
 		RobotMap.leftEncoder.reset();
 		RobotMap.rightEncoder.reset();
-		left.configureEncoder(RobotMap.distance.getLeftRaw(), RobotMap.encoderPPR, .5);
+		RobotMap.direction.reset();
+		left.configureEncoder(RobotMap.distance.getLeftRaw(),RobotMap.encoderPPR, .5);
 		right.configureEncoder(RobotMap.distance.getRightRaw(),RobotMap.encoderPPR, .5);
 
 		// The first argument is the proportional gain. Usually this will be quite high
@@ -57,11 +58,31 @@ public class PathForward extends Command {
 		// to a higher or lower speed quicker
 		left.configurePIDVA(1.0, 0.0, 0.0, 1 / max_velocity, 0);
 		right.configurePIDVA(1.0, 0, 0, 1 / max_velocity, 0);
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-
+			SmartDashboard.putNumber("left accel", left.getSegment().acceleration);
+			SmartDashboard.putNumber("left time delta", left.getSegment().dt);
+			SmartDashboard.putNumber("left heading", left.getSegment().heading);
+			SmartDashboard.putNumber("left jerk", left.getSegment().jerk);
+			SmartDashboard.putNumber("left pos", left.getSegment().position);
+			SmartDashboard.putNumber("left velocity", left.getSegment().velocity);
+			SmartDashboard.putNumber("left x", left.getSegment().x);
+			SmartDashboard.putNumber("left y", left.getSegment().y);
+			
+			SmartDashboard.putNumber("right accel", right.getSegment().acceleration);
+			SmartDashboard.putNumber("right time delta", right.getSegment().dt);
+			SmartDashboard.putNumber("right heading", right.getSegment().heading);
+			SmartDashboard.putNumber("right jerk", right.getSegment().jerk);
+			SmartDashboard.putNumber("right pos", right.getSegment().position);
+			SmartDashboard.putNumber("right velocity", right.getSegment().velocity);
+			SmartDashboard.putNumber("right x", right.getSegment().x);
+			SmartDashboard.putNumber("right y", right.getSegment().y);
+			 double distance_covered = ((double)(RobotMap.distance.getLeftRaw() - 0) / RobotMap.encoderPPR)
+		                * .5;
+			SmartDashboard.putNumber("distance covered", distance_covered);
 		double l = left.calculate(RobotMap.distance.getLeftRaw());
 		double r = right.calculate(RobotMap.distance.getRightRaw());
 
@@ -73,7 +94,7 @@ public class PathForward extends Command {
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
 		SmartDashboard.putNumber("angle difference", angleDifference);
 		double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
-		// turn = 0;
+		 //turn = 0;
 
 		SmartDashboard.putNumber("left output", (l + turn));
 		SmartDashboard.putNumber("right output", (r - turn));

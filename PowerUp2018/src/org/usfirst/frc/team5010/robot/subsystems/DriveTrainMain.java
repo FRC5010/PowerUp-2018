@@ -6,6 +6,7 @@ import org.usfirst.frc.team5010.robot.commands.TeleopDefault;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -28,6 +29,8 @@ public class DriveTrainMain extends Subsystem {
 //		rightMotor.set(-rightPower);
 //		leftMotor.set(leftPower);
 		
+		SmartDashboard.putNumber("right encoder getRaw", RobotMap.rightEncoder.getRaw());
+		SmartDashboard.putNumber("left encoder getRaw", -RobotMap.leftEncoder.getRaw());
 		leftMotors.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, leftPower);
 		rightMotors.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, -rightPower);
 		
